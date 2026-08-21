@@ -1,0 +1,3240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+	<link rel="stylesheet" href="style_editor.css">
+	<link rel="stylesheet" href="types.css">
+
+	<meta charset="UTF-8">
+	<title>Pokémon Tabelle</title>
+
+</head>
+
+<body>
+
+	<button onclick="window.location.href='index.html'">← Zurück zum Grid</button>
+	
+	<button onclick="savePokemon()">Pokémon speichern</button>
+
+	<div class="wrapper">
+
+			<!-- Linke Seite, Feste Stats -->
+			<div class="pokemon-panel">
+			
+					<div class="sprite-wrapper">
+
+						<div class="sprite-controls">
+
+							<div id="genderContainer"></div>
+
+							<button id="shinyBtn" class="toggle-btn">✨</button>
+							
+							<button id="caughtBtn" class="toggle-btn compact-caught-btn">
+
+								<span class="pokeball">
+									<span class="pokeball-center"></span>
+								</span>
+
+							</button>
+
+						</div>
+
+						<div class="sprite-frame">
+
+							<img id="spriteImg" src="" alt="Sprite">
+							
+						</div>
+						
+						<!-- Choose Form -->
+						
+						<div class="pokemon-profile">
+
+							<div class="pokemon-select-grid">
+
+								<div class="field">
+
+									<label>Nr.</label>
+
+									<select id="nummerSelect"
+											class="number-select">
+									</select>
+
+								</div>
+
+								<div class="field">
+
+									<label>Name</label>
+
+									<select id="nameSelect"
+											class="name-select">
+									</select>
+
+								</div>
+
+								<div class="field field-full">
+
+									<label>Form</label>
+
+									<select id="form"
+											class="form-select">
+									</select>
+
+								</div>
+
+							</div>
+
+							<div class="profile-section">
+
+								<div class="profile-title">
+									Typen
+								</div>
+
+								<div class="type-container">
+									<div id="typ1" class="type-slot"></div>
+									<div id="typ2" class="type-slot"></div>
+								</div>
+
+							</div>
+
+							<div class="profile-section">
+
+								<div class="profile-title">
+									Ei-Gruppen
+								</div>
+
+								<div class="egg-container">
+									<div id="egg1" class="egg-chip"></div>
+									<div id="egg2" class="egg-chip"></div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<!-- Notizen -->
+
+						<div class="notes-card">
+
+							<div class="notes-header">
+								Notizen
+							</div>
+
+							<textarea
+								class="notes-area"
+								placeholder="Notizen..."
+							></textarea>
+
+						</div>
+
+					</div>
+			</div>
+
+		<!-- Mittlere Seite -->
+		
+		<div class="editor-panel">
+			<section class="editor-group">
+				<h2>⚙ Allgemein</h2>
+
+				<div class="field">
+					<label>Markierung:</label>
+					<div id="markContainer" class="mark-row"></div>
+				</div>
+				
+				<div class="field">
+					<label>Größe:</label>
+					<select id="height"></select>
+				</div>
+				
+				<div class="field">
+					<label>Wesen:</label>
+					<select id="wesen"></select>
+				</div>
+				
+				<div class="field">
+					<label>Persönlichkeit:</label>
+					<select id="personality"></select>
+				</div>
+				
+				<div class="field">
+					<label>Level:</label>
+					<input
+						id="levelInput"
+						type="number"
+						class="level-input"
+						min="1"
+						max="100"
+						value="100"
+					>
+				</div>
+				
+				<div class="field">
+					<label>Fanglevel:</label>
+					<input
+						id="catchlevelInput"
+						type="number"
+						class="level-input"
+						min="1"
+						max="100"
+						value="100"
+					>
+				</div>
+				
+				<div class="field">
+					<label>Ball:</label>
+
+					<div class="pokeball-dropdown" id="pokeballDropdown">
+
+						<button
+							type="button"
+							class="pokeball-selected"
+							id="pokeballSelected"
+						>
+							<img
+								id="pokeballSelectedImage"
+								src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+								alt=""
+							>
+							<span id="pokeballSelectedName">Pokeball</span>
+							<span class="pokeball-arrow">▼</span>
+						</button>
+
+						<div
+							class="pokeball-options"
+							id="pokeballOptions"
+						></div>
+
+					</div>
+
+					<!-- Bestehendes Feld bleibt für die Speicherung erhalten -->
+					<select id="pokeball" hidden></select>
+				</div>
+				
+				<div class="field">
+					<label>Fähigkeit:</label>
+
+					<div class="ability-dropdown" id="abilityDropdown">
+
+						<button
+							type="button"
+							class="ability-selected"
+							id="abilitySelected"
+						>
+							<span id="abilitySelectedName">
+								Fähigkeit auswählen
+							</span>
+
+							<span class="ability-arrow">▼</span>
+						</button>
+
+						<div
+							class="ability-options"
+							id="abilityOptions"
+						></div>
+
+					</div>
+
+					<!-- Unsichtbares Select für bestehende Speicher-/Edit-Logik -->
+					<select id="ability" hidden></select>
+
+				</div>
+				
+			</section>
+			
+			<section class="editor-group">
+
+				<h2>📍 Herkunft</h2>
+				
+				<div class="field">
+					<label>Datum:</label>
+					<input type="date" id="date">
+				</div>
+				<div class="field">
+					<label>Ort:</label>
+					<select id="location"></select>
+				</div>
+				
+				<div class="field">
+					<label>Spiel:</label>
+					<select id="game"></select>
+				</div>
+				<div class="field">
+					<label>Generation:</label>
+					<select id="generation">
+						<option value="">Alle</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+					</select>
+				</div>
+				
+				<div class="field">
+					<label>ID:</label>
+					<input
+						type="text"
+						id="trainerID"
+						maxlength="6"
+						pattern="[0-9]{5,6}"
+						placeholder="00001"
+					>
+				</div>
+				<div class="field">
+					<label>OG-Trainer:</label>
+					<input
+					type="text"
+					id="trainer"
+					maxlength="12"
+					placeholder="OG-Trainer"
+					>
+				</div>
+				
+				<div class="field">
+					<label>Spitzname:</label>
+					<input
+					type="text"
+					id="nickname"
+					maxlength="12"
+					placeholder="Spitzname"
+					>
+				</div>
+			</section>
+			
+			<section class="editor-group">
+
+				<h2>✨ Besonderheiten</h2>
+
+				<div class="field">
+					 <label>Pokestar</label>
+						<select id="pokestar">
+							<option value="Nein" selected>Nein</option>
+							<option value="Ja">Ja</option>
+						</select>
+				</div>
+
+				<div class="field">
+					<label>Tera-Typ:</label>
+					<select id="teratype">
+						<option>Normal</option>
+						<option>Feuer</option>
+						<option>Wasser</option>
+						<option>Pflanze</option>
+						<option>Elektro</option>
+						<option>Eis</option>
+						<option>Kampf</option>
+						<option>Gift</option>
+						<option>Boden</option>
+						<option>Flug</option>
+						<option>Psycho</option>
+						<option>Käfer</option>
+						<option>Gestein</option>
+						<option>Geist</option>
+						<option>Drache</option>
+						<option>Unlicht</option>
+						<option>Stahl</option>
+						<option>Fee</option>
+						<option>Stellar</option>
+					</select>
+				</div>
+				
+				<div class="field">
+					<label>Blätterkrone:</label>
+					<select id="shinycrown">
+						<option>Nein</option>
+						<option>Ja</option>
+					</select>
+				</div>
+
+				<div class="field">
+					<label>Dynamax:</label>
+						<select id="dynamax">
+							<option>Nein</option>
+							<option>Dynamax</option>
+							<option>Gigadynamax</option>
+						</select>
+				</div>
+				
+			</section>
+			
+			<section class="editor-group">
+
+				<h2>🏆 Wettbewerbe</h2>
+				
+				
+				<div class="field">
+					<label>Coolness:</label>
+					<input id="cool" type="number" class="coolness-input" min="0" max="255" value="0">
+				</div>
+
+				<div class="field">
+					<label>Schönheit:</label>
+					<input id="beauty" type="number" class="schönheit-input" min="0" max="255" value="0">
+				</div>
+
+				<div class="field">
+					<label>Klugheit:</label>
+					<input id="smart" type="number" class="klugheit-input" min="0" max="255" value="0">
+				</div>
+
+				<div class="field">
+					<label>Putzigkeit:</label>
+					<input id="cute" type="number" class="putzigkeit-input" min="0" max="255" value="0">
+				</div>
+
+				<div class="field">
+					<label>Stärke:</label>
+					<input id="tough" type="number" class="stärke-input" min="0" max="255" value="0">
+				</div>
+				
+			</section>
+
+			<section class="editor-group stats">
+
+				<h2 class="group-toggle">
+					<span>📊 Statuswerte</span>
+					<span class="toggle-arrow">▲</span>
+				</h2>
+
+				<div class="group-content">
+
+					<div class="stats-grid">
+
+						<!-- Kopfzeile -->
+						<div class="cell stats-empty"></div>
+
+						<div class="cell stats-header">KP</div>
+						<div class="cell stats-header">Atk.</div>
+						<div class="cell stats-header">Def.</div>
+						<div class="cell stats-header">Sp.-Atk.</div>
+						<div class="cell stats-header">Sp.-Def.</div>
+						<div class="cell stats-header">Init.</div>
+
+
+						<!-- Basis -->
+						<div class="cell stats-label">Basis</div>
+
+						<div class="cell stat-base" id="hpbase">107</div>
+						<div class="cell stat-base" id="atkbase">139</div>
+						<div class="cell stat-base" id="defbase">139</div>
+						<div class="cell stat-base" id="spatkbase">53</div>
+						<div class="cell stat-base" id="spdefbase">53</div>
+						<div class="cell stat-base" id="initbase">139</div>
+
+
+						<!-- IV -->
+						<div class="cell stats-label">IV</div>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+						<input
+							class="cell iv-input"
+							type="number"
+							min="0"
+							max="31"
+							value="31"
+						>
+
+
+						<!-- EV -->
+						<div class="cell stats-label">EV</div>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+						<input
+							class="cell ev-input"
+							type="number"
+							min="0"
+							max="252"
+							value="0"
+						>
+
+
+						<!-- Gesamt -->
+						<div class="cell stats-label total-label">Gesamt</div>
+
+						<div class="cell total-cell stat-hp" id="total-hp">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+						<div class="cell total-cell stat-atk" id="total-atk">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+						<div class="cell total-cell stat-def" id="total-def">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+						<div class="cell total-cell stat-spatk" id="total-spatk">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+						<div class="cell total-cell stat-spdef" id="total-spdef">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+						<div class="cell total-cell stat-init" id="total-init">
+							<span class="total-value">0</span>
+							<div class="stat-bar">
+								<div class="stat-bar-fill"></div>
+							</div>
+						</div>
+
+					</div>
+				
+				</div>
+				
+			</section>
+
+			<section class="editor-group attacks">
+
+				<h2 class="group-toggle">
+					<span>⚔ Attacken</span>
+					<span class="toggle-arrow">▼</span>
+				</h2>
+				
+				<div class="group-content">
+				
+					<div class="attack-grid">
+						<div class="attack-slot"></div>
+						<div class="attack-slot"></div>
+						<div class="attack-slot"></div>
+						<div class="attack-slot"></div>
+					</div>
+					
+				</div>
+				
+			</section>
+			
+		</div>
+		
+		<!-- Rechte Seite -->
+		<div class="ribbon-panel">
+			<div class="ribbon-header">
+
+				<div class="ribbon-title">
+					Bänder
+				</div>
+
+				<div id="bandCounter" class="ribbon-counter">
+					0 / 0
+				</div>
+
+			</div>
+			
+			<input
+				id="ribbonSearch"
+				class="search-input"
+				type="text"
+				placeholder="🔍 Band suchen..."
+			>
+
+			<div id="bandContainer" class="band-container"></div>
+				
+				<h2>Kartenvorschau</h2>
+				<div id="previewCard"></div>
+
+		</div>
+
+	</div>
+	
+	<script src="pokemon-data.js"></script>
+	<script src="game-data.js"></script>
+	<script src="attack-data.js"></script>
+	<script src="ribbon-data.js"></script>
+	<script src="ability-data.js"></script>
+	<script src="editor-data.js"></script>
+	<script src="cardRenderer.js"></script>
+	
+	<script src="pokemon-transfer-data.js"></script>
+
+	<script>
+	
+	// =========================
+	// START SCRIPTE
+	// =========================
+	
+		const UI = {
+
+			setStats(formData) {
+				DOM.hp.textContent = formData.stats.kp;
+				DOM.atk.textContent = formData.stats.angriff;
+				DOM.def.textContent = formData.stats.verteidigung;
+				DOM.spatk.textContent = formData.stats.spezialAngriff;
+				DOM.spdef.textContent = formData.stats.spezialVerteidigung;
+				DOM.init.textContent = formData.stats.initiative;
+			},
+
+			setTypes(formData) {
+				DOM.typ1.textContent = formData.typen[0] || "";
+				DOM.typ2.textContent = formData.typen[1] || "";
+			},
+
+			setEggGroups(formData) {
+
+				DOM.ei1.textContent = formData.eiergruppen[0] || "";
+				DOM.ei2.textContent = formData.eiergruppen[1] || "";
+
+				DOM.ei1.style.display =
+					formData.eiergruppen[0] ? "flex" : "none";
+
+				DOM.ei2.style.display =
+					formData.eiergruppen[1] ? "flex" : "none";
+
+			},
+
+			setSprite(pokemon, formName) {
+				setSpriteWithFallback(pokemon, formName);
+			},
+
+			setAbilities(formData) {
+
+				const key = getAbilitiesKey(formData);
+
+				if (uiCache.abilitiesKey === key) return;
+				uiCache.abilitiesKey = key;
+
+
+				const abilitySelect = DOM.ability;
+
+				const dropdown =
+					document.getElementById("abilityDropdown");
+
+				const selected =
+					document.getElementById("abilitySelected");
+
+				const selectedName =
+					document.getElementById("abilitySelectedName");
+
+				const optionsContainer =
+					document.getElementById("abilityOptions");
+
+
+				if (
+					!abilitySelect ||
+					!dropdown ||
+					!selected ||
+					!selectedName ||
+					!optionsContainer
+				) {
+					return;
+				}
+
+
+				// =========================
+				// Fähigkeiten ermitteln
+				// =========================
+
+				abilitySelect.innerHTML = "";
+				optionsContainer.innerHTML = "";
+
+				if (!formData) {
+
+					selectedName.textContent =
+						"Fähigkeit auswählen";
+
+					return;
+				}
+
+
+				let abilities = [];
+
+
+				if (Array.isArray(formData.faehigkeiten)) {
+
+					abilities = formData.faehigkeiten;
+
+				} else {
+
+					if (formData.faehigkeiten?.normal) {
+						abilities.push(
+							...formData.faehigkeiten.normal
+						);
+					}
+
+					if (formData.faehigkeiten?.hidden) {
+						abilities.push(
+							formData.faehigkeiten.hidden
+						);
+					}
+
+					if (formData.faehigkeiten?.versteckt) {
+						abilities.push(
+							formData.faehigkeiten.versteckt
+						);
+					}
+
+				}
+
+
+				// Doppelte Einträge entfernen
+				abilities = [
+					...new Set(
+						abilities.filter(Boolean)
+					)
+				];
+
+
+				// =========================
+				// Verstecktes Select
+				// =========================
+
+				abilities.forEach(ability => {
+
+					const option =
+						document.createElement("option");
+
+					option.value = ability;
+					option.textContent = ability;
+
+					abilitySelect.appendChild(option);
+
+				});
+
+
+				// =========================
+				// Sichtbares Dropdown
+				// =========================
+
+				abilities.forEach(ability => {
+
+					const option =
+						document.createElement("button");
+
+					option.type = "button";
+
+					option.className =
+						"ability-option";
+
+					option.dataset.value =
+						ability;
+
+
+					const description =
+						abilityDescriptions[ability] || "";
+
+
+					option.innerHTML = `
+
+						<div class="ability-option-name">
+							${ability}
+						</div>
+
+						${
+							description
+								? `
+									<div class="ability-option-description">
+										${description}
+									</div>
+								`
+								: ""
+						}
+
+					`;
+
+					optionsContainer.appendChild(option);
+
+				});
+				
+				optionsContainer.onclick = event => {
+
+					const option =
+						event.target.closest(".ability-option");
+
+					if (!option) return;
+
+					event.stopPropagation();
+
+					const ability =
+						option.dataset.value;
+
+					abilitySelect.value = ability;
+
+					selectedName.textContent =
+						ability;
+
+					updateAbilityDropdown();
+
+					dropdown.classList.remove("open");
+
+					requestPreviewUpdate();
+
+				};
+
+
+				// Aktuellen Wert anzeigen
+				updateAbilityDropdown();
+
+
+				// =========================
+				// Öffnen / Schließen
+				// =========================
+
+				selected.onclick = event => {
+
+					event.stopPropagation();
+
+					dropdown.classList.toggle("open");
+
+				};
+
+
+				// =========================
+				// Klick außerhalb
+				// =========================
+
+				if (!dropdown.dataset.listenerAttached) {
+
+					document.addEventListener("click", event => {
+
+						if (!dropdown.contains(event.target)) {
+
+							dropdown.classList.remove("open");
+
+						}
+
+					});
+
+					dropdown.dataset.listenerAttached = "true";
+
+				}
+
+			},
+
+			setGender(formData) {
+				const key = getGenderKey(formData);
+
+				if (uiCache.genderKey === key) return;
+				uiCache.genderKey = key;
+
+				const select = DOM.geschlecht;
+				select.innerHTML = "";
+
+				if (!formData) return;
+
+				const g = formData.geschlecht;
+
+				if (Array.isArray(g)) {
+					g.forEach(val => {
+						const opt = document.createElement("option");
+						opt.value = val;
+						opt.textContent = val;
+						select.appendChild(opt);
+					});
+
+				} else if (g === null) {
+					const opt = document.createElement("option");
+					opt.value = "Geschlechtslos";
+					opt.textContent = "Geschlechtslos";
+					select.appendChild(opt);
+
+				} else {
+					Object.keys(g).forEach(val => {
+						const opt = document.createElement("option");
+						opt.value = val;
+						opt.textContent = val;
+						select.appendChild(opt);
+					});
+				}
+			}
+		};
+
+		const uiCache = {
+			pokemonIndex: null,
+			formName: null,
+			abilitiesKey: null,
+			genderKey: null
+		};
+
+		const state = {
+			pokemonIndex: 0,
+			formName: null
+		};
+
+		function setState(newState) {
+			Object.assign(state, newState);
+		}
+
+	</script>
+
+	<script>
+		function render() {
+
+			const pokemon = getCurrentBasePokemon();
+
+			if (!pokemon) return;
+
+			const formName =
+				state.formName ||
+				Object.keys(pokemon.forms)[0];
+
+			const formData = pokemon.forms[formName];
+			if (!formData) return;
+			
+			setType("typ1", formData.typen?.[0]);
+			setType("typ2", formData.typen?.[1]);
+
+			// SPRITE + BASIC UPDATE nur bei Pokémonwechsel
+		if (
+			uiCache.pokemonIndex !== state.pokemonIndex ||
+			uiCache.formName !== formName
+		) {
+
+			updateForms(pokemon);
+
+			nummerSelect.value = pokemon.nummer;
+			nameSelect.value = pokemon.nummer;
+
+			uiCache.pokemonIndex = state.pokemonIndex;
+		}
+
+			// FORM synchronisieren
+			if (uiCache.formName !== formName) {
+				DOM.form.value = formName;
+				uiCache.formName = formName;
+			}
+
+			// =========================
+			// FORM-ABHÄNGIGE UI
+			// =========================
+
+			UI.setTypes(formData);
+			UI.setEggGroups(formData);
+			UI.setStats(formData);
+			UI.setAbilities(formData);
+			UI.setSprite(pokemon, formName);
+
+			renderGenderButtons(formData);
+
+			calculateTotalStats();
+			requestPreviewUpdate();
+		}
+
+
+
+		function getAbilitiesKey(formData) {
+			if (!formData) return "";
+
+			if (Array.isArray(formData.faehigkeiten)) {
+				return formData.faehigkeiten.join("|");
+			}
+
+			return [
+				...(formData.faehigkeiten?.normal || []),
+				formData.faehigkeiten?.hidden || "",
+				formData.faehigkeiten?.versteckt || ""
+			].join("|");
+		}
+
+		function getGenderKey(formData) {
+			if (!formData?.geschlecht) return "none";
+
+			if (Array.isArray(formData.geschlecht)) {
+				return "arr:" + formData.geschlecht.join("|");
+			}
+
+			return "obj:" + Object.keys(formData.geschlecht).join("|");
+		}
+
+	</script>
+
+	<script>
+
+		const DOM = {
+			// === Stats ===
+			hp: document.getElementById("hpbase"),
+			atk: document.getElementById("atkbase"),
+			def: document.getElementById("defbase"),
+			spatk: document.getElementById("spatkbase"),
+			spdef: document.getElementById("spdefbase"),
+			init: document.getElementById("initbase"),
+
+			totalHp: document.getElementById("total-hp"),
+			totalAtk: document.getElementById("total-atk"),
+			totalDef: document.getElementById("total-def"),
+			totalSpatk: document.getElementById("total-spatk"),
+			totalSpdef: document.getElementById("total-spdef"),
+			totalInit: document.getElementById("total-init"),
+
+			// === Hauptanzeige ===
+			sprite: document.getElementById("spriteImg"),
+			form: document.getElementById("form"),
+
+			// === Pokémon Auswahl ===
+			nummerSelect: document.getElementById("nummerSelect"),
+			nameSelect: document.getElementById("nameSelect"),
+
+			// === Basisdaten ===
+			typ1: document.getElementById("typ1"),
+			typ2: document.getElementById("typ2"),
+			ei1: document.getElementById("egg1"),
+			ei2: document.getElementById("egg2"),
+
+			trainer: document.getElementById("trainer"),
+			nickname: document.getElementById("nickname"),
+
+			// === UI Container ===
+			bandContainer: document.getElementById("bandContainer"),
+			markContainer: document.getElementById("markContainer"),
+
+			// === Inputs ===
+			trainerID: document.getElementById("trainerID"),
+			level: document.getElementById("levelInput"),
+			catchlevel: document.getElementById("catchlevelInput"),
+			height: document.getElementById("height"),
+			wesen: document.getElementById("wesen"),
+			teratype: document.getElementById("teratype"),
+			dynamax: document.getElementById("dynamax"),
+			pokestar: document.getElementById("pokestar"),
+			shinycrown: document.getElementById("shinycrown"),
+			location: document.getElementById("location"),
+			game: document.getElementById("game"),
+			generation: document.getElementById("generation"),
+
+			genderContainer: document.getElementById("genderContainer"),
+
+			personality: document.getElementById("personality"),
+			pokeball: document.getElementById("pokeball"),
+			ability: document.getElementById("ability"),
+
+			cool: document.getElementById("cool"),
+			beauty: document.getElementById("beauty"),
+			smart: document.getElementById("smart"),
+			cute: document.getElementById("cute"),
+			tough: document.getElementById("tough"),
+			
+			// === Other things ===
+			date: document.getElementById("date"),
+			notes: document.querySelector(".notes-area"),
+
+			shinyBtn: document.getElementById("shinyBtn"),
+			caughtBtn: document.getElementById("caughtBtn"),
+
+			preview: document.getElementById("previewCard"),
+
+			ribbonSearch: document.getElementById("ribbonSearch")
+		};
+
+		const nameSelect = DOM.nameSelect;
+
+		let currentGender = "Männlich";
+		let isShiny = false;
+		let isCaught = false;
+		
+		let isUpdating = false;
+		let editingPokemon = null;
+
+		/*
+		==================================================
+		Dropdowns erzeugen
+		==================================================
+		*/
+
+		pokemonListe.forEach((pokemon) => {
+
+			const nummerOption = document.createElement("option");
+
+			nummerOption.value = pokemon.nummer;
+
+			nummerOption.textContent =
+				"#" + String(pokemon.nummer).padStart(4, "0");
+
+			nummerSelect.appendChild(nummerOption);
+
+
+			const nameOption = document.createElement("option");
+
+			nameOption.value = pokemon.nummer;
+			nameOption.textContent = pokemon.name;
+
+			nameSelect.appendChild(nameOption);
+
+		});
+		
+		function populateEditorDropdown(select, values) {
+
+			select.innerHTML = "";
+
+			values.forEach(value => {
+
+				const option = document.createElement("option");
+
+				option.value = value;
+				option.textContent = value;
+
+				select.appendChild(option);
+
+			});
+
+		}
+
+		populateEditorDropdown(DOM.wesen, editorData.nature);
+		populateEditorDropdown(DOM.personality, editorData.personality);
+		populateEditorDropdown(DOM.height, editorData.height);
+		DOM.height.value = "M";
+		populateEditorDropdown(DOM.teratype, editorData.teraTypes);
+		
+
+		/*
+		==================================================
+		Hilfsfunktionen
+		==================================================
+		*/
+
+		function getCurrentFormData() {
+
+			const pokemon = getCurrentBasePokemon();
+
+			if (!pokemon) return null;
+
+			const formName =
+				DOM.form.value ||
+				state.formName ||
+				Object.keys(pokemon.forms)[0];
+
+			return pokemon.forms[formName];
+
+		}
+		
+		function getCurrentBasePokemon() {
+
+			return pokemonListe.find(
+				p => p.nummer === state.pokemonIndex
+			) || null;
+
+		}
+
+		function updateForms(pokemon) {
+
+			const formSelect = DOM.form
+			formSelect.innerHTML = "";
+
+			Object.entries(pokemon.forms).forEach(([key, form]) => {
+
+				const opt = document.createElement("option");
+
+				opt.value = key;
+
+				opt.textContent = form.displayName ?? form.displayname ?? key;
+
+				formSelect.appendChild(opt);
+			});
+		}
+
+		/*
+		==================================================
+		Pokémon aktualisieren
+		==================================================
+		*/
+
+		function updatePokemon(nummer, forceForm = null) {
+
+			if (isUpdating) return;
+			isUpdating = true;
+
+			try {
+				setState({
+					pokemonIndex: Number(nummer),
+					formName: forceForm
+				});
+
+				uiCache.pokemonIndex = null;
+				uiCache.formName = null;
+
+				render();
+
+			} finally {
+				isUpdating = false;
+			}
+		}
+
+		/*
+		==================================================
+		Dropdown Events
+		==================================================
+		*/
+
+		DOM.nummerSelect.addEventListener("change", e => {
+			if (isUpdating) return;
+			updatePokemon(e.target.value);
+		});
+
+		DOM.nameSelect.addEventListener("change", e => {
+			if (isUpdating) return;
+			updatePokemon(e.target.value);
+		});
+
+		/*
+		==================================================
+		Initiales Pokémon
+		==================================================
+		*/
+
+		window.addEventListener("DOMContentLoaded", () => {
+
+			renderBaender();
+			renderMarkierungen();
+			renderAttacken();
+
+			initPage();
+			initPokeballDropdown();
+			
+			initPreview();
+			requestPreviewUpdate();
+			
+		});
+
+	</script>
+
+	<script>
+
+		const trainerID = DOM.trainerID;
+
+		trainerID.addEventListener("input", () => {
+
+		// Alles außer Zahlen entfernen
+		trainerID.value = trainerID.value.replace(/\D/g, "");
+
+			// Maximal 6 Stellen
+			if (trainerID.value.length > 6) 
+			{ trainerID.value = trainerID.value.slice(0, 6); }
+		});
+
+	</script>
+
+	<script>
+		// =========================
+		// Bänder filtern
+		// =========================
+
+		function filterRibbons() {
+
+			const search = document
+				.getElementById("ribbonSearch")
+				.value
+				.toLowerCase();
+
+			document.querySelectorAll(".band-item").forEach(item => {
+
+				const text = item.textContent.toLowerCase();
+
+				item.style.display =
+					text.includes(search)
+						? ""
+						: "none";
+			});
+		}
+
+		document
+			.getElementById("ribbonSearch")
+			.addEventListener("input", filterRibbons);
+
+		// =========================
+		// Band-Zähler
+		// =========================
+
+		function updateBandCounter() {
+
+			const checked = document.querySelectorAll(
+				".band-item input[type='checkbox']:checked"
+			).length;
+
+			document.getElementById("bandCounter").textContent =
+				`${checked} ausgewählt`;
+
+		}
+
+
+		// =========================
+		// Bänder laden
+		// =========================
+
+		function renderBaender(savedBands = null) {
+
+			DOM.bandContainer.innerHTML = "";
+
+			const active = new Set(savedBands || []);
+
+			const currentGeneration =
+				DOM.generation.value
+					? Number(DOM.generation.value)
+					: null;
+
+			const availableBands = baender.filter(band => {
+
+				const rule = BAND_RULES[band.name];
+
+				// Keine Regel = Band bleibt immer verfügbar
+				if (!rule) return true;
+
+				return rule(currentGeneration);
+			});
+
+			availableBands.forEach(band => {
+
+				const row = document.createElement("div");
+				row.className = "band-item";
+
+				const checkbox = document.createElement("input");
+				checkbox.type = "checkbox";
+				checkbox.dataset.band = band.name;
+				checkbox.checked = active.has(band.name);
+
+				checkbox.addEventListener("change", () => {
+
+					updateBandCounter();
+					requestPreviewUpdate();
+
+				});
+
+				const img = document.createElement("img");
+				img.className = "band-img";
+				img.src =
+					`https://raw.githubusercontent.com/kwsch/PKHeX/master/PKHeX.Drawing.Misc/Resources/img/ribbons/${band.image}.png`;
+				img.alt = band.name;
+
+				const text = document.createElement("div");
+				text.className = "band-text";
+
+				const name = document.createElement("div");
+				name.className = "band-name";
+				name.textContent = band.name;
+
+				const title = document.createElement("div");
+				title.className = "band-title";
+				title.textContent =
+					band.title ? `(${band.title})` : "";
+
+				text.appendChild(name);
+				text.appendChild(title);
+
+				row.appendChild(checkbox);
+				row.appendChild(img);
+				row.appendChild(text);
+
+				DOM.bandContainer.appendChild(row);
+			});
+
+			updateBandCounter();
+		}
+		
+		DOM.generation.addEventListener("change", () => {
+			renderBaender();
+			requestPreviewUpdate();
+		});
+
+		renderBaender();
+	
+	</script>
+	
+	<!-- Card Preview -->
+	<script>
+	function createPokemonData() {
+
+		const pokemon = pokemonListe.find(p => p.nummer === Number(DOM.nummerSelect.value));
+		
+		if (!pokemon) return null;
+
+		return {
+
+			id: editingPokemon?.id ?? crypto.randomUUID(),
+
+			nummer: pokemon.nummer,
+
+			name: DOM.nameSelect.options[DOM.nameSelect.selectedIndex].text,
+
+			spriteId: pokemon.forms[DOM.form.value]?.spriteId ?? pokemon.forms.Standard?.spriteId ?? null,
+			
+			pokemonId: pokemon.forms[DOM.form.value].id,
+
+			typ1: DOM.typ1.textContent,
+			typ2: DOM.typ2.textContent,
+
+			shiny: isShiny,
+			geschlecht: currentGender,
+
+			trainer: DOM.trainer.value,
+
+			level: Number(DOM.level.value),
+
+			wesen: DOM.wesen.value,
+
+			faehigkeit: DOM.ability.value,
+
+			ball: DOM.pokeball.value,
+
+			stats: {
+
+				hp: Number(DOM.totalHp.textContent),
+				atk: Number(DOM.totalAtk.textContent),
+				def: Number(DOM.totalDef.textContent),
+				spatk: Number(DOM.totalSpatk.textContent),
+				spdef: Number(DOM.totalSpdef.textContent),
+				init: Number(DOM.totalInit.textContent)
+
+			},
+
+			attacken: getSelectedAttacks(),
+
+			bands: Array.from(
+				document.querySelectorAll("#bandContainer input[type='checkbox']")
+			).map(cb => ({
+				name: cb.dataset.band,
+				active: cb.checked
+			})),
+
+			favorit: editingPokemon?.favorit ?? false
+
+		};
+
+	}
+
+	function getCurrentPokemon() {
+		return createPokemonData();
+	}
+	
+	let previewUpdatePending = false;
+
+	function updatePreview() {
+
+		const preview = DOM.preview;
+
+		preview.replaceChildren(
+			createDetailCard(getCurrentPokemon(), false)
+		);
+
+	}
+
+	function requestPreviewUpdate() {
+
+		if (previewUpdatePending) return;
+
+		previewUpdatePending = true;
+
+		requestAnimationFrame(() => {
+
+			previewUpdatePending = false;
+
+			updatePreview();
+
+		});
+
+	}
+	
+	function initPreview() {
+
+		document.addEventListener(
+			"input",
+			handlePreviewInput
+		);
+
+		document.addEventListener(
+			"change",
+			handlePreviewInput
+		);
+
+	}
+
+	function handlePreviewInput(event) {
+
+		if (
+			event.target.matches(
+				"input, select, textarea"
+			)
+		) {
+			requestPreviewUpdate();
+		}
+
+	}
+	
+	</script>
+
+	<script>
+
+		// Symbole werden in der Tabelle verwaltet
+
+		DOM.markContainer.innerHTML = "";
+
+		function getNextColor(current) {
+
+			const index =
+				editorData.colors.indexOf(current);
+
+			return editorData.colors[
+				(index + 1) % editorData.colors.length
+			];
+		}
+
+		function renderMarkierungen(savedMarks = null) {
+
+			DOM.markContainer.innerHTML = "";
+
+			editorData.symbols.forEach(symbol => {
+
+				const el =
+					document.createElement("div");
+
+				el.className = "mark-icon";
+				el.textContent = symbol;
+
+				el.dataset.symbol = symbol;
+
+				const savedMap = new Map(
+					(savedMarks || []).map(
+						mark => [mark.symbol, mark]
+					)
+				);
+				
+				const saved = savedMap.get(symbol);
+
+				el.dataset.color =
+					saved?.color || editorData.colors[0];
+
+				el.style.color =
+					el.dataset.color;
+
+				el.addEventListener("click", () => {
+
+					const nextColor =
+						getNextColor(el.dataset.color);
+
+					el.dataset.color =
+						nextColor;
+
+					el.style.color =
+						nextColor;
+				});
+
+				DOM.markContainer.appendChild(el);
+
+			});
+		}
+
+	</script>
+
+	<script>
+	
+		// ======================================================
+		// Sprite mit Fallback setzen
+		// ======================================================
+
+		function setSpriteWithFallback(
+			pokemon,
+			formName = "Standard"
+		) {
+
+			if (!pokemon) return;
+
+			const form =
+				pokemon.forms?.[formName] ??
+				pokemon.forms?.Standard;
+
+			const nummer =
+				form?.spriteId ??
+				pokemon.nummer;
+
+			const img = DOM.sprite;
+
+			const shiny = isShiny;
+
+			const female =
+				currentGender === "Weiblich";
+
+			const base =
+				"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+			const normalUrl =
+				shiny
+				? `${base}shiny/${nummer}.png`
+				: `${base}${nummer}.png`;
+
+			const femaleUrl =
+				shiny
+				? `${base}shiny/female/${nummer}.png`
+				: `${base}female/${nummer}.png`;
+
+			img.src = normalUrl;
+
+			if (female) {
+
+				const testImg =
+					new Image();
+
+				testImg.onload = () => {
+					img.src = femaleUrl;
+				};
+
+				testImg.onerror = () => {
+					img.src = normalUrl;
+				};
+
+				testImg.src = femaleUrl;
+			}
+		}
+
+		// ======================================================
+		// Sprite aktualisieren
+		// ======================================================
+
+		function updateCurrentPokemonSprite() {
+
+			const pokemon = getCurrentBasePokemon();
+
+			if (!pokemon) return;
+
+			const formName =
+				DOM.form.value ||
+				state.formName ||
+				Object.keys(pokemon.forms)[0];
+
+			setSpriteWithFallback(
+				pokemon,
+				formName
+			);
+		}
+
+		// ======================================================
+		// Event Listener
+		// ======================================================
+
+	</script>
+
+	<script>
+		// Werte Speichern
+		function getValue(id) {
+			const el = document.getElementById(id);
+			return el ? el.value : "";
+		}
+
+		function getNumber(id) {
+			return Number(getValue(id)) || 0;
+		}
+
+		function savePokemon() {
+
+			let storage = JSON.parse(localStorage.getItem("customPokemon")) || [];
+
+			const trainer = DOM.trainer.value.trim();
+
+			// ALTES POKÉMON (falls Edit-Modus)
+			const old = editingPokemon || {};
+			
+			const selectedPokemon = pokemonListe.find(
+				p => p.nummer === Number(nummerSelect.value)
+			);
+			
+			if (!selectedPokemon) return;
+
+			const pokemon = {
+				...old, // ALLE ALTEN WERTE BEHALTEN
+
+				id: old.id || crypto.randomUUID(),
+				
+				renderVersion: (old.renderVersion || 0) + 1,
+
+				nummer: selectedPokemon.nummer,
+				name: nameSelect.selectedOptions[0].text,
+
+				spriteId: selectedPokemon.forms[DOM.form.value]?.spriteId 
+					?? selectedPokemon.forms.Standard?.spriteId 
+					?? null,
+					
+				pokemonId: selectedPokemon.forms[DOM.form.value]?.id ?? null,
+
+				groesse: getValue("height"),
+
+				wesen: getValue("wesen"),
+				teraTyp: getValue("teratype"),
+				dynamax: getValue("dynamax"),
+				pokestar: getValue("pokestar"),
+				geschlecht: currentGender,
+				blaetterkrone: getValue("shinycrown"),
+
+				datum: getValue("date"),
+				location: getValue("location"),
+				game: getValue("game"),
+				generation: getNumber("generation"),
+
+				trainerID: getValue("trainerID"),
+				ogTrainer: trainer || "—",
+				spitzname: getValue("nickname"),
+
+				eiGruppe1: DOM.ei1,
+				eiGruppe2: DOM.ei2,
+				
+				notizen: DOM.notes.value,
+
+				typ1: document.getElementById("typ1").textContent,
+				typ2: document.getElementById("typ2").textContent,
+
+				persoenlichkeit: getValue("personality"),
+
+				shiny: isShiny,
+				gefangen: isCaught,
+
+				ball: getValue("pokeball"),
+				faehigkeit: getValue("ability"),
+				form: getValue("form"),
+
+				coolness: getNumber("cool"),
+				schoenheit: getNumber("beauty"),
+				klugheit: getNumber("smart"),
+				putzigkeit: getNumber("cute"),
+				staerke: getNumber("tough"),
+
+				ivs: Array.from(document.querySelectorAll(".iv-input"))
+					.map(i => Number(i.value)),
+
+				evs: Array.from(document.querySelectorAll(".ev-input"))
+					.map(i => Number(i.value)),
+
+				stats: {
+					hp: Number(DOM.totalHp.textContent),
+					atk: Number(DOM.totalAtk.textContent),
+					def: Number(DOM.totalDef.textContent),
+					spatk: Number(DOM.totalSpatk.textContent),
+					spdef: Number(DOM.totalSpdef.textContent),
+					init: Number(DOM.totalInit.textContent)
+				},
+
+				attacken: getSelectedAttacks(),
+
+				// Bänder bleiben erhalten (wenn vorhanden)
+				bands: Array.from(
+					document.querySelectorAll("#bandContainer input[type='checkbox']")
+				).map(cb => ({
+					name: cb.dataset.band,
+					active: cb.checked
+				})),
+
+				// Markierungen bleiben erhalten
+				marks: Array.from(document.querySelectorAll(".mark-icon"))
+					.map(el => ({
+						symbol: el.dataset.symbol,
+						color: el.dataset.color
+					})),
+
+				level: getNumber("levelInput"),
+				catchlevel: getNumber("catchlevelInput")
+			};
+
+			// Update oder Insert
+			const index = storage.findIndex(x => x.id === pokemon.id);
+
+			if (index >= 0) {
+				storage[index] = pokemon; // überschreiben
+			} else {
+				storage.push(pokemon); // neu hinzufügen
+			}
+
+			localStorage.setItem("customPokemon", JSON.stringify(storage));
+
+			if (typeof evaluateAchievements === "function") {
+				evaluateAchievements();
+			}
+			
+			localStorage.setItem("dirtyPokemonId", pokemon.id);
+			
+			/* save this to allow own sorting */
+			customOrder:
+				editingPokemon?.customOrder ??
+				Date.now()
+
+			window.location.href = "index.html";
+			
+		}
+	</script>
+
+	<script>
+	
+		// Pokemon laden
+		function loadEditMode(editData) {
+
+			editingPokemon = JSON.parse(editData);
+
+			nummerSelect.classList.add("locked-select");
+			nameSelect.classList.add("locked-select");
+
+
+			const pokemon = pokemonListe.find(
+				p => p.nummer === editingPokemon.nummer
+			);
+
+			if (!pokemon) return;
+
+			updatePokemon(
+				editingPokemon.nummer,
+				editingPokemon.form
+			);
+
+
+			// Warten bis alle Dropdowns / DOM-Elemente erstellt wurden
+			requestAnimationFrame(() => {
+
+				// Alle normalen Felder laden
+				applyEditModeData(editingPokemon);
+
+				// Bänder laden
+				renderBaender(
+					editingPokemon.bands
+						?.filter(b => b.active)
+						.map(b => b.name)
+				);
+
+				// Markierungen laden
+				renderMarkierungen(
+					editingPokemon.marks
+				);
+
+				// Attacken nach dem Erstellen der Dropdowns laden
+				if (editingPokemon.attacks) {
+
+					setSelectedAttacks(
+						editingPokemon.attacks
+					);
+
+				}
+
+				calculateTotalStats();
+
+				requestPreviewUpdate();
+
+			});
+
+			localStorage.removeItem("editPokemon");
+
+		}
+
+		function setContestValues(p) {
+			if (!p) return;
+
+			DOM.cool.value = p.coolness ?? 0;
+			DOM.beauty.value = p.schoenheit ?? 0;
+			DOM.smart.value = p.klugheit ?? 0;
+			DOM.cute.value = p.putzigkeit ?? 0;
+			DOM.tough.value = p.staerke ?? 0;
+		}
+
+		function applyEditModeData(pokemon) {
+
+			// --- sichere Select Setter ---
+			function setSelectValue(el, value) {
+				if (!el) return;
+				const exists = [...el.options].some(o => o.value === value);
+				if (exists) el.value = value;
+			}
+
+			DOM.height.value = pokemon.groesse || "M";
+			DOM.wesen.value = pokemon.wesen || "";
+			DOM.pokestar.value = pokemon.pokestar || "";
+			DOM.shinycrown.value = pokemon.blaetterkrone || "";
+			
+			restoreOriginData(pokemon);
+
+			DOM.date.value = pokemon.datum || "";
+
+			DOM.trainerID.value = pokemon.trainerID || "";
+			DOM.trainer.value = pokemon.ogTrainer || "";
+			DOM.nickname.value = pokemon.spitzname || "";
+
+			DOM.notes.value = pokemon.notizen || "";
+
+			document.getElementById("teratype").value =
+				pokemon.teraTyp || "Normal";
+
+			document.getElementById("dynamax").value =
+				pokemon.dynamax || "Nein";
+
+			setSelectValue(
+				DOM.ability,
+				pokemon.faehigkeit || ""
+			);
+
+			updateAbilityDropdown();
+
+			document.getElementById("personality").value =
+				pokemon.persoenlichkeit || "";
+
+			// ===== Status =====
+
+			currentGender = pokemon.geschlecht || "Männlich";
+			isShiny = pokemon.shiny === true;
+			isCaught = pokemon.gefangen === true;
+
+			shinyBtn.classList.toggle("active", isShiny);
+
+			renderGenderButtons(getCurrentFormData());
+			updateCurrentPokemonSprite();
+
+			updateCaughtButton();
+			caughtBtn.classList.toggle("active", isCaught);
+
+			// ===== Ball =====
+
+			setSelectValue(DOM.pokeball, pokemon.ball);
+			updatePokeballDropdown();
+
+			// ===== Contest =====
+
+			setContestValues(pokemon);
+			
+			// ===== Level =====
+
+			DOM.level.value = pokemon.level || 100;
+			DOM.catchlevel.value = pokemon.catchlevel || 100;
+
+			// ===== IVs =====
+
+			if (pokemon.ivs) {
+
+				document.querySelectorAll(".iv-input").forEach((input, i) => {
+					input.value = pokemon.ivs[i] ?? 0;
+				});
+
+			}
+
+			// ===== EVs =====
+
+			if (pokemon.evs) {
+
+				document.querySelectorAll(".ev-input").forEach((input, i) => {
+					input.value = pokemon.evs[i] ?? 0;
+				});
+
+			}
+
+			// ===== Attacken =====
+
+			if (pokemon.attacken) {
+
+				setSelectedAttacks(
+					pokemon.attacken
+				);
+
+			}
+
+			// ===== Bänder =====
+
+			const bandInputs = document.querySelectorAll(
+				"#bandContainer input[type='checkbox']"
+			);
+
+			if (pokemon.bands && bandInputs.length) {
+
+				bandInputs.forEach(cb => {
+
+					const found = pokemon.bands.find(
+						b => b.name === cb.dataset.band
+					);
+
+					cb.checked = found ? found.active : false;
+
+				});
+
+			}
+
+			// ===== Marks =====
+
+			const markEls = document.querySelectorAll(".mark-icon");
+
+			if (pokemon.marks && markEls.length) {
+
+				markEls.forEach(el => {
+
+					const found = pokemon.marks.find(
+						m => m.symbol === el.dataset.symbol
+					);
+
+					if (found) {
+
+						el.dataset.color = found.color;
+						el.style.color = found.color;
+
+					}
+
+				});
+
+			}
+
+			// ===== Sprite =====
+
+			const basePokemon = getCurrentBasePokemon();
+
+			if (basePokemon) {
+
+				setSpriteWithFallback(
+					basePokemon,
+					pokemon.form || "Standard"
+				);
+
+			}
+
+		}
+		
+	</script>
+
+	<!-- Attacks -->
+	<script>
+		function renderAttacken() {
+			document.querySelectorAll(".attack-slot").forEach(slot => {
+				createAttackDropdown(slot);
+			});
+		}
+
+		function getSelectedAttacks() {
+
+			return Array.from(document.querySelectorAll(".attack-dropdown"))
+				.map(w => w.dataset.value)
+				.filter(Boolean);
+		}
+
+	</script>
+
+	<script>
+	function initPage() {
+
+		const editData = localStorage.getItem("editPokemon");
+
+		if (editData) {
+			loadEditMode(editData);
+		} else {
+			updatePokemon(pokemonListe[0].nummer);
+		}
+	}
+	</script>
+
+	<script>
+		function calculateTotalStats() {
+
+			const base = [
+				Number(DOM.hp.textContent) || 0,
+				Number(DOM.atk.textContent) || 0,
+				Number(DOM.def.textContent) || 0,
+				Number(DOM.spatk.textContent) || 0,
+				Number(DOM.spdef.textContent) || 0,
+				Number(DOM.init.textContent) || 0
+			];
+
+			const ivs = Array.from(document.querySelectorAll(".iv-input"))
+				.map(i => Number(i.value) || 0);
+
+			const evs = Array.from(document.querySelectorAll(".ev-input"))
+				.map(i => Number(i.value) || 0);
+
+			// WICHTIG: immer aktuellen DOM Wert nehmen
+			const level = Number(DOM.level?.value ?? 100) || 100;
+
+			const nature = DOM.wesen?.value || "";
+
+			const stats = [
+				calcStat(base[0], ivs[0], evs[0], level, true),
+				calcStat(base[1], ivs[1], evs[1], level) * getNatureModifier("atk", nature),
+				calcStat(base[2], ivs[2], evs[2], level) * getNatureModifier("def", nature),
+				calcStat(base[3], ivs[3], evs[3], level) * getNatureModifier("spatk", nature),
+				calcStat(base[4], ivs[4], evs[4], level) * getNatureModifier("spdef", nature),
+				calcStat(base[5], ivs[5], evs[5], level) * getNatureModifier("init", nature)
+			];
+
+			const pokemonNummer = Number(
+				DOM.nummerSelect?.value ?? DOM.nummerSelect?.textContent
+			);
+
+			const finalStats = [
+
+				pokemonNummer === 292
+					? 1
+					: Math.floor(stats[0]),
+
+				Math.floor(stats[1]),
+
+				Math.floor(stats[2]),
+
+				Math.floor(stats[3]),
+
+				Math.floor(stats[4]),
+
+				Math.floor(stats[5])
+
+			];
+
+
+			// Höchsten der sechs Statuswerte bestimmen
+
+			const maxStat = Math.max(...finalStats);
+
+
+			// Werte + Balken aktualisieren
+
+			const totalElements = [
+
+				DOM.totalHp,
+				DOM.totalAtk,
+				DOM.totalDef,
+				DOM.totalSpatk,
+				DOM.totalSpdef,
+				DOM.totalInit
+
+			];
+
+
+			totalElements.forEach((element, index) => {
+
+				const value = finalStats[index];
+
+				const valueElement =
+					element.querySelector(".total-value");
+
+				const bar =
+					element.querySelector(".stat-bar-fill");
+
+
+				// Zahl anzeigen
+
+				valueElement.textContent = value;
+
+
+				// Verhältnis zum höchsten Statuswert
+
+				const percentage =
+					maxStat > 0
+						? (value / maxStat) * 100
+						: 0;
+
+
+				bar.style.width =
+					`${percentage}%`;
+
+			});
+		}
+
+		document.querySelectorAll(".iv-input, .ev-input").forEach(i =>
+			i.addEventListener("input", () => {
+				calculateTotalStats();
+				requestPreviewUpdate();
+			})
+		);
+
+		DOM.level.addEventListener("input", calculateTotalStats);
+		DOM.wesen.addEventListener("change", calculateTotalStats);
+
+		function getNatureModifier(statName, nature) {
+
+			if (!nature) return 1;
+
+			const modifier = editorData.natureModifiers[nature];
+
+			if (!modifier) return 1;
+
+			if (modifier.up === statName) return 1.1;
+			if (modifier.down === statName) return 0.9;
+
+			return 1;
+		}
+		
+		function calcStat(base, iv, ev, level, isHP = false) {
+
+			if (isHP) {
+				return Math.floor(
+					((2 * base + iv + Math.floor(ev / 4)) * level) / 100
+				) + level + 10;
+			}
+
+			return Math.floor(
+				(Math.floor(((2 * base + iv + Math.floor(ev / 4)) * level) / 100) + 5)
+			);
+		}
+
+	</script>
+
+	<script>
+		function renderGenderButtons(formData) {
+
+			const container = DOM.genderContainer;
+
+			container.innerHTML = "";
+
+			if (!formData?.geschlecht) return;
+
+			const rawGenders =
+				Array.isArray(formData.geschlecht)
+				? formData.geschlecht
+				: Object.keys(formData.geschlecht);
+
+			const genders =
+				rawGenders.filter(g =>
+					g === "Männlich" ||
+					g === "Weiblich"
+				);
+
+			// Keine echten Geschlechter vorhanden
+			if (genders.length === 0) {
+
+				currentGender = "Unbekannt";
+
+				return;
+			}
+
+			// =========================
+			// Nur ein Geschlecht
+			// =========================
+
+			if (genders.length === 1) {
+
+				currentGender = genders[0];
+
+				const btn = document.createElement("button");
+
+				btn.className = "toggle-btn active";
+
+				const female = currentGender === "Weiblich";
+
+				btn.textContent = female ? "♀" : "♂";
+
+				btn.classList.add(
+					female ? "female" : "male"
+				);
+
+				container.appendChild(btn);
+
+				return;
+			}
+
+			// =========================
+			// Beide Geschlechter
+			// =========================
+
+			if (!genders.includes(currentGender)) {
+				currentGender = genders[0];
+			}
+
+			const btn = document.createElement("button");
+
+			btn.className = "toggle-btn active";
+
+			function updateButton() {
+
+				const female = currentGender === "Weiblich";
+
+				btn.textContent = female ? "♀" : "♂";
+
+				btn.classList.toggle("female", female);
+				btn.classList.toggle("male", !female);
+			}
+
+			updateButton();
+
+			btn.addEventListener("click", () => {
+
+				currentGender =
+					currentGender === "Männlich"
+					? "Weiblich"
+					: "Männlich";
+
+				updateButton();
+
+				updateCurrentPokemonSprite();
+				requestPreviewUpdate();
+			});
+
+			container.appendChild(btn);
+		}
+
+		const shinyBtn = DOM.shinyBtn
+
+		shinyBtn.addEventListener("click", () => {
+
+			isShiny = !isShiny;
+
+			shinyBtn.classList.toggle(
+				"active",
+				isShiny
+			);
+
+			updateCurrentPokemonSprite();
+			requestPreviewUpdate();
+		});
+
+		const caughtBtn = DOM.caughtBtn;
+
+		caughtBtn.addEventListener("click", () => {
+
+			isCaught = !isCaught;
+
+			updateCaughtButton();
+		});
+
+		function updateCaughtButton() {
+
+			caughtBtn.classList.toggle(
+				"active",
+				isCaught
+			);
+
+			caughtBtn.title =
+				isCaught
+				? "Gefangen"
+				: "Nicht gefangen";
+		}
+
+	</script>
+	
+	<script>
+		document.querySelectorAll(".iv-input").forEach(input => {
+			input.addEventListener("input", () => {
+				let value = Number(input.value);
+
+				if (value > 31) input.value = 31;
+				if (value < 0) input.value = 0;
+			});
+		});
+		
+		document.querySelectorAll(".ev-input").forEach(input => {
+			input.addEventListener("input", () => {
+				let value = Number(input.value);
+
+				if (value > 252) input.value = 252;
+				if (value < 0) input.value = 0;
+			});
+		});
+	</script>
+
+	<script>
+	function setType(elementId, typeName) {
+
+		const el = document.getElementById(elementId);
+
+		// zurücksetzen
+		el.className = "type-slot";
+
+		// leer → verstecken
+		if (!typeName) {
+			el.style.display = "none";
+			return;
+		}
+
+		el.style.display = "flex";
+		el.textContent = typeName;
+
+		const typeClass = {
+			Feuer: "fire",
+			Wasser: "water",
+			Pflanze: "grass",
+			Elektro: "electric",
+			Normal: "normal",
+			Flug: "flying",
+			Käfer: "bug",
+			Gift: "poison",
+			Gestein: "rock",
+			Boden: "ground",
+			Kampf: "fighting",
+			Eis: "ice",
+			Psycho: "psychic",
+			Geist: "ghost",
+			Drache: "dragon",
+			Unlicht: "dark",
+			Stahl: "steel",
+			Fee: "fairy"
+		};
+
+		el.classList.add(`type-${typeClass[typeName]}`);
+	}
+
+	</script>
+	
+	<script>
+
+		const attackTypeMap = {
+			Normal: "normal",
+			Feuer: "fire",
+			Wasser: "water",
+			Pflanze: "grass",
+			Elektro: "electric",
+			Gift: "poison",
+			Flug: "flying",
+			Käfer: "bug",
+			Gestein: "rock",
+			Boden: "ground",
+			Kampf: "fighting",
+			Eis: "ice",
+			Psycho: "psychic",
+			Geist: "ghost",
+			Drache: "dragon",
+			Unlicht: "dark",
+			Stahl: "steel",
+			Fee: "fairy"
+		};
+
+		const attackTypeIcons = {
+
+			Normal: 1,
+			Kampf: 2,
+			Flug: 3,
+			Gift: 4,
+			Boden: 5,
+			Gestein: 6,
+			Käfer: 7,
+			Geist: 8,
+			Stahl: 9,
+			Feuer: 10,
+			Wasser: 11,
+			Pflanze: 12,
+			Elektro: 13,
+			Psycho: 14,
+			Eis: 15,
+			Drache: 16,
+			Unlicht: 17,
+			Fee: 18
+
+		};
+		
+		const attackTypeIconPath =
+		"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/small/";
+
+
+		function getTypeIcon(type){
+
+			const icon = attackTypeIcons[type];
+
+			if(!icon){
+				return "";
+			}
+
+			return `
+				<img 
+					class="attack-type-icon"
+					src="${attackTypeIconPath}${icon}.png"
+					alt="${type}"
+				>
+			`;
+
+		}
+
+		function createAttackDropdown(container, initialValue = null) {
+
+			const wrapper = document.createElement("div");
+			wrapper.className = "attack-dropdown";
+
+			const selected = document.createElement("div");
+			selected.className = "attack-selected";
+
+			const options = document.createElement("div");
+			options.className = "attack-options";
+
+			const search = document.createElement("input");
+
+			search.type = "text";
+			search.className = "attack-search";
+			search.placeholder = "Attacke suchen...";
+
+
+			function setSelected(atk) {
+
+				const typeClass = attackTypeMap[atk.type] || "normal";
+
+				// Typklasse am Dropdown aktualisieren
+				selected.className = `attack-selected type-${typeClass}`;
+
+				wrapper.className = wrapper.className
+					.replace(/\btype-\S+/g, "")
+					.trim();
+
+				wrapper.classList.add(`type-${typeClass}`);
+
+
+				selected.innerHTML = `
+					<div class="attack-corner">
+						${getTypeIcon(atk.type)}
+					</div>
+
+					<div class="attack-power">
+						${atk.power || "—"}
+					</div>
+
+					<div class="attack-title">
+						${atk.name}
+					</div>
+
+					<div class="attack-divider"></div>
+
+					<div class="attack-bottom">
+
+					<div class="attack-description-box">
+						${atk.description || "&nbsp;"}
+					</div>
+
+					<div class="attack-footer">
+
+						<div class="attack-category-label">
+							${attackCategoryMap[atk.category] || ""}
+							${atk.category}
+						</div>
+
+						<div class="attack-type-label">
+							${atk.type}
+						</div>
+
+					</div>
+
+				</div>
+
+					</div>
+				`;
+
+
+				wrapper.dataset.value = atk.name;
+
+			}
+
+			ATTACKS.forEach(atk => {
+
+				const typeClass = attackTypeMap[atk.type] || "normal";
+
+				const option = document.createElement("div");
+
+				option.className = `attack-option type-${typeClass}`;
+				option.dataset.name = atk.name.toLowerCase();
+
+				option.innerHTML = `
+					<div class="attack-corner">
+						${getTypeIcon(atk.type)}
+					</div>
+
+					<div class="attack-power">
+						${atk.power || "—"}
+					</div>
+
+					<div class="attack-title">
+						${atk.name}
+					</div>
+
+					<div class="attack-divider"></div>
+
+					<div class="attack-bottom">
+
+						<div class="attack-description-box">
+							${atk.description || "&nbsp;"}
+						</div>
+
+						<div class="attack-footer">
+
+							<div class="attack-category-label">
+								${attackCategoryMap[atk.category] || ""}
+								${atk.category}
+							</div>
+
+							<div class="attack-type-label">
+								${atk.type}
+							</div>
+
+						</div>
+
+					</div>
+				`;
+
+				option.addEventListener("click", e => {
+
+					e.stopPropagation();
+
+					setSelected(atk);
+
+					wrapper.classList.remove("open");
+
+					requestPreviewUpdate();
+
+				});
+
+
+				options.appendChild(option);
+
+			});
+
+
+			search.addEventListener("input", () => {
+
+				const value = search.value.toLowerCase().trim();
+
+				options.querySelectorAll(".attack-option").forEach(option => {
+
+					option.style.display =
+						option.dataset.name.includes(value)
+							? ""
+							: "none";
+
+				});
+
+			});
+
+
+			selected.addEventListener("click", e => {
+
+				e.stopPropagation();
+
+				wrapper.classList.toggle("open");
+
+				if(wrapper.classList.contains("open")) {
+
+					search.value = "";
+
+					search.dispatchEvent(new Event("input"));
+
+					search.focus();
+
+				}
+
+			});
+
+
+			options.prepend(search);
+
+			wrapper.appendChild(selected);
+			wrapper.appendChild(options);
+
+			container.appendChild(wrapper);
+
+
+
+			// gespeicherter Wert
+			if(initialValue) {
+
+				const atk = ATTACKS.find(a => a.name === initialValue);
+
+				if(atk) {
+					setSelected(atk);
+					return;
+				}
+
+			}
+
+
+			// Standardattacke
+			if(ATTACKS.length > 0) {
+				setSelected(ATTACKS[0]);
+			}
+
+		}
+
+		function setSelectedAttacks(attacks) {
+
+			const dropdowns = document.querySelectorAll(".attack-dropdown");
+
+			dropdowns.forEach((dropdown, i) => {
+
+				const name = attacks[i];
+				if (!name) return;
+
+				const atk = ATTACKS.find(a => a.name === name);
+				if (!atk) return;
+
+
+				const selected = dropdown.querySelector(".attack-selected");
+
+				const typeClass = attackTypeMap[atk.type] || "normal";
+
+
+				// Typklasse setzen
+				dropdown.classList.forEach(cls => {
+					if (cls.startsWith("type-")) {
+						dropdown.classList.remove(cls);
+					}
+				});
+
+				dropdown.classList.add(`type-${typeClass}`);
+
+
+				selected.className =
+					`attack-selected type-${typeClass}`;
+
+
+				selected.innerHTML = `
+					<div class="attack-corner">
+						${getTypeIcon(atk.type)}
+					</div>
+
+					<div class="attack-power">
+						${atk.power || "—"}
+					</div>
+
+					<div class="attack-title">
+						${atk.name}
+					</div>
+
+					<div class="attack-divider"></div>
+
+					<div class="attack-bottom">
+
+						<div class="attack-description-box">
+							${atk.description || "&nbsp;"}
+						</div>
+
+						<div class="attack-footer">
+
+							<div class="attack-category-label">
+								${attackCategoryMap[atk.category] || ""}
+								${atk.category}
+							</div>
+
+							<div class="attack-type-label">
+								${atk.type}
+							</div>
+
+						</div>
+
+					</div>
+				`;
+
+
+				dropdown.dataset.value = atk.name;
+
+			});
+		}
+
+	</script>
+	
+	<script>
+	// Update Game Data
+		
+	function populateGameDropdown(generation = null) {
+
+		const currentGame = DOM.game.value;
+
+		DOM.game.innerHTML = "";
+
+		Object.entries(GAME_DATA).forEach(([gameName, gameData]) => {
+
+			const filterGeneration =
+				generation === null || generation === ""
+				? null
+				: Number(generation);
+		
+			if (
+				filterGeneration !== null &&
+				gameData.generation !== filterGeneration
+			) {
+				return;
+			}
+
+			const option = document.createElement("option");
+
+			option.value = gameName;
+			option.textContent = gameName;
+
+			if (gameName === currentGame) {
+				option.selected = true;
+			}
+
+			DOM.game.appendChild(option);
+
+		});
+		
+		if (!DOM.game.value && DOM.game.options.length > 0) {
+
+			DOM.game.selectedIndex = 0;
+
+		}
+
+	}
+	
+	DOM.generation.addEventListener("change", () => {
+
+		if (DOM.generation.value === "") {
+
+			populateGameDropdown();
+
+		} else {
+
+			populateGameDropdown(Number(DOM.generation.value));
+
+		}
+
+		updateGameData();
+
+	});
+	
+	function updateGameData() {
+
+		const game = DOM.game.value;
+
+		const gameData = GAME_DATA[game];
+
+		if (!gameData) {
+
+			updateLocationDropdown([]);
+			return;
+
+		}
+
+		updateLocationDropdown(gameData.locations);
+
+	}
+	
+	function restoreOriginData(pokemon) {
+
+		const generation = pokemon.generation;
+		const game = pokemon.game;
+		const location = pokemon.location;
+
+
+		// =========================================
+		// Generation setzen
+		// =========================================
+
+		DOM.generation.value =
+			generation !== undefined &&
+			generation !== null
+				? String(generation)
+				: "";
+
+
+		// =========================================
+		// Passende Spiele erzeugen
+		// =========================================
+
+		if (DOM.generation.value === "") {
+
+			populateGameDropdown();
+
+		} else {
+
+			populateGameDropdown(
+				Number(DOM.generation.value)
+			);
+
+		}
+
+
+		// =========================================
+		// Gespeichertes Spiel auswählen
+		// =========================================
+
+		if (
+			game &&
+			[...DOM.game.options]
+				.some(option => option.value === game)
+		) {
+
+			DOM.game.value = game;
+
+		}
+
+
+		// =========================================
+		// Orte des Spiels erzeugen
+		// =========================================
+
+		updateGameData();
+
+
+		// =========================================
+		// Gespeicherten Ort auswählen
+		// =========================================
+
+		if (
+			location &&
+			[...DOM.location.options]
+				.some(option => option.value === location)
+		) {
+
+			DOM.location.value = location;
+
+		}
+
+	}
+		
+	function updateLocationDropdown(locations) {
+
+		DOM.location.innerHTML = "";
+
+		locations.forEach(location => {
+
+			const option = document.createElement("option");
+
+			option.value = location.name ?? location;
+			option.textContent = location.name ?? location;
+
+			DOM.location.appendChild(option);
+
+		});
+
+	}
+	
+	DOM.game.addEventListener("change", () => {
+
+		updateGameData();
+
+	});
+
+	</script>
+	
+	
+	<script>
+	// Hide attack and stats
+	document.querySelectorAll(".group-toggle").forEach(header => {
+
+		header.addEventListener("click", () => {
+
+			const group = header.parentElement;
+
+			group.classList.toggle("collapsed");
+
+			const arrow = header.querySelector(".toggle-arrow");
+
+			arrow.textContent =
+				group.classList.contains("collapsed")
+					? "▼"
+					: "▲";
+
+		});
+
+	});
+
+	</script>
+	
+	<script>
+	
+		/* =========================
+		   Pokéball Auswahl
+		========================= */
+
+		const POKEBALL_SPRITE_BASE =
+			"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/";
+		
+		function initPokeballDropdown() {
+
+			const dropdown =
+				document.getElementById("pokeballDropdown");
+
+			const selected =
+				document.getElementById("pokeballSelected");
+
+			const selectedImage =
+				document.getElementById("pokeballSelectedImage");
+
+			const selectedName =
+				document.getElementById("pokeballSelectedName");
+
+			const optionsContainer =
+				document.getElementById("pokeballOptions");
+
+			const select =
+				document.getElementById("pokeball");
+
+
+			if (
+				!dropdown ||
+				!selected ||
+				!selectedImage ||
+				!selectedName ||
+				!optionsContainer ||
+				!select
+			) {
+				return;
+			}
+
+
+			// =========================================
+			// Verstecktes Select aus editorData erzeugen
+			// =========================================
+
+			select.innerHTML = "";
+
+			editorData.pokeballs.forEach(ball => {
+
+				const option =
+					document.createElement("option");
+
+				option.value = ball.value;
+				option.textContent = ball.name;
+
+				select.appendChild(option);
+
+			});
+
+
+			// =========================================
+			// Sichtbares Dropdown erzeugen
+			// =========================================
+
+			optionsContainer.innerHTML = "";
+
+
+			editorData.pokeballs.forEach(ball => {
+
+				const optionElement =
+					document.createElement("button");
+
+				optionElement.type = "button";
+				optionElement.className = "pokeball-option";
+
+				optionElement.dataset.value =
+					ball.value;
+
+
+				optionElement.innerHTML = `
+					<img
+						src="${POKEBALL_SPRITE_BASE}${ball.sprite}"
+						alt=""
+					>
+					<span>${ball.name}</span>
+				`;
+
+
+				optionElement.addEventListener("click", () => {
+
+					select.value = ball.value;
+
+					selectedImage.src =
+						POKEBALL_SPRITE_BASE + ball.sprite;
+
+					selectedName.textContent =
+						ball.name;
+
+					dropdown.classList.remove("open");
+
+					updatePokeballActiveOption();
+
+				});
+
+
+				optionsContainer.appendChild(optionElement);
+
+			});
+
+			// =========================================
+			// Dropdown öffnen / schließen
+			// =========================================
+
+			selected.addEventListener("click", event => {
+
+				event.stopPropagation();
+
+				dropdown.classList.toggle("open");
+
+			});
+
+
+			document.addEventListener("click", event => {
+
+				if (!dropdown.contains(event.target)) {
+
+					dropdown.classList.remove("open");
+
+				}
+
+			});
+
+
+			// =========================================
+			// Falls Wert per JS geändert wird
+			// =========================================
+
+			// Standardwert
+			if (!select.value) {
+
+				select.value =
+					editorData.pokeballs[0]?.value || "";
+
+			}
+
+		}
+		
+		function updatePokeballDropdown() {
+
+			const select =
+				document.getElementById("pokeball");
+
+			const selectedImage =
+				document.getElementById("pokeballSelectedImage");
+
+			const selectedName =
+				document.getElementById("pokeballSelectedName");
+
+			const optionsContainer =
+				document.getElementById("pokeballOptions");
+
+			if (
+				!select ||
+				!selectedImage ||
+				!selectedName
+			) {
+				return;
+			}
+
+			const value = select.value;
+
+			const pokeballsByValue = new Map(
+				editorData.pokeballs.map(
+					ball => [ball.value, ball]
+				)
+			);
+
+			const ball = pokeballsByValue.get(value);
+
+			if (!ball) return;
+
+			selectedImage.src =
+				POKEBALL_SPRITE_BASE + ball.sprite;
+
+			selectedName.textContent =
+				ball.name;
+
+			optionsContainer
+				?.querySelectorAll(".pokeball-option")
+				.forEach(option => {
+
+					option.classList.toggle(
+						"active",
+						option.dataset.value === value
+					);
+
+				});
+
+		}
+		
+	</script>
+	
+	<script>
+	
+	/* =========================
+	   Fähigkeiten Auswahl
+	========================= */
+	
+	function updateAbilityDropdown() {
+
+		const abilitySelect =
+			document.getElementById("ability");
+
+		const selectedName =
+			document.getElementById("abilitySelectedName");
+
+		const optionsContainer =
+			document.getElementById("abilityOptions");
+
+
+		if (!abilitySelect || !selectedName) {
+			return;
+		}
+
+
+		const value =
+			abilitySelect.value;
+
+
+		selectedName.textContent =
+			value || "Fähigkeit auswählen";
+
+
+		if (optionsContainer) {
+
+			optionsContainer
+				.querySelectorAll(".ability-option")
+				.forEach(option => {
+
+					option.classList.toggle(
+						"active",
+						option.dataset.value === value
+					);
+
+				});
+
+		}
+
+	}
+	
+	</script>
+
+</body>
+</html>

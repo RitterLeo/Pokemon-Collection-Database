@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Pokémon Kartensammlung</title>
+
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="stylesheet" href="types.css">
+	<link rel="stylesheet" href="confirmDialog.css">
+
+    <script src="attack-data.js"></script>
+	<script src="cardRenderer.js"></script>
+	<script src="search.js"></script>
+	<script src="sorting.js"></script>
+	<script src="confirmDialog.js"></script>
+
+</head>
+
+<body>
+
+	<!-- =========================
+		 TOPBAR
+	========================= -->
+	<div id="topbar">
+
+		<button onclick="exportData()">Speichern</button>
+
+		<input type="file"
+			   id="fileLoader"
+			   accept=".json"
+			   style="display:none"
+			   onchange="importData(event)">
+
+		<button onclick="document.getElementById('fileLoader').click()">Laden</button>
+
+		<button onclick="window.location.href='pokemon_rm_karteneditor.html'">➕ Pokémon hinzufügen</button>
+		<button onclick="window.location.href='collection.html'">📊 Statistiken</button>
+
+		<!-- Filter -->
+		<button id="filterButton" onclick="toggleFilterPanel()">🔍 Filter</button>
+		
+		<div id="filterPanel" class="filter-panel hidden">
+
+			<div class="filter-header">
+
+				<strong>Filter</strong>
+
+				<button onclick="toggleFilterPanel()">✖</button>
+
+			</div>
+
+			 <!-- FILTER AUSWÄHLEN -->
+			<div class="filter-content">
+
+				<button onclick="addFilter('generation')">
+					Generation
+				</button>
+
+				<button onclick="addFilter('type')">
+					Typ
+				</button>
+
+				<button onclick="addFilter('game')">
+					Spiel
+				</button>
+
+				<button onclick="addFilter('ball')">
+					Ball
+				</button>
+
+				<button onclick="addFilter('ability')">
+					Fähigkeit
+				</button>
+
+				<button onclick="addFilter('nature')">
+					Wesen
+				</button>
+				
+				<button onclick="addFilter('gender')">
+					Geschlecht
+				</button>
+
+				<button onclick="addFilter('favorite')">
+					Favorit
+				</button>
+
+				<button onclick="addFilter('shiny')">
+					Schillernd
+				</button>
+				
+				<button onclick="addFilter('level')">
+					Level
+				</button>
+				<button onclick="addFilter('date')">
+					Datum
+				</button>
+
+			</div>
+			
+			<!-- AKTIVE FILTER -->
+
+			<div class="active-filter-section">
+
+				<div class="active-filter-title">
+					Aktive Filter
+				</div>
+
+				<div id="activeFilters"></div>
+
+			</div>
+			
+			<div class="filter-footer">
+
+				<button onclick="clearFilters()">
+					🗑 Alle Filter löschen
+				</button>
+
+			</div>
+
+		</div>
+
+		<div class="sort-container">
+
+			<div class="sort-group">
+
+				<label>Primär</label>
+
+				<select id="primarySort"></select>
+
+			</div>
+
+			<div class="sort-group">
+
+				<label>Sekundär</label>
+
+				<select id="secondarySort"></select>
+
+			</div>
+
+		</div>
+
+		<input type="text" id="searchBox" placeholder="🔍 Pokémon suchen...">
+
+	</div>
+
+	<!-- Bar showing all active Pokemons by filters -->
+	<div id="resultBar">
+
+		<span id="resultCount"></span>
+
+	</div>
+
+	<!-- =========================
+		 MAIN
+	========================= -->
+	<div id="main">
+
+		<div id="grid"></div>
+
+		<!-- DETAIL -->
+		<div id="detail">
+
+			<div id="detailContent"></div>
+
+		</div>
+
+	</div>
+
+	<!-- =========================
+		 SCRIPT
+	========================= -->
+
+	<script>
+
+		/* =========================
+		   STORAGE
+		========================= */
+		function getCustom(){
+
+			return JSON.parse(
+				localStorage.getItem("customPokemon")
+			) || [];
+
+		}
+		
+		let pokemonStorage = [];
+
+		function loadStorage() {
+
+			pokemonStorage = getCustom();
+			migrateCustomOrder(pokemonStorage);
+
+		}
+
+		function saveStorage(){
+
+			localStorage.setItem(
+				"customPokemon",
+				JSON.stringify(pokemonStorage)
+			);
+
+		}
+
+		/* =========================
+		   ELEMENTE
+		========================= */
+		const grid = document.getElementById("grid");
+		const detail = document.getElementById("detail");
+		const detailContent = document.getElementById("detailContent");
+
+		let activeCard = null;
+		
+		const cardCache = new Map();
+		const cardElements = new Map();
+		
+		let currentVisibleIds = [];
+		let currentFilterSignature = "";
+		
+		let currentSortSignature = "";
+		let sortedCache = [];
+		
+		const dirtyCards = new Set();
+		
+		function markCardDirty(id){
+
+			dirtyCards.add(id);
+
+			updateDirtyCards();
+
+		}
+		
+		function updateDirtyCards(){
+
+			if(dirtyCards.size === 0){
+				return;
+			}
+
+			for(const id of dirtyCards){
+
+				const pokemon = pokemonStorage.find(
+					p => p.id === id
+				);
+
+				if(!pokemon){
+					continue;
+				}
+
+				const oldCard = cardElements.get(id);
+				
+				if(
+					oldCard &&
+					oldCard._renderVersion === pokemon.renderVersion
+				){
+					continue;
+				}
+
+				if(!oldCard){
+					continue;
+				}
+
+				const newCard = createCard(pokemon);
+
+				cardCache.set(id, newCard);
+				cardElements.set(id, newCard);
+
+				oldCard.replaceWith(newCard);
+				
+				newCard._renderVersion = pokemon.renderVersion;
+				newCard._pokemon = pokemon;
+
+				if(activeCard === oldCard){
+
+					activeCard = newCard;
+
+				}
+
+			}
+
+			dirtyCards.clear();
+
+		}
+
+		/* Alle aktiven Filter */
+		let activeFilters = [];
+		
+		const numericFilters = {
+
+			level: {
+				field: "level",
+				min: 1,
+				max: 100
+			},
+
+			cool: {
+				field: "cool",
+				min: 0,
+				max: 255
+			},
+
+			beauty: {
+				field: "beauty",
+				min: 0,
+				max: 255
+			},
+
+			cute: {
+				field: "cute",
+				min: 0,
+				max: 255
+			},
+
+			smart: {
+				field: "smart",
+				min: 0,
+				max: 255
+			},
+
+			tough: {
+				field: "tough",
+				min: 0,
+				max: 255
+			}
+
+		};
+		
+		const filterDefinitions = {
+
+			generation: {
+				label: "Generation",
+				input: "select",
+				field: "generation"
+			},
+
+			type: {
+				label: "Typ",
+				input: "select",
+				field: "type"
+			},
+
+			game: {
+				label: "Spiel",
+				input: "select",
+				field: "game"
+			},
+
+			ball: {
+				label: "Ball",
+				input: "select",
+				field: "ball"
+			},
+			
+			gender: {
+				label: "Geschlecht",
+				input: "select",
+				field: "geschlecht"
+			},
+
+			ability: {
+				label: "Fähigkeit",
+				input: "select",
+				field: "faehigkeit"
+			},
+
+			nature: {
+				label: "Wesen",
+				input: "select",
+				field: "wesen"
+			},
+
+			favorite: {
+				label: "Favorit",
+				input: "boolean"
+			},
+
+			shiny: {
+				label: "Schillernd",
+				input: "boolean"
+			},
+
+			level: {
+				label: "Level",
+				input: "number",
+				field: "level",
+				min: 1,
+				max: 100
+			},
+			
+			date: {
+				label: "Datum",
+				input: "date",
+				field: "datum"
+			},
+
+		};
+
+		const searchBox = document.getElementById("searchBox");
+
+		let searchTimeout;
+
+		if (searchBox) {
+
+			searchBox.addEventListener("input", () => {
+
+				clearTimeout(searchTimeout);
+
+				searchTimeout = setTimeout(() => {
+
+					refreshGrid();
+
+				}, 200);
+
+			});
+
+		}
+
+		function saveFilters() {
+
+			localStorage.setItem(
+				"activeFilters",
+				JSON.stringify(activeFilters)
+			);
+
+		}
+
+		function loadFilters() {
+
+			const saved =
+				localStorage.getItem("activeFilters");
+
+			if (saved) {
+
+				activeFilters = JSON.parse(saved);
+
+			}
+
+		}
+		
+		function getSortedData(data){
+
+			const signature = JSON.stringify({
+
+				sort: sortModes,
+				ids: data.map(p => p.id)
+
+			});
+
+			if(signature === currentSortSignature){
+
+				return sortedCache;
+
+			}
+
+			currentSortSignature = signature;
+
+			sortedCache = applySorting(data);
+
+			return sortedCache;
+
+		}
+		
+		/* =========================
+		   GRID RENDER
+		========================= */
+		function refreshGrid(storage = null){
+
+			storage ??= pokemonStorage;
+
+			const signature = JSON.stringify({
+
+				filters: activeFilters,
+
+				search: searchBox.value,
+
+				sort: sortModes,
+
+				ids: storage.map(p => p.id)
+
+			});
+
+			if(signature === currentFilterSignature){
+
+				return;
+
+			}
+
+			currentFilterSignature = signature;
+
+			let data = applyFilters(storage);
+
+			data = getSortedData(data);
+
+			renderGrid(data);
+
+			updateResultCount(
+				data.length,
+				storage.length
+			);
+
+		}
+		
+		// save the names of the boxes
+
+		let boxNames = {};
+
+		function loadBoxNames(){
+
+			try {
+
+				boxNames =
+					JSON.parse(
+						localStorage.getItem("boxNames")
+					) || {};
+
+			} catch {
+
+				boxNames = {};
+
+			}
+
+		}
+
+		function saveBoxNames(){
+
+			localStorage.setItem(
+				"boxNames",
+				JSON.stringify(boxNames)
+			);
+
+		}
+		
+		
+		let boxColors = {};
+
+		function loadBoxColors(){
+
+			try {
+
+				boxColors =
+					JSON.parse(
+						localStorage.getItem("boxColors")
+					) || {};
+
+			} catch {
+
+				boxColors = {};
+
+			}
+
+		}
+
+		function saveBoxColors(){
+
+			localStorage.setItem(
+				"boxColors",
+				JSON.stringify(boxColors)
+			);
+
+		}
+
+		function renderGrid(data){
+
+			grid.innerHTML = "";
+
+			const visibleIds = new Set();
+
+			// =====================================================
+			// KARTEN RENDERN
+			// =====================================================
+
+			let currentNode = grid.firstChild;
+
+			for(const pokemon of data){
+
+				visibleIds.add(pokemon.id);
+
+				let card = cardCache.get(pokemon.id);
+
+				if(!card){
+
+					card = createCard(pokemon);
+
+					cardCache.set(
+						pokemon.id,
+						card
+					);
+
+				}
+
+				if(!card._dragInitialized){
+
+					enableCardDrag(card);
+
+					card._dragInitialized = true;
+
+				}
+
+				grid.appendChild(card);
+			}
+
+
+			// =====================================================
+			// NICHT MEHR SICHTBARE KARTEN AUS DEM CACHE ENTFERNEN
+			// =====================================================
+
+			for(const id of cardCache.keys()){
+
+				if(!visibleIds.has(id)){
+
+					const cachedCard =
+						cardCache.get(id);
+
+					if(cachedCard &&
+					   cachedCard.parentElement === grid){
+
+						cachedCard.remove();
+
+					}
+
+				}
+
+			}
+
+
+			// =====================================================
+			// BOXEN ERSTELLEN
+			// =====================================================
+
+			const cards = [
+				...grid.querySelectorAll(".card")
+			];
+
+			const cardsPerBox = 30;
+
+			const boxCount =
+				Math.ceil(
+					cards.length / cardsPerBox
+				);
+
+
+			// =====================================================
+			// BOXEN AUFBAUEN
+			// =====================================================
+
+			for(
+				let boxIndex = 0;
+				boxIndex < boxCount;
+				boxIndex++
+			){
+
+				const boxNumber =
+					boxIndex + 1;
+
+
+				// -------------------------------------------------
+				// BOX
+				// -------------------------------------------------
+
+				const box =
+					document.createElement("div");
+
+				box.className =
+					"pokemon-box";
+
+
+				// -------------------------------------------------
+				// BOX-FARBE
+				// -------------------------------------------------
+
+				const defaultBoxColor =
+					"#ffcf7d";
+
+				const boxColor =
+					boxColors[boxNumber] ||
+					defaultBoxColor;
+
+				box.style.setProperty(
+					"--box-color",
+					boxColor
+				);
+
+
+				// -------------------------------------------------
+				// HEADER
+				// -------------------------------------------------
+
+				const header =
+					document.createElement("div");
+
+				header.className =
+					"box-header";
+
+
+				// -------------------------------------------------
+				// TITEL
+				// -------------------------------------------------
+
+				const title =
+					document.createElement("div");
+
+				title.className =
+					"box-title";
+
+				const defaultBoxName =
+					`Box ${boxNumber}`;
+
+				title.textContent =
+					boxNames[boxNumber] ||
+					defaultBoxName;
+
+
+				// -------------------------------------------------
+				// TITEL BEARBEITEN
+				// -------------------------------------------------
+
+				title.addEventListener(
+					"click",
+					(e) => {
+
+						e.stopPropagation();
+
+						const input =
+							document.createElement("input");
+
+						input.type =
+							"text";
+
+						input.value =
+							title.textContent;
+
+						input.className =
+							"box-title-input";
+
+						title.replaceWith(
+							input
+						);
+
+						input.focus();
+						input.select();
+
+
+						function finishEdit(){
+
+							const value =
+								input.value.trim();
+
+							const newName =
+								value ||
+								defaultBoxName;
+
+							title.textContent =
+								newName;
+
+							boxNames[boxNumber] =
+								newName;
+
+							saveBoxNames();
+
+							input.replaceWith(
+								title
+							);
+
+						}
+
+
+						input.addEventListener(
+							"keydown",
+							(event) => {
+
+								if(
+									event.key ===
+									"Enter"
+								){
+
+									finishEdit();
+
+								}
+
+								if(
+									event.key ===
+									"Escape"
+								){
+
+									input.value =
+										title.textContent;
+
+									finishEdit();
+
+								}
+
+							}
+						);
+
+
+						input.addEventListener(
+							"blur",
+							finishEdit
+						);
+
+					}
+				);
+
+
+				header.appendChild(
+					title
+				);
+
+
+				// -------------------------------------------------
+				// FARBAUSWAHL
+				// -------------------------------------------------
+
+				const colorPicker =
+					document.createElement(
+						"input"
+					);
+
+				colorPicker.type =
+					"color";
+
+				colorPicker.className =
+					"box-color-picker";
+
+				colorPicker.value =
+					boxColor;
+
+
+				colorPicker.addEventListener(
+					"input",
+					(event) => {
+
+						const color =
+							event.target.value;
+
+						box.style.setProperty(
+							"--box-color",
+							color
+						);
+
+						boxColors[boxNumber] =
+							color;
+
+						saveBoxColors();
+
+					}
+				);
+
+
+				header.appendChild(
+					colorPicker
+				);
+
+
+				// -------------------------------------------------
+				// HEADER IN BOX
+				// -------------------------------------------------
+
+				box.appendChild(
+					header
+				);
+
+
+				// -------------------------------------------------
+				// KARTEN DIESER BOX
+				// -------------------------------------------------
+
+				const start =
+					boxIndex *
+					cardsPerBox;
+
+				const end =
+					Math.min(
+						start + cardsPerBox,
+						cards.length
+					);
+
+
+				for(
+					let cardIndex = start;
+					cardIndex < end;
+					cardIndex++
+				){
+
+					const card =
+						cards[cardIndex];
+
+					box.appendChild(
+						card
+					);
+
+				}
+
+
+				// -------------------------------------------------
+				// BOX INS GRID
+				// -------------------------------------------------
+
+				grid.appendChild(
+					box
+				);
+
+			}
+
+
+			// =====================================================
+			// KEINE KARTEN
+			// =====================================================
+
+			if(cards.length === 0){
+
+				const empty =
+					document.createElement(
+						"div"
+					);
+
+				empty.className =
+					"empty-message";
+
+				empty.textContent =
+					"Keine Karten gefunden.";
+
+				grid.appendChild(
+					empty
+				);
+
+			}
+
+		}
+		
+		function refreshCard(card, pokemon){
+
+			const newCard = createCard(pokemon);
+
+			cardCache.set(
+				pokemon.id,
+				newCard
+			);
+
+			card.replaceWith(newCard);
+
+			if(activeCard === card){
+
+				activeCard = newCard;
+
+				detailContent.replaceChildren(
+					createDetailCard(pokemon)
+				);
+
+			}
+
+		}
+		
+		function removeCard(card, pokemon){
+
+			if(activeCard === card){
+
+				closeDetail();
+
+			}
+
+			cardCache.delete(pokemon.id);
+
+			card.remove();
+
+			updateResultCount(
+				document.querySelectorAll(".card").length,
+				pokemonStorage.length
+			);
+
+		}
+		
+		function updateResultCount(filteredCount, totalCount) {
+
+			const text =
+
+				filteredCount === totalCount
+
+					? `${totalCount} Pokémon`
+
+					: `${filteredCount} von ${totalCount} Pokémon`;
+
+			document.getElementById("resultCount").textContent = text;
+
+		}
+		
+		function compareValues(left, operator, right) {
+
+			switch (operator) {
+
+				case "=":
+					return left === right;
+
+				case "!=":
+					return left !== right;
+
+				case ">":
+					return left > right;
+
+				case "<":
+					return left < right;
+
+				case ">=":
+					return left >= right;
+
+				case "<=":
+					return left <= right;
+
+				default:
+					return true;
+
+			}
+
+		}
+		
+		function getNestedValue(obj, path) {
+
+			return path.split(".").reduce(
+
+				(current, key) => current?.[key],
+
+				obj
+
+			);
+
+		}
+		
+		function applyFilters(data) {
+
+			// =========================
+			// Suchfeld
+			// =========================
+
+			const searchValue = searchBox
+				? searchBox.value.trim()
+				: "";
+
+			if (searchValue) {
+
+				data = data
+
+					.map(pokemon => ({
+
+						pokemon,
+						score: getSearchScore(pokemon, searchValue)
+
+					}))
+
+					.filter(entry => entry.score > 0)
+
+					.sort((a, b) => {
+
+						if (b.score !== a.score) {
+							return b.score - a.score;
+						}
+
+						return Number(a.pokemon.nummer) - Number(b.pokemon.nummer);
+
+					})
+
+					.map(entry => entry.pokemon);
+
+			}
+
+			// =========================
+			// Aktive Filter
+			// =========================
+
+			activeFilters.forEach(filter => {
+
+				// =========================
+				// Alle Zahlenfilter
+				// =========================
+
+				if (numericFilters[filter.type]) {
+
+					const definition = numericFilters[filter.type];
+
+					data = data.filter(p => {
+
+						const value = Number(filter.value);
+
+						const current = Number(
+							getNestedValue(p, definition.field)
+						);
+
+						return compareValues(
+							current,
+							filter.operator,
+							value
+						);
+
+					});
+
+					return;
+
+				}
+				
+				if (filter.type === "date") {
+
+					if (filter.value !== "") {
+
+						data = data.filter(p => {
+
+							if (!p.datum)
+								return false;
+
+							const current = new Date(p.datum).getTime();
+							const value = new Date(filter.value).getTime();
+
+							return compareValues(
+								current,
+								filter.operator,
+								value
+							);
+
+						});
+
+					}
+
+					return;
+
+				}
+
+				// =========================
+				// Spezielle Filter
+				// =========================
+
+				switch (filter.type) {
+				
+					case "generation":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								Number(p.generation) === Number(filter.value)
+							);
+
+						}
+
+						break;
+
+					case "type":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+
+								p.typ1 === filter.value ||
+								p.typ2 === filter.value
+
+							);
+
+						}
+
+						break;
+
+					case "game":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.game === filter.value
+							);
+
+						}
+
+						break;
+
+					case "ball":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.ball === filter.value
+							);
+
+						}
+
+						break;
+
+					case "ability":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.faehigkeit === filter.value
+							);
+
+						}
+
+						break;
+						
+					case "gender":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.geschlecht === filter.value
+							);
+
+						}
+
+						break;
+
+					case "nature":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.wesen === filter.value
+							);
+
+						}
+
+						break;
+
+					case "favorite":
+
+						if (filter.value === "true") {
+
+							data = data.filter(p =>
+								p.favorit === true
+							);
+
+						}
+
+						break;
+
+					case "shiny":
+
+						if (filter.value === "true") {
+
+							data = data.filter(p =>
+								p.shiny === true
+							);
+
+						}
+
+						break;
+
+				}
+
+			});
+
+			return data;
+
+		}
+		
+		function toggleFilterPanel() {
+
+			document
+				.getElementById("filterPanel")
+				.classList
+				.toggle("hidden");
+
+		}
+		
+		function addFilter(type) {
+
+			// Prüfen, ob der Filter bereits existiert
+			if (activeFilters.some(f => f.type === type)) {
+				return;
+			}
+
+			const definition = filterDefinitions[type];
+
+			activeFilters.push({
+
+				type,
+
+				operator:
+					definition.input === "number" ||
+					type === "generation"
+						? "="
+						: "",
+
+				value: ""
+
+			});
+
+			renderActiveFilters();
+			saveFilters();
+		}
+		
+		const numericOperatorHTML = `
+			<select
+				class="filter-operator"
+				onchange="changeFilterOperator(INDEX, this.value)">
+
+				<option value="=">=</option>
+				<option value="!=">≠</option>
+				<option value=">">&gt;</option>
+				<option value=">=">≥</option>
+				<option value="<">&lt;</option>
+				<option value="<=">≤</option>
+
+			</select>
+		`;
+		
+		function renderActiveFilters() {
+
+			const container = document.getElementById("activeFilters");
+
+			container.innerHTML = "";
+
+			activeFilters.forEach((filter, index) => {
+
+				const definition = filterDefinitions[filter.type];
+
+				const chip = document.createElement("div");
+				chip.className = "filter-chip";
+
+				let options = "";
+				let list = [];
+				let operatorHTML = "";
+
+				// -------------------------
+				// Operator für Zahlenfilter
+				// -------------------------
+
+				if (definition.input === "number") {
+
+					operatorHTML = `
+
+						<select class="filter-operator"
+								onchange="changeFilterOperator(${index}, this.value)">
+
+							<option value="=">=</option>
+							<option value="!=">≠</option>
+							<option value=">">></option>
+							<option value="<"><</option>
+							<option value=">=">>=</option>
+							<option value="<="><=</option>
+
+						</select>
+
+					`;
+
+				}
+				else if (definition.input === "date") {
+
+					operatorHTML = `
+
+						<select class="filter-operator"
+								onchange="changeFilterOperator(${index}, this.value)">
+
+							<option value="=">=</option>
+							<option value="!=">≠</option>
+							<option value=">">></option>
+							<option value="<"><</option>
+							<option value=">=">>=</option>
+							<option value="<="><=</option>
+
+						</select>
+
+					`;
+
+				}
+
+				// -------------------------
+				// Boolean
+				// -------------------------
+
+				if (definition.input === "boolean") {
+
+					options = `
+						<option value="">Alle</option>
+						<option value="true">Ja</option>
+					`;
+
+				}
+
+				// -------------------------
+				// Typ
+				// -------------------------
+
+				else if (filter.type === "type") {
+
+					getCustom().forEach(p => {
+
+						if (p.typ1 && p.typ1 !== "-")
+							list.push(p.typ1);
+
+						if (p.typ2 && p.typ2 !== "-")
+							list.push(p.typ2);
+
+					});
+
+					list = [...new Set(list)].sort();
+
+				}
+
+				// -------------------------
+				// Normale Dropdownfilter
+				// -------------------------
+
+				else if (definition.input === "select") {
+
+					list = getUniqueValues(definition.field, getCustom() );
+
+				}
+
+				if (list.length > 0) {
+
+					options = `<option value="">Alle</option>`;
+
+					list.forEach(value => {
+
+						options += `
+							<option value="${value}">
+								${value}
+							</option>
+						`;
+
+					});
+
+				}
+
+				// -------------------------
+				// HTML erzeugen
+				// -------------------------
+
+				if (definition.input === "number" || definition.input === "date") {
+
+					const inputType =
+						definition.input === "date"
+							? "date"
+							: "number";
+
+
+					chip.innerHTML = `
+
+						<span>${definition.label}</span>
+
+						${operatorHTML}
+
+						<input
+							type="${inputType}"
+							${definition.input === "number"
+								? `
+									min="${definition.min ?? 1}"
+									max="${definition.max ?? ""}"
+								  `
+								: ""
+							}
+							value="${filter.value}"
+							onchange="changeFilterValue(${index}, this.value)"
+							oninput="changeFilterValue(${index}, this.value)"
+						>
+
+						<button onclick="removeFilter(${index})">
+							✖
+						</button>
+
+					`;
+
+					chip.querySelector(".filter-operator").value = filter.operator;
+
+				}
+				else {
+
+					chip.innerHTML = `
+
+						<span>${definition.label}</span>
+
+						<select onchange="changeFilterValue(${index}, this.value)">
+							${options}
+						</select>
+
+						<button onclick="removeFilter(${index})">
+							✖
+						</button>
+
+					`;
+
+					chip.querySelector("select").value = filter.value;
+
+				}
+
+				container.appendChild(chip);
+
+			});
+
+		}
+		
+		function changeFilterOperator(index, operator) {
+
+			activeFilters[index].operator = operator;
+
+			saveFilters();
+
+			refreshGrid();
+
+		}
+		
+		function changeFilterValue(index, value) {
+
+			const filter = activeFilters[index];
+			const definition = filterDefinitions[filter.type];
+
+			// =========================
+			// Zahlenfilter
+			// =========================
+
+			if (definition.input === "number") {
+
+				let number = Number(value);
+
+				if (isNaN(number)) {
+					number = definition.min;
+				}
+
+				number = Math.max(
+					definition.min,
+					Math.min(definition.max, number)
+				);
+
+				filter.value = number;
+
+				// Wert auch im Eingabefeld aktualisieren
+				const input = document.activeElement;
+
+				if (input instanceof HTMLInputElement) {
+					input.value = number;
+				}
+
+			}
+			else if (definition.input === "date") {
+
+				filter.value = value;
+
+			}
+
+			// =========================
+			// Alle anderen Filter
+			// =========================
+
+			else {
+
+				filter.value = value;
+
+			}
+
+			saveFilters();
+
+			refreshGrid();
+
+		}
+		
+		function getFilterName(type) {
+
+			return filterDefinitions[type]?.label || type;
+
+		}
+		
+		function getUniqueValues(field, storage = null) {
+
+			storage ??= getCustom();
+
+			const values = [...new Set(
+
+				storage
+					.map(p => p[field])
+					.filter(v =>
+						v !== undefined &&
+						v !== null &&
+						v !== "" &&
+						v !== "-"
+					)
+
+			)];
+
+			if (field === "generation") {
+
+				values.sort((a, b) => Number(a) - Number(b));
+
+			} else {
+
+				values.sort((a, b) =>
+					String(a).localeCompare(String(b), "de")
+				);
+
+			}
+			
+			return values;
+
+		}
+		
+		function createNumberList(min, max) {
+
+			const list = [];
+
+			for (let i = min; i <= max; i++) {
+				list.push(i);
+			}
+
+			return list;
+
+		}
+		
+		function removeFilter(index) {
+
+		activeFilters.splice(index, 1);
+
+		renderActiveFilters();
+
+		saveFilters();
+
+		refreshGrid();
+
+		}
+		
+		function clearFilters() {
+
+			activeFilters = [];
+
+			saveFilters();
+
+			renderActiveFilters();
+
+			refreshGrid();
+
+			document
+				.getElementById("filterPanel")
+				.classList
+				.add("hidden");
+
+		}
+		
+		function applySorting(data){
+
+			return [...data].sort((a,b)=>{
+
+				for(const mode of sortModes){
+
+					const result =
+						comparePokemon(a,b,mode);
+
+					if(result !== 0){
+						return result;
+					}
+
+				}
+
+				return 0;
+
+			});
+
+		}
+
+		/* =========================
+		   DETAIL VIEW
+		========================= */
+		function showDetail(p, el) {
+
+			if (activeCard) {
+				activeCard.classList.remove("active");
+			}
+
+			el.classList.add("active");
+			activeCard = el;
+
+			detail.style.display = "block";
+			detailContent.replaceChildren(createDetailCard(p));
+		}
+
+		/* =========================
+		   EXPORT / IMPORT
+		========================= */
+		function exportData() {
+
+			const data = localStorage.getItem("customPokemon");
+
+			if (!data) {
+				alert("Keine Daten vorhanden.");
+				return;
+			}
+
+			const blob = new Blob([data], { type: "application/json" });
+
+			const url = URL.createObjectURL(blob);
+
+			const a = document.createElement("a");
+
+			a.href = url;
+			a.download = "pokemon_sammlung.json";
+
+			a.click();
+
+			URL.revokeObjectURL(url);
+		}
+
+		function importData(event) {
+
+			const file = event.target.files[0];
+			if (!file) return;
+
+			const reader = new FileReader();
+
+			reader.onload = function (e) {
+
+				try {
+
+					const data = JSON.parse(e.target.result);
+
+					pokemonStorage = data;
+
+					saveStorage();
+
+					alert("Daten erfolgreich geladen!");
+
+					location.reload();
+
+				} catch (err) {
+					alert("Ungültige Datei!");
+				}
+			};
+
+			reader.readAsText(file);
+		}
+
+		/* =========================
+		   CLOSE DETAIL
+		========================= */
+		function closeDetail() {
+
+			detail.style.display = "none";
+
+			if (activeCard) {
+				activeCard.classList.remove("active");
+				activeCard = null;
+			}
+
+		}
+
+		document.addEventListener("detailClose", () => {
+
+			closeDetail();
+
+		});
+
+		/* =========================
+		   FILTER SYSTEM
+		========================= */
+
+		function normalizeType(type) {
+
+			const map = {
+				fire: "Feuer",
+				water: "Wasser",
+				electric: "Elektro",
+				grass: "Pflanze",
+				normal: "Normal",
+				flying: "Flug",
+				bug: "Käfer",
+				poison: "Gift",
+				rock: "Gestein",
+				ground: "Boden",
+				fighting: "Kampf",
+				ice: "Eis",
+				psychic: "Psycho",
+				ghost: "Geist",
+				dragon: "Drache",
+				dark: "Unlicht",
+				steel: "Stahl",
+				fairy: "Fee"
+			};
+
+			return map[type] || type;
+		}
+
+		/* =========================
+		   INIT
+		========================= */
+		window.addEventListener("DOMContentLoaded", () => {
+
+			pokemonStorage =
+				JSON.parse(localStorage.getItem("customPokemon")) || [];
+
+			pokemonStorage = getCustom();
+			
+			loadBoxNames();
+			loadBoxColors();
+			
+			loadFilters();
+			renderActiveFilters();
+			
+			initSorting();
+			
+			refreshGrid(pokemonStorage);
+			
+			const editPokemonId =
+				localStorage.getItem("indexEditScrollPokemonId");
+				
+			if (editPokemonId) {
+
+				localStorage.removeItem(
+					"indexEditScrollPokemonId"
+				);
+
+				requestAnimationFrame(() => {
+
+					const card =
+						document.querySelector(
+							`.card[data-id="${editPokemonId}"]`
+						);
+
+					if (card) {
+
+						card.scrollIntoView({
+							block: "center",
+							behavior: "instant"
+						});
+
+					}
+
+				});
+
+			}
+
+			const dirtyId =
+				localStorage.getItem("dirtyPokemonId");
+
+			if (dirtyId) {
+
+				markCardDirty(dirtyId);
+				updateDirtyCards();
+
+				localStorage.removeItem("dirtyPokemonId");
+
+			}
+
+		});
+		
+		/* =========================
+		   GAME STATE UPDATE
+		========================= */
+		function updateGameState(){
+
+			updateDirtyCards();
+
+			refreshGrid();
+
+			if(typeof evaluateAchievements === "function"){
+				evaluateAchievements();
+			}
+
+			if(typeof renderAchievements === "function"){
+				renderAchievements();
+			}
+
+		}
+
+		/* =========================
+		   CARD BUTTONS
+		========================= */
+
+		grid.addEventListener("click", (e) => {
+
+			// =========================
+			// BUTTONS
+			// =========================
+
+			const button = e.target.closest("[data-action]");
+
+			if (button) {
+
+				e.preventDefault();
+				e.stopPropagation();
+				e.stopImmediatePropagation();
+
+				const card = button.closest(".card");
+
+				if (!card) return;
+
+				const id = card.dataset.id;
+
+				const pokemon = pokemonStorage.find(p => p.id === id);
+
+				if (!pokemon) return;
+
+				switch (button.dataset.action) {
+
+					// =========================
+					// FAVORIT
+					// =========================
+
+					case "favorite": {
+
+						pokemon.favorit = !pokemon.favorit;
+
+						saveStorage();
+
+						updateFavorite(card, pokemon);
+
+						break;
+
+					}
+
+					// =========================
+					// EDIT
+					// =========================
+
+					case "edit": {
+
+						localStorage.setItem(
+							"editPokemon",
+							JSON.stringify(pokemon)
+						);
+
+						localStorage.setItem(
+							"indexEditScrollPokemonId",
+							pokemon.id
+						);
+
+						window.location.href =
+							`pokemon_rm_karteneditor.html?num=${pokemon.nummer}`;
+
+						break;
+					}
+
+					// =========================
+					// LÖSCHEN
+					// =========================
+
+					case "delete": {
+
+						showConfirmDialog({
+
+							title: "⚠ Pokémon löschen?",
+
+							message: `
+								Du bist dabei,<br><br>
+								#${String(pokemon.nummer).padStart(4, "0")} ${pokemon.name}<br><br>
+								dauerhaft aus deiner Sammlung zu entfernen.
+							`,
+
+							confirmText: "Löschen",
+
+							cancelText: "Abbrechen",
+
+							onConfirm: () => {
+
+								pokemonStorage = pokemonStorage.filter(
+									p => p.id !== pokemon.id
+								);
+
+								saveStorage();
+
+								if (
+									activeCard &&
+									activeCard.dataset.id === pokemon.id
+								) {
+
+									closeDetail();
+
+								}
+
+								removeCard(card, pokemon);
+
+							}
+
+						});
+
+						break;
+
+					}
+
+				}
+
+				return;
+
+			}
+
+			// =========================
+			// KARTE ÖFFNEN
+			// =========================
+
+			const card = e.target.closest(".card");
+
+			if (!card) return;
+
+			const pokemon = pokemonStorage.find(
+				p => p.id === card.dataset.id
+			);
+
+			if (!pokemon) return;
+
+			showDetail(pokemon, card);
+
+		});
+		
+	</script>
+
+	<script>
+	
+		/* =========================
+		   RESPONSIVE TOPBAR
+		========================= */
+
+		function updateTopbarLayout() {
+
+			const topbar = document.getElementById("topbar");
+
+			if (!topbar) {
+				return;
+			}
+
+			const width = topbar.clientWidth;
+
+			if (width < 1550) {
+
+				topbar.classList.add("topbar-compact");
+
+			} else {
+
+				topbar.classList.remove("topbar-compact");
+
+			}
+
+		}
+
+
+		window.addEventListener("DOMContentLoaded", () => {
+
+			const topbar = document.getElementById("topbar");
+
+			if (!topbar) {
+				return;
+			}
+
+			const observer = new ResizeObserver(() => {
+
+				updateTopbarLayout();
+
+			});
+
+			observer.observe(topbar);
+
+			updateTopbarLayout();
+
+		});
+	
+	</script>
+
+</body>
+</html>

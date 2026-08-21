@@ -1,0 +1,89 @@
+.type-slot.type-fire {
+    background: #FF421C;
+    color: black;
+}
+
+.type-slot.type-water {
+    background: #2C9BE3;
+    color: black;
+}
+
+.type-slot.type-grass {
+    background: #62BC5A;
+    color: black;
+}
+
+.type-slot.type-electric {
+    background: #FFDC00;
+    color: black;
+}
+
+.type-slot.type-ice {
+    background: #74CFC0;
+    color: black;
+}
+
+.type-slot.type-fighting {
+    background: #BB5544;
+    color: black;
+}
+
+.type-slot.type-poison {
+    background: #9553CD;
+    color: black;
+}
+
+.type-slot.type-ground {
+    background: #A67439;
+    color: black;
+}
+
+.type-slot.type-flying {
+    background: #96CAFF;
+    color: black;
+}
+
+.type-slot.type-psychic {
+    background: #FF6380;
+    color: black;
+}
+
+.type-slot.type-bug {
+    background: #92C12A;
+    color: black;
+}
+
+.type-slot.type-rock {
+    background: #BBAA66;
+    color: black;
+}
+
+.type-slot.type-ghost {
+    background: #6E4370;
+    color: black;
+}
+
+.type-slot.type-dragon {
+    background: #5670BE;
+    color: black;
+}
+
+.type-slot.type-dark {
+    background: #4E4545;
+    color: black;
+}
+
+.type-slot.type-steel {
+    background: #AAAABB;
+    color: black;
+}
+
+.type-slot.type-fairy {
+    background: #EC8FE6;
+    color: black;
+}
+
+.type-slot.type-normal {
+    background: #BBBBAA;
+    color: black;
+}
