@@ -991,7 +991,7 @@ const TRANSFER_TRADE_GROUPS = {
 // TEST TRANSFER DEFINITIONS
 const POKEMON_TRANSFER_DATA = {
 
-	1: {
+	"1": {
 		name: "Bisasam",
 
 		origin: {
@@ -1005,7 +1005,22 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	302: {
+	"19-alola": {
+		name: "Rattfratz",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+	
+	"302": {
 		name: "Zobiris",
 
 		origin: {
@@ -1019,7 +1034,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	511: {
+	"511": {
 		name: "Vegimak",
 
 		origin: {
@@ -1034,7 +1049,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	512: {
+	"512": {
 		name: "Vegichita",
 
 		origin: {
@@ -1049,7 +1064,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	515: {
+	"513": {
 		name: "Grillmak",
 
 		origin: {
@@ -1064,7 +1079,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	516: {
+	"514": {
 		name: "Grillchita",
 
 		origin: {
@@ -1079,7 +1094,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	515: {
+	"515": {
 		name: "Sodamak",
 
 		origin: {
@@ -1094,7 +1109,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	516: {
+	"516": {
 		name: "Sodachita",
 
 		origin: {
@@ -1109,8 +1124,8 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	794: {
-		name: "Masskito",
+	"793": {
+		name: "Anego",
 
 		origin: {
 			generation: 7,
@@ -1124,7 +1139,129 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	999: {
+	"794": {
+		name: "Masskito",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"795": {
+		name: "Schabelle",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+	
+		
+	"796": {
+		name: "Voltriant",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"797": {
+		name: "Kaguron",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"798": {
+		name: "Katagami",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"799": {
+		name: "Schlingking",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"805": {
+		name: "Muramura",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+		
+	"806": {
+		name: "Kopplosio",
+
+		origin: {
+			generation: 7,
+
+			games: [
+				"Sun",
+				"Moon",
+				"UltraSun",
+				"UltraMoon"
+			]
+		}
+	},
+	
+	
+	"999": {
 		name: "Gierspenst",
 
 		origin: {
@@ -1137,7 +1274,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	1000: {
+	"1000": {
 		name: "Monetigo",
 
 		origin: {
@@ -1150,7 +1287,7 @@ const POKEMON_TRANSFER_DATA = {
 		}
 	},
 	
-	1020: {
+	"1020": {
 		name: "Keilflame",
 
 		origin: {
@@ -1165,11 +1302,596 @@ const POKEMON_TRANSFER_DATA = {
 
 };
 
+// Rules for pokemon that can evolve later
+const POKEMON_TRANSFER_EVOLUTION_RULES = {
 
-// Rules for transfering a pokemon
+	"982": {
+		transferAs: 360,
+		availableFromGeneration: 9
+	}
+
+};
+
+// Rules for transfering a pokemon (to which games can they go?)
 const POKEMON_TRANSFER_RULES = {
 
-	302: {
+	"19-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"20-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"26-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsArceus"
+		]
+	},
+	
+	"27-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"28-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"37-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"38-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"50-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"51-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"52-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"52-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"53-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"74-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"75-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"76-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"77-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"78-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"79-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"80-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"83-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"88-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"89-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"103-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"105-alola": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+		]
+	},
+	
+	"110-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"122-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"144-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"145-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"146-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"199-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"222-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"263-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"264-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+
+	"302": {
 		exclude: [
 			"FireRed",
 			"LeafGreen",
@@ -1178,56 +1900,15 @@ const POKEMON_TRANSFER_RULES = {
 			"LegendsArceus"
 		]
 	},
-
-	511: {
-		exclude: [
-			"LetsGoPikachu",
-			"LetsGoEvoli",
-			"Sword",
-			"Shield",
-			"LegendsArceus",
-			"Scarlet",
-			"Violet"
-		]
-	},
 	
-	512: {
+	"360": {
 		exclude: [
 			"LetsGoPikachu",
-			"LetsGoEvoli",
-			"Sword",
-			"Shield",
-			"LegendsArceus",
-			"Scarlet",
-			"Violet"
-		]
-	},
-	
-	513: {
-		exclude: [
-			"LetsGoPikachu",
-			"LetsGoEvoli",
-			"Sword",
-			"Shield",
-			"LegendsArceus",
-			"Scarlet",
-			"Violet"
-		]
-	},
-	
-	514: {
-		exclude: [
-			"LetsGoPikachu",
-			"LetsGoEvoli",
-			"Sword",
-			"Shield",
-			"LegendsArceus",
-			"Scarlet",
-			"Violet"
+			"LetsGoEvoli"
 		]
 	},
 
-	515: {
+	"511": {
 		exclude: [
 			"LetsGoPikachu",
 			"LetsGoEvoli",
@@ -1239,7 +1920,7 @@ const POKEMON_TRANSFER_RULES = {
 		]
 	},
 	
-	516: {
+	"512": {
 		exclude: [
 			"LetsGoPikachu",
 			"LetsGoEvoli",
@@ -1251,7 +1932,173 @@ const POKEMON_TRANSFER_RULES = {
 		]
 	},
 	
-	794: {
+	"513"	: {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"514": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"Scarlet",
+			"Violet"
+		]
+	},
+
+	"515": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"516": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"554-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"555-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"555-galar-trance": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"562-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"618-galar": {
+		exclude: [
+			"FireRed",
+			"LeafGreen",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	//SM
+	"722": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"793": {
 		exclude: [
 			"X",
 			"Y",
@@ -1268,7 +2115,1866 @@ const POKEMON_TRANSFER_RULES = {
 		]
 	},
 	
-	999: {
+	"794": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"795": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"796": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"797": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"798": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"799": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	"805": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+		
+	"806": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet",
+			"LegendsZA"
+		]
+	},
+	
+	// SV
+	"906": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"907": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"908": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"909": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"910": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"911": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"912": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"913": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"914": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"915": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"916": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"917": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"918": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"919": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"920": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"921": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"922": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"923": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"924": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"925": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"926": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"927": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"928": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"929": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"930": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"931": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"932": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"933": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"934": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"935": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"936": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"937": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"938": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"939": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"940": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"941": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"942": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"943": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"944": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"945": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"946": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"947": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"948": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"949": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"950": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"951": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"952": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"953": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"954": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"955": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"956": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"957": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"958": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"959": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"960": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"961": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"962": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"963": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"964": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"965": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"966": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"967": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"968": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"969": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"970": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"971": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"972": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"973": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"974": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"975": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"976": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"977": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"978": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"979": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"980": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"981": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"982": {
+		
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"983": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"984": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"985": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"986": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"987": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"988": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"989": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"990": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"991": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"992": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"993": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"994": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"995": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"996": {
 		exclude: [
 			"LetsGoPikachu",
 			"LetsGoEvoli",
@@ -1280,7 +3986,7 @@ const POKEMON_TRANSFER_RULES = {
 		]
 	},
 	
-	1000: {
+	"997": {
 		exclude: [
 			"LetsGoPikachu",
 			"LetsGoEvoli",
@@ -1292,7 +3998,434 @@ const POKEMON_TRANSFER_RULES = {
 		]
 	},
 	
-	1020: {
+	"998": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"999": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1000": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1001": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1002": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1003": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1004": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1005": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1006": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1007": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1008": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1009": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1010": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1011": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1012": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1013": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1014": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1015": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1016": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1017": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"1018": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1019": {
+		exclude: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1020": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1021": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1022": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1023": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1024": {
+		exclude: [
+			"LetsGoPikachu",
+			"LetsGoEvoli",
+			"Sword",
+			"Shield",
+			"LegendsArceus",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"LegendsZA"
+		]
+	},
+	
+	"1025": {
 		exclude: [
 			"LetsGoPikachu",
 			"LetsGoEvoli",
@@ -1307,7 +4440,7 @@ const POKEMON_TRANSFER_RULES = {
 
 };
 
-const GAME_NAME_TO_NODE = {
+const TRANSFER_GAME_ALIASES = {
 
     "Rot": "RedVC",
     "Blau": "BlueVC",
@@ -1349,6 +4482,7 @@ const GAME_NAME_TO_NODE = {
 
     "Schwert": "Sword",
     "Schild": "Shield",
+
     "Strahlender Diamant": "BrilliantDiamond",
     "Leuchtende Perle": "ShiningPearl",
     "Legenden: Arceus": "LegendsArceus",
@@ -1360,17 +4494,177 @@ const GAME_NAME_TO_NODE = {
 
 function getPokemonTransferGames(pokemon) {
 
-    if (!pokemon.gefangen) {
+	if (!pokemon) {
+		return [];
+	}
+
+	// Nur gefangene Pokémon berücksichtigen
+	if (pokemon.gefangen !== true) {
+		return [];
+	}
+
+	// Ohne gespeichertes Spiel kein Transferweg
+	if (!pokemon.game) {
+		return [];
+	}
+
+	// -------------------------------------------------
+	// Fangspiel ermitteln
+	// -------------------------------------------------
+
+	function normalizeGameName(name) {
+
+		return String(name ?? "")
+			.trim()
+			.toLowerCase();
+
+	}
+
+	const originGame = Object.entries(TRANSFER_NODES)
+		.find(([nodeKey, node]) =>
+			node.type === "game" &&
+			normalizeGameName(node.name) ===
+			normalizeGameName(`Pokémon ${pokemon.game}`)
+		);
+
+	if (!originGame) {
+		return [];
+	}
+
+	const originNode = originGame[0];
+
+	// -------------------------------------------------
+	// Transferwege berechnen
+	// -------------------------------------------------
+
+	const reachableNodes =
+		findTransferPaths(originNode);
+
+	// -------------------------------------------------
+	// Nur echte Spiele zurückgeben
+	// -------------------------------------------------
+
+	return reachableNodes
+		.filter(nodeKey =>
+			TRANSFER_NODES[nodeKey]?.type === "game"
+		)
+		.filter(nodeKey =>
+			nodeKey !== originNode
+		);
+
+}
+
+function getPokemonAvailableGames(pokemon) {
+
+    if (!pokemon || pokemon.gefangen !== true) {
         return [];
     }
 
-    const originNode = GAME_NAME_TO_NODE[pokemon.game];
-
-    if (!originNode) {
+    if (!pokemon.game) {
         return [];
     }
 
-    // ab hier Transfergraph auswerten
+    const originKey = TRANSFER_GAME_ALIASES[pokemon.game];
+
+    if (!originKey) {
+        console.warn(
+            "Kein Transfer-Node für Fangspiel gefunden:",
+            pokemon.game
+        );
+        return [];
+    }
+
+    const reachable = new Set();
+
+    reachable.add(originKey);
+
+	function traverse(currentNode) {
+
+		// ---------------------------------------------
+		// 1. Normale Transferverbindungen
+		// ---------------------------------------------
+
+		for (const connection of TRANSFER_CONNECTIONS) {
+
+			if (connection.from !== currentNode) {
+				continue;
+			}
+
+			const target = connection.to;
+
+			if (reachable.has(target)) {
+				continue;
+			}
+
+			reachable.add(target);
+
+			traverse(target);
+		}
+
+
+		// ---------------------------------------------
+		// 2. Tausch innerhalb derselben Tauschgruppe
+		// ---------------------------------------------
+
+		const tradeGroup = getTradeGroupForGame(currentNode);
+
+		for (const tradeTarget of tradeGroup) {
+
+			if (tradeTarget === currentNode) {
+				continue;
+			}
+
+			if (reachable.has(tradeTarget)) {
+				continue;
+			}
+
+			reachable.add(tradeTarget);
+
+			traverse(tradeTarget);
+		}
+	}
+
+    traverse(originKey);
+
+    // ---------------------------------------------
+	// Transfer-Dienste aus dem Ergebnis entfernen
+	// ---------------------------------------------
+
+	reachable.delete("bank");
+	reachable.delete("home");
+
+
+	// ---------------------------------------------
+	// Pokémon-spezifische Einschränkungen
+	// ---------------------------------------------
+
+	const rule = POKEMON_TRANSFER_RULES[pokemon.nummer];
+
+	if (rule && Array.isArray(rule.exclude)) {
+
+		for (const excludedGame of rule.exclude) {
+			reachable.delete(excludedGame);
+		}
+	}
+
+
+	// ---------------------------------------------
+	// Ergebnis zurückgeben
+	// ---------------------------------------------
+
+	return [...reachable];
+}
+
+function getTradeGroupForGame(gameKey) {
+
+    for (const group of Object.values(TRANSFER_TRADE_GROUPS)) {
+
+        if (group.includes(gameKey)) {
+            return group;
+        }
+    }
+
+    return [];
 }
 
 // ---------------------------------------------------------
@@ -1526,4 +4820,4 @@ function getAllPokemonTransferData() {
 	return result;
 }
 
-console.log(getAllPokemonTransferData());
+/* console.log(getAllPokemonTransferData()); */

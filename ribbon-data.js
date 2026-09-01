@@ -50,7 +50,7 @@ const baender = [
     { name: "Doppel-Band der Fähigkeit", title: "", image: "ribbonabilitydouble" },
     { name: "Multi-Band der Fähigkeit", title: "", image: "ribbonabilitymulti" },
     { name: "Paar-Band der Fähigkeit", title: "", image: "ribbonabilitypair" },
-    { name: "Welt-Band der Fähigkeit", title: "", image: "ribbonabilityworld" },
+    //{ name: "Welt-Band der Fähigkeit", title: "", image: "ribbonabilityworld" }, -- not available anymore
 
     { name: "Profikampfband", title: "Kampfveteran", image: "ribbonbattlerskillful" },
     { name: "Meisterkampfband", title: "Kampfgenie", image: "ribbonbattlerexpert" },
@@ -153,356 +153,3622 @@ const baender = [
 /* RULES TO GIVE POKEMON BANDS */
 
 const BAND_RULES = {
+
+	"Band des Champs": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"FireRed",
+			"LeafGreen",
+		]
+	},
 	
-	"Band des Kalos-Champs": generation => {
-
-        // Noch keine Generation festgelegt?
-        if (!generation) return true;
-
-        return generation >= 1 && generation <= 6;
-    },
-
-    "Band des Alola-Champs": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 1 && generation <= 7;
-    },
+	"Band des Sinnoh-Champs": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	// ZEICHEN NUR FÜR POKEMON AB GENERATION 8
-	"Mittags-Zeichen": generation => {
+	"Band des Hoenn-Champs": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire"
+		]
+	},
 
-        if (!generation) return true;
+	"Band des Kalos-Champs": {
+		games: [
+			"X",
+			"Y"
+		]
+	},
 
-        return generation >= 8;
-    },
+	"Band des Alola-Champs": {
+		games: [
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon"
+		]
+	},
 	
-	"Mitternachts-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band des Galar-Champs": {
+		games: [
+			"Sword",
+			"Shield"
+		]
+	},
 	
-	"Abenddämmerungs-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band des Paldea-Champs": {
+		games: [
+			"Scarlet",
+			"Violet"
+		]
+	},
 	
-	"Morgendämmerungs-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	// Contests
+	"Band des Künstlers": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald"
+		]
+	},
 	
-	"Wolken-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Coolness": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Regen-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Coolness Super": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Gewitter-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Coolness Hyper": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Schneefall-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Coolness Master": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Schneesturm-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Schönheit": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Dürre-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Schönheit Super": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Sandsturm-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Schönheit Hyper": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Nebel-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
-
-	"Schicksals-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Schönheit Master": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Angel-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Anmut": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Curry-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
-
-	"Gängigkeits-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Anmut Super": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Raufbold-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Anmut Hyper": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Sorglos-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
-
-	"Spannungs-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Anmut Master": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Vorfreude-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Klugheit": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Charisma-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Klugheit Super": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Gelassenheits-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
-
-	"Hitzkopf-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Klugheit Hyper": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Achtlos-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Klugheit Master": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Glücklichkeits-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Stärke": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Wut-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Stärke Super": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Lächel-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Stärke Hyper": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Trübsal-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band der Stärke Master": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 	
-	"Heiterkeits-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Coolnessmeisterband": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Missmut-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Schönheitsmeisterband": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Verstands-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Putzigkeitsmeisterband": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Impulsiv-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Klugheitsmeisterband": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Listigkeits-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Stärkemeisterband": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Grimmig-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Band des Wettbewerbsstars": {
+		games: [
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Sanftmut-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Glitzersternband": {
+		games: [
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
 	
-	"Panik-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	/*"Wettbewerbsgedenkband": {
+		games: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire"
+		]
+	},*/
 	
-	"Ansporn-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Wettbewerbsgedenkband": {
+		games: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire"
+		]
+	},
 	
-	"Lustlos-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Kampfgedenkband": {
+		games: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire"
+		]
+	},
 	
-	"Selbstvertrauens-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	//Tower
+	"": {
+		games: [
+			"",
+			""
+		]
+	},
 	
-	"Selbstzweifel-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Profikampfband": {
+		games: [
+			"X",
+			"Y"
+		]
+	},
 	
-	"Arglos-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Meisterkampfband": {
+		games: [
+			"X",
+			"Y"
+		]
+	},
 	
-	"Scheinheilig-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Profibaumband": {
+		games: [
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon"
+		]
+	},
 	
-	"Elan-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Meisterbaumband": {
+		games: [
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon"
+		]
+	},
 	
-	"Formtief-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Meisterturmband": {
+		games: [
+			"Sword",
+			"Shield"
+		]
+	},
 	
-	"Raritäts-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
-
-	"Elite-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Meisterrangband": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		]
+	},
 	
-	"Titanen-Zeichen": generation => {
-
-        if (!generation) return true;
-
-        return generation >= 8;
-    },
+	"Battle-Royale-Meisterband": {
+		games: [
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon"
+		]
+	},
 	
-	"Herrscher-Zeichen": generation => {
+	//Daily
+	"Band der Wachsamkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band des Schocks": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band der Traurigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band der Sorglosigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band der Entspannung": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band des Schlafens": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band des Lächelns": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	//Buying
+	"Hinreißendes Band": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},	
+	
+	"Königliches Band": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Hinreißendes Königliches Band": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	//Other
+	"Fleißband": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald",
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"HeartGold",
+			"SoulSilver",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"Fußabdruckband": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"HeartGold",
+			"SoulSilver",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"BrilliantDiamond",
+			"ShiningPearl"
+		]
+	},
+	
+	"Band der Legende": {
+		games: [
+			"HeartGold",
+			"SoulSilver"
+		]
+	},
+	
+	"Zutraulichkeitsband": {
+		games: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+			"Sword",
+			"Shield",
+			"BrilliantDiamond",
+			"ShiningPearl",
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"Trainingsband": {
+		games: [
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire"
+		]
+	},
+	
+	"Hisui-Band": {
+		games: [
+			"LegendsArceus"
+		]
+	},
+	
+	"Band des Gewinners": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald"
+		]
+	},
+	
+	"Band des Sieges": {
+		games: [
+			"Ruby",
+			"Sapphire",
+			"Emerald"
+		]
+	},
+	
+	"Band der Fähigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Großes Band der Fähigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Doppel-Band der Fähigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Multi-Band der Fähigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Paar-Band der Fähigkeit": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Band der Nation": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
+	
+	"Band der Erde": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum"
+		]
+	},
 
-        if (!generation) return true;
 
-        return generation >= 8;
-    },
+	//Pokémon can only have one personality or weather mark or time of day mark. They can only get it at time of capture.
+
+
+
+	// Marks
+	//Daytime
+	"Mittags-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+
+	"Mitternachts-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+
+	"Abenddämmerungs-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Morgendämmerungs-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	// Weather Marks
+	"Wolken-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Regen-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Gewitter-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Schneefall-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Schneesturm-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Dürre-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Sandsturm-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Nebel-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	//Personality
+	"Gängigkeits-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Raufbold-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Sorglos-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Spannungs-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Vorfreude-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Charisma-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Gelassenheits-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Hitzkopf-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Achtlos-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Glücklichkeits-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Wut-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Lächel-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Trübsal-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Heiterkeits-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Missmut-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Verstands-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Impulsiv-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Listigkeits-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Grimmig-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Sanftmut-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Panik-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Ansporn-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Lustlos-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Selbstvertrauens-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Selbstzweifel-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Arglos-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Scheinheilig-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Elan-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Formtief-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	// Height
+	"Riesen-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Winzlings-Zeichen"
+		]
+	},
+	
+	"Winzlings-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Riesen-Zeichen"
+		]
+	},
+	
+	//Other
+	"Angel-Zeichen": {
+		games: [
+			"Sword",
+			"Shield"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Raritäts-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Schicksals-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Raritäts-Zeichen",
+		]
+	},
+	
+	"Curry-Zeichen": {
+		games: [
+			"Sword",
+			"Shield"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield"
+		]
+	},
+	
+	"Raritäts-Zeichen": {
+		games: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Sword",
+			"Shield",
+			"Scarlet",
+			"Violet"
+		],
+		
+		conflictsWith: [
+			"Mittags-Zeichen",
+			"Mitternachts-Zeichen",
+			"Abenddämmerungs-Zeichen",
+			"Morgendämmerungs-Zeichen",
+			"Wolken-Zeichen",
+			"Regen-Zeichen",
+			"Gewitter-Zeichen",
+			"Schneefall-Zeichen",
+			"Schneesturm-Zeichen",
+			"Dürre-Zeichen",
+			"Sandsturm-Zeichen",
+			"Nebel-Zeichen",
+			"Gängigkeits-Zeichen",
+			"Raufbold-Zeichen",
+			"Sorglos-Zeichen",
+			"Spannungs-Zeichen",
+			"Vorfreude-Zeichen",
+			"Charisma-Zeichen",
+			"Gelassenheits-Zeichen",
+			"Hitzkopf-Zeichen",
+			"Achtlos-Zeichen",
+			"Glücklichkeits-Zeichen",
+			"Wut-Zeichen",
+			"Lächel-Zeichen",
+			"Trübsal-Zeichen",
+			"Heiterkeits-Zeichen",
+			"Missmut-Zeichen",
+			"Verstands-Zeichen",
+			"Impulsiv-Zeichen",
+			"Listigkeits-Zeichen",
+			"Grimmig-Zeichen",
+			"Sanftmut-Zeichen",
+			"Panik-Zeichen",
+			"Ansporn-Zeichen",
+			"Lustlos-Zeichen",
+			"Selbstvertrauens-Zeichen",
+			"Selbstzweifel-Zeichen",
+			"Arglos-Zeichen",
+			"Scheinheilig-Zeichen",
+			"Elan-Zeichen",
+			"Formtief-Zeichen",
+			"Angel-Zeichen",
+			"Schicksals-Zeichen"
+		]
+	},
+	
+	"Aufsammler-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+	},
+	
+	"Partner-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+	},
+	
+	"Gourmet-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+	},
+	
+	// SV
+	
+	"Elite-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"LegendsArceus"
+		]
+	},
+	
+	"Titanen-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	"Herrscher-Zeichen": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		originGames: [
+			"Scarlet",
+			"Violet"
+		]
+	},
+	
+	// Events
+	"Klassisches Band": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"Black",
+			"White",
+			"Black2",
+			"White2",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+		],
+		
+		balls: [
+			"Jubelball"
+		]
+	},
+	
+	"Premierband": {
+		games: [
+			"Diamond",
+			"Pearl",
+			"Platinum",
+			"Black",
+			"White",
+			"Black2",
+			"White2",
+			"X",
+			"Y",
+			"OmegaRuby",
+			"AlphaSapphire",
+			"Sun",
+			"Moon",
+			"UltraSun",
+			"UltraMoon",
+		],
+		
+		balls: [
+			"Jubelball"
+		]
+	},
+	
+	"Partnerband": {
+		games: [
+			"Scarlet",
+			"Violet"
+		],
+		
+		balls: [
+			"Jubelball"
+		]
+	},
+	
 };

@@ -13,7 +13,7 @@ const abilityDescriptions = {
 		"Erhöht den Angriffswert um 50% aber das Pokémon ist nur in der Lage, eine Attacke einzusetzen.",
 		
 	"Alpha-System":
-		"Ändert den Typ des Pokémon abhängig von der Disc die es trägt.",
+		"Ändert den Typ des Pokémon, abhängig von der Disc die es trägt.",
 		
 	"Alptraum":
 		"Schlafende Gegner verlieren am Ende der Runde 1/8 ihrer KP.",
@@ -37,7 +37,7 @@ const abilityDescriptions = {
 		"Verhindert, dass das Pokémon Verbrennungen erleidet.",
 		
 	"Aufwertung":
-		"Verdoppelt den Schaden den der Gegner leidet um dass doppelte, wenn der Anwender eine nicht sehr effektive Attacke einsetzt.",
+		"Verdoppelt den Schaden den der Gegner erleidet um dass doppelte, wenn der Anwender eine nicht sehr effektive Attacke einsetzt.",
 		
 	"Aura-Umkehr":
 		"Der Effekt der Fähigkeit von Feen- und Dunkelaura wird umgekehrt und bewirken stattdessen eine Schadensreduktion.",
@@ -151,7 +151,7 @@ const abilityDescriptions = {
 		"Spezial-Attacken verursachen 50% weniger Schaden.",
 		
 	"Eishaut":
-		"Heilt 1/8 seiner KP bei Schnee oder Hagel und schützt vor Schaden durch Hagel.",
+		"Verleiht Immunität gegenüber Hagel-Schaden. Heilt 1/8 seiner KP bei Schnee oder Hagel.",
 		
 	"Elektro-Erzeuger":
 		"Erzeugt bei Kampfantritt ein Elektrofeld.",
@@ -358,7 +358,7 @@ const abilityDescriptions = {
 		"Verhindert das Entfernen oder Stehlen von Items durch den Gegner.",
 		
 	"Klimaschutz":
-		"Hebt alle Wetter-Effekte bei Kampfantritt auf.",
+		"Hebt alle Wetter-Effekte bei Kampfantritt auf, beendet diese aber nicht.",
 		
 	"Kloakensoße":
 		"KP-absorbierende Attacken gegen dieses Pokemon füllen keine KP auf sondern verursachen Schaden.",
@@ -421,7 +421,7 @@ const abilityDescriptions = {
 		"Verleiht Schutz vor Statusproblemen solange die KP über 50% liegen, fallen diese darunter zerbricht die Panzerung und es wird aggressiver.",
 		
 	"Lockenkopf":
-		"Wird das Pokémon berührt sinkt die Initiative des Angreifers um eine Stufe.",
+		"Wird das Pokémon berührt, sinkt die Initiative des Angreifers um eine Stufe.",
 		
 	"Magenkrempler":
 		"Wird das Pokémon besiegt, erhält der Angreifer Schaden in Höhe seiner, vor der Kampfunfähigkeit besessenen, KP.",
@@ -502,7 +502,7 @@ const abilityDescriptions = {
 		"Der Gegner kann keine Volltreffer gegen dieses Pokemon landen.",
 		
 	"Partikelschutz":
-		"Verleiht eine Immunität gegenüber wetterbedingtem Schaden, Sporen-Attacken und der Fähigkeit Sporenwirt.",
+		"Verleiht Immunität gegenüber wetterbedingtem Schaden, Sporen-Attacken und der Fähigkeit Sporenwirt.",
 		
 	"Pastellhülle":
 		"Das Pokemon und seine Partner-Pokemon können nicht vergiftet werden und heilt bestehende Vergiftungen.",
@@ -553,19 +553,19 @@ const abilityDescriptions = {
 		"Ignoriert die Reduktion der Initiative bei Paralyse und erhöht die Initiative um 50% bei Statusproblemen.",
 		
 	"Rastlose Seele":
-		"",
+		"Stellt der Angreifer mit einer Attacke Kontakt her, werden die Fähigkeiten beider Pokemon getauscht.",
 		
 	"Rauflust":
-		"",
+		"Ermöglicht es, Geister-Pokemon mit Normal- und Kampf-Attacken zu treffen und verhindert den Effekt von Bedroher.",
 		
 	"Rauhaut":
-		"",
+		"Angreifer verlieren bei Kontakt mit dem Pokemon 1/8 ihrer KP.",
 		
 	"Reaktionsgas":
-		"",
+		"Verhindert, dass die Fähigkeiten aller Pokemon auf dem Kampf aktiviert werden solange das Pokemon auf dem Feld ist.",
 		
 	"Receiver":
-		"",
+		"Übernimmt die Fähigkeit des Mitstreiters wenn dieser besiegt wird.",
 		
 	"Regengenuss":
 		"Heilt im Regen 1/16 seiner KP.",
@@ -580,208 +580,214 @@ const abilityDescriptions = {
 		"Das Pokemon flieht oder wird ausgewechselt, wenn es unter 50% seiner KP erreicht.",
 		
 	"Reitgespann":
-		"",
+		"Verhindert, dass Gegner Beeren konsumieren können und erhöht den Angriff in seiner Schimmelreiter-Form, oder Spezial-Angriff um 1 Stufe in seiner Rappenreiter-Form, wenn das Pokemon einen Gegner besiegt.",
 		
 	"Rivalität":
 		"Erhöht die Stärke von Attacken gegenüber Pokemon des gleichen Geschlechts um 25%, und verringert sie um 25% bei Angriffen auf Pokemon des anderen Geschlechts. Kein Effekt auf Pokemon mit unbekanntem Geschlecht.",
 		
 	"Robustheit":
-		"",
+		"Verleiht Immunität gegenüber KO-Attacken. Das Pokemon übersteht treffer, die es bei vollen KP besiegen würde, mit 1 KP.",
 	
 	"Rohe Gewalt":
 		"Attacken mit Zusatzeffekten werden um 30% verstärkt. Diese Effekte, sowie von Fähigkeiten und Items gehen aber verloren.",
 		
 	"Rückzug":
-		"",
+		"Das Pokemon flieht oder wird ausgewechselt, wenn es unter 50% seiner KP erreicht.",
 		
 	"Sandgewalt":
-		"",
+		"Verleiht Immunität gegenüber Sandsturm-Schaden. Die Stärke von Gesteins-, Stahl- und Boden-Attacken ist im Sandsturm um 30% erhöht.",
 		
 	"Sandscharrer":
-		"",
+		"Verleiht Immunität gegenüber Sandsturm-Schaden. Verdoppelt die Initiative im Sandsturm.",
 		
 	"Sandschleier":
-		"",
+		"Verleiht Immunität gegenüber Sandsturm-Schaden. Die Genauigkeit aller Attacken bei Sandsturm, die dieses Pokemon als Ziel haben, sinkt um 20%.",
 		
 	"Sandspeier":
-		"",
+		"Wird das Pokemon von einer Attacke getroffen wird ein Sandsturm entfacht.",
 		
 	"Sandsturm":
 		"Entfacht bei Kampfantritt einen Sandsturm.",
 		
 	"Saugnapf":
-		"",
+		"Schützt das Pokemon davor, von Attacken und Items ausgetauscht zu werden.",
 		
 	"Saumselig":
-		"",
+		"Halbiert den Angriffs- und Initiativewert des Pokemon für die ersten 5 Runden auf dem Feld.",
 		
 	"Scharfkantig":
-		"",
+		"Erhöht die Stärke von Schnitt-Attacken um 50%.",
+		
+	"Scharwandel":
+		"Fallen die KP des Pokemon unter 50% nimmt es die Optimum-Form an.",
 	
 	"Scherenmacht":
-		"",
+		"Verhindert das senken des Angriffswertes durch den Gegner.",
 		
 	"Schildlos":
 		"Alle Attacken des Anwenders, und auf diesen gerichtete Attacken, treffen unabhängig von der Genauigkeit",
 		
 	"Schnarchnase":
-		"",
+		"Das Pokemon kann nur jede zweite Runde Attacken einsetzen.",
 		
 	"Schneemantel":
-		"",
+		"Verleiht Immunität gegenüber Hagel-Schaden. Die Genauigkeit aller Attacken bei Hagel oder Schnee, die dieses Pokemon als Ziel haben, sinkt um 20%.",
 		
 	"Schneescharrer":
-		"",
+		"Verdoppelt die Initiative bei Hagel oder Schnee.",
 		
 	"Schneeschauer":
-		"",
+		"Entfacht bei Kampfantritt einen Schnee- oder Hagelsturm.",
 		
 	"Schnellschuss":
-		"",
+		"Das Pokemon greift mit einer Wahrscheinlichkeit von 30% vor dem Gegner an.",
 		
 	"Schnüffler":
-		"",
+		"Verrät bei Kampfantritt, was für ein Item die Gegner tragen.",
 		
 	"Schraubflosse":
-		"",
+		"Die Attacken des Pokemon können nicht umgeleitet werden.",
 		
 	"Schwächling":
-		"",
+		"Halbiert den Angriff und Spezial-Angriff, wenn die KP des Pokemon unter 50% fallen.",
 
 	"Schwebe":
 		"Verleiht Immunität gegen Boden-Attacken. Stachler, Giftspitzen, Klebenetz und Ausweglos haben keinen Effekt.",
 		
 	"Schwebedurch":
-		"",
+		"Ignoriert die Effekte von Reflektor, Lichtschild, Bodyguard, Weißnebel, Auroraschleier und Delegator.",
 		
 	"Schweifrüstung":
 		"Schützt das Pokémon und seine Mitstreiter vor Attacken mit erhöhter Priorität.",
 		
 	"Schwermetall":
-		"",
+		"Verdoppelt das Gewicht des Pokemon.",
 		
 	"Seelenherz":
-		"",
+		"Erhöht den Spezial-Angriff des Pokemon sobald ein Pokemon besiegt wird.",
 		
 	"Siegeswille":
-		"",
+		"Wird ein Statuswert gesenkt steigt sein Angriffswert um 2 Stufen.",
 		
 	"Solarkraft":
-		"",
+		"Das Pokemon verliert bei Sonnenschein 1/8 seiner KP aber der Spezial-Angriff wird um 50% erhöht.",
 		
 	"Speckschicht":
 		"Halbiert den Schaden von Feuer- und Eis-Attacken.",
 		
 	"Spiegelrüstung":
-		"",
+		"Reflektiert Effekte, die Statuswerte senken, auf den Anwender zurück.",
 		
 	"Sporenwirt":
-		"",
+		"Pokemon, die das Pokemon berühren, werden mit einer Wahrscheinlichkeit von 30% vergiftet, paralysiert oder eingeschläfert.",
 		
 	"Stählerner Wille":
-		"",
+		"Verstärkt Stahl-Attacken des Pokemon und seiner Mitstreiter um 50%.",
 		
 	"Stahlprofi":
-		"",
+		"Verstärkt Stahl-Attacken des Pokemon um 50%.",
 		
 	"Stahlrückgrat":
-		"",
+		"Die Attacken des Pokemon können nicht umgeleitet werden.",
 		
 	"Starthilfe":
-		"",
+		"Verleiht Immunität gegenüber Elektro-Attacken. Wird das Pokemon von einer Elektro-Attacke getroffen erhöht sich seine Initiative um 1 Stufe.",
 		
 	"Statik":
-		"",
+		"Pokemon, die das Pokemon berühren, werden mit einer Wahrscheinlichkeit von 30% paralysiert.",
 		
 	"Steinhaupt":
-		"",
+		"Verleiht Immunität gegenüber Rückstoß-Schaden.",
+		
+	"Steinträger":
+		"Verstärkt Gesteins-Attacken des Pokemon um 50%.",
 		
 	"Stichbohrer":
-		"",
+		"Attacken, welche Kontakt herstellen, umgehen Schild-Attacken, richten dann aber nur noch 1/4 des ursprünglichen Schadens an.",
 		
 	"Streusaat":
-		"",
+		"Wird das Pokemon von einer Attacke getroffen wird ein Grasfeld erzeugt.",
 		
 	"Strolch":
-		"",
+		"Status-Attacken des Pokemon werden mit erhöhter Priorität eingesetzt.",
 	
 	"Sturmsog":
-		"",
+		"Verleiht Immunität gegenüber Wasser-Attacken und zieht diese automatisch an. Wird es von einer Wasser-Attacke getroffen erhöht sich der Spezial-Angriff um eine Stufe.",
 
 	"Sturzbach":
 		"Erhöht die Stärke von Wasser-Attacken um 50% wenn nur noch 1/3 seiner KP vorhanden sind.",
 		
 	"Superschütze":
-		"",
+		"Volltreffer richten 50% mehr Schaden an.",
 		
 	"Superwechsel":
-		"",
+		"Wird das Pokemon ausgewechselt, nimmt es die Helden-Form an.",
 		
 	"Surf-Schweif":
-		"",
+		"Verdoppelt die Initiative bei aktivem Elektro-Feld.",
 		
 	"Süßer Nektar":
-		"",
+		"Senkt den Ausweich-Wert des Gegners um 1 Stufe bei Kampfantritt.",
 		
 	"Symbiose":
-		"",
+		"Übergibt das getragene Item an einen Mitstreiter, wenn dieser sein eigenes Item aufbraucht.",
 		
 	"Synchro":
 		"Verursacht der Gegner ein Statusproblem, so wird dieser ebenfalls davon betroffen.",
 		
 	"Synchronauftritt":
-		"",
+		"Kopiert bei Kampf-Antritt die Statusveränderungen seines Mitstreiters.",
 		
 	"Taktikwechsel":
-		"",
+		"Das Pokemon wechselt bei dem Einsatz einer Offensiv-Attacke in die Klingenform und bei Einsatz von Königsschild in die Schildform.",
 		
 	"Tänzer":
 		"Setzt ein Pokemon Tanz-Attacken ein, so führt es diese danach ebenfalls aus, unabhängig davon, ob es bereits am Zug war.",
 		
 	"Tastfluch":
-		"",
+		"Attacken des Angreifers werden bei einem Treffer, mit einer Wahrscheinlichkeit von 30%, für 3 Runden blockiert.",
 		
 	"Taumelschritt":
-		"",
+		"Halbiert die Genauigkeit der Attacken die dieses Pokemon als Ziel haben, wenn es verwirrt ist.",
 		
 	"Techniker":
 		"Attacken mit einer Stärke von 60 oder niedriger, richten 50% mehr Schaden an.",
 		
 	"Telepathie":
-		"",
+		"Das Pokemon kann nicht von Attacken des Mitstreiters getroffen werden die Schaden verursachen.",
 		
 	"Temposchub":
-		"",
+		"Erhöht am Ende jeder Runde die Initiative um 1 Stufe.",
 		
 	"Tera-Panzer":
-		"",
+		"Bei vollen KP werden alle Attacken, solange das Pokemon nicht dagegen Immun ist, in nicht sehr effektive Attacken umgewandelt.",
 		
 	"Tera-Wandel":
-		"",
+		"Das Pokemon wechselt bei Kampfantritt in die Terakristall-Form.",
 		
 	"Teraforming Null":
-		"",
+		"Alle Wetter- und Feld-Effekte werden bei Kampfantritt aufgehoben.",
 		
 	"Teravolt":
-		"",
+		"Ignoriert die Fähigkeit des Zieles beim Angreifen.",
 		
 	"Thermowandel":
-		"",
+		"Verleiht Immunität gegenüber Verbrennungen. Erhöht den Angriffswert um 1 Stufen, wenn es Schaden von einer Feuer-Attacke erleidet.",
 		
 	"Tiefkühlkopf":
-		"",
+		"Das Pokemon kann einen physischen Angriff einstecken ohne Schaden zu nehmen. Regeneriert die Fähigkeit, wenn es schneit oder hagelt.",
 		
 	"Titankiefer":
-		"",
+		"Erhöht die Stärke von Biss-Attacken um 50%.",
 		
 	"Tollpatsch":
 		"Das Pokémon kann keine getragenen Items verwenden.",
 		
 	"Trance-Modus":
-		"",
+		"Fallen die KP des Pokemon unter 50% verfällt es in den Trance-Modus.",
 		
 	"Transistor":
-		"",
+		"Verstärkt Elektro-Attacken des Pokemon um 30%.",
 		
 	"Triumphstern":
 		"Erhöht die Genauigkeit von Attacken des Pokemon und seiner Mitstreiter um 10%.",
@@ -793,34 +799,34 @@ const abilityDescriptions = {
 		"Nimmt die Gestalt des letzten kampffähigen Pokemon im Team an, bis es von einer Attacke getroffen wird.",
 		
 	"Turbobrand":
-		"",
+		"Ignoriert die Fähigkeit des Zieles beim Angreifen.",
 		
 	"Überbrückung":
-		"",
+		"Ignoriert die Fähigkeit des Zieles beim Angreifen.",
 		
 	"Übereifer":
-		"",
+		"Erhöht die Stärke von Attacken um 50%, senkt aber deren Genauigkeit um 20%.",
 		
 	"Umkehrung":
-		"",
+		"Der Effekt von Attacken und Fähigkeiten die Statuswerte senken oder erhöhen wird umgekehrt.",
 		
 	"Unbeugsamkeit":
-		"",
+		"Wird ein Statuswert gesenkt steigt sein Spezial-Angriffswert um 2 Stufen.",
 		
 	"Unheilsgefäß":
-		"",
+		"Senkt den Spezial-Angriff aller Pokemon ohne diese Fähigkeit um 25%.",
 		
 	"Unheilsjuwelen":
-		"",
+		"Senkt die Spezial-Verteidigung aller Pokemon ohne diese Fähigkeit um 25%.",
 		
 	"Unheilskörper":
-		"",
+		"Wird das Pokemon berührt, wird es selbst und der Angreifer mit dem Effekt von Abgesang belegt.",
 		
 	"Unheilsschwert":
-		"",
+		"Senkt die Verteidigung aller Pokemon ohne diese Fähigkeit um 25%.",
 		
 	"Unheilstafeln":
-		"",
+		"Senkt den Angriff aller Pokemon ohne diese Fähigkeit um 25%.",
 		
 	"Unkenntnis":
 		"Das Pokemon erhält, unabhängig von den Statusveränderungen des Gegners, Schaden, und fügt auf dieselbe Weise Schaden zu.",
@@ -829,49 +835,49 @@ const abilityDescriptions = {
 		"Das Pokemon erzeugt bei Kampfantritt strömenden Regen und verhindert den Wetterwechsel. Feuer-Attacken werden bei diesem Wetter wirkungslos.",
 		
 	"Variabilität":
-		"",
+		"Ändert den Typ des Pokémon, abhängig von der Tafel die es trägt.",
 		
 	"Vegetarier":
-		"",
+		"Verleiht Immunität gegenüber Pflanzen-Attacken. Wird das Pokemon von einer Pflanzen-Attacke getroffen erhöht sich sein Angriffswert um 1 Stufe.",
 		
 	"Verborgene Faust":
-		"",
+		"Attacken, welche Kontakt herstellen, umgehen Schild-Attacken, richten dann aber nur noch 1/4 des ursprünglichen Schadens an.",
 		
 	"Verklumpen":
-		"",
+		"Wird das Pokemon von einer Wasser-Attacke getroffen, erhöht sich seine Verteidigung um 2 Stufen.",
 		
 	"Viskosität":
-		"",
+		"Wird das Pokémon berührt, sinkt die Initiative des Angreifers um eine Stufe.",
 		
 	"Völlerei":
-		"",
+		"Beeren, die erst bei 25% der KP aktivieren, werden schon ab 50% der übrigen KP eingesetzt.",
 		
 	"Voltabsorber":
 		"Verleiht Immunität gegenüber Elektro-Attacken. Wird das Pokemon von einer Elektro-Attacke getroffen regeneriert es 1/4 seiner KP.",
 		
 	"Vorahnung":
-		"",
+		"Besitzt der Gegner eine KO-Attacke oder eine sehr effektive Attacke gegen das Pokemon, erscheint bei Kampfantritt eine Warnmeldung.",
 		
 	"Vorwarnung":
-		"",
+		"Die Attacke des Gegners mit der größten Basisstärke wird bei Kampfantritt genannt.",
 		
 	"Wachhund":
-		"",
+		"Schützt das Pokemon davor, von Attacken und Items ausgetauscht zu werden. Außerdem erhöht Bedroher den Angriff anstatt ihn zu senken.",
 		
 	"Wackerer Schild":
-		"",
+		"Erhöht die Verteidigung beim ersten bei Kampfantritt um eine Stufe.",
 		
 	"Wandlungskunst":
-		"",
+		"Nimmt nach dem Kampfantritt den Typen der eigenen eingesetzten Attacke an.",
 		
 	"Wankelmut":
-		"",
+		"Werden die Statuswerte des Pokemon gesenkt oder erhöht verdoppelt sich der Effekt.",
 		
 	"Wasserblase":
 		"Verhindert Verbrennungen, reduziert den Schaden von Feuer-Attacken um 50% und Verdoppelt den Schaden seiner Wasser-Attacken.",
 		
 	"Wassertempo":
-		"",
+		"Verdoppelt die Initiative im Regen.",
 		
 	"Wegsperre":
 		"Verhindert Austausch und Flucht von Pokemon.",
@@ -880,19 +886,19 @@ const abilityDescriptions = {
 		"Der Anwender landet mit Serien-Attacken immer die maximale Anzahl an Treffern.",
 		
 	"Wiederkäuer":
-		"",
+		"Verspeist eine bereits gegessene Beere am Ende der nächsten Runde erneut.",
 		
 	"Windkraft":
-		"",
+		"Verdoppelt die Stärke der nächsten Elektro-Attacke, wenn es von einer Wind-Attacke getroffen wird oder von Rückenwind beeinflusst wird.",
 		
 	"Windreiter":
-		"",
+		"Verleiht Immunität gegenüber Wind-Attacken. Wird das Pokemon von einer Wind-Attacke getroffen oder steht unter dem Effekt von Rückenwird, steigt sein Angriff um 1 Stufe.",
 		
 	"Wolke Sieben":
-		"",
+		"Hebt alle Wetter-Effekte bei Kampfantritt auf, beendet diese aber nicht.",
 		
 	"Wollflaum":
-		"",
+		"Erhält das Pokemon Schaden durch eine Attacke, wird die Initiative aller anderen Pokemon um 1 Stufe gesenkt.",
 		
 	"Wunderhaut":
 		"Senkt die Genauigkeit von Status-Attacken, die auf dieses Pokemon zielen, auf 50%.",
@@ -901,13 +907,13 @@ const abilityDescriptions = {
 		"Das Pokemon erhält nur von sehr effektiven Attacken Schaden.",
 		
 	"Würggeschoss":
-		"",
+		"Das Pokemon fängt nach dem Einsatz von Surfer oder Taucher, bei über 50% seiner KP ein Pikuda und unter 50% ein Pikachu. Erleidet es Schaden wirft es den Fang auf den Gegner und richtet 1/4 seiner KP an Schaden an. Pikuda senkt die Verteidigung zusätzlich und Pikachu paralysiert das Ziel. Umgeht Delegator.",
 		
 	"Wutausbruch":
-		"",
+		"Erhöht den Spezial-Angriff um 1 Stufe, wenn die KP unter 50% durch eine Attacke fallen.",
 		
 	"Wutpanzer":
-		"",
+		"Erhöht den Angriff, Spezial-Angriff und die Initiative um 1 Stufe und senkt die Verteidigung und Spezial-Verteidigung um 1 Stufe, wenn das Pokemon weniger als 50% seiner KP hat.",
 		
 	"Zähigkeit":
 		"Die Verteidigung des Pokemon erhöht sich um eine Stufe, wenn es von einer Attacke getroffen wird.",

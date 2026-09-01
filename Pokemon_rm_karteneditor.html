@@ -1236,6 +1236,7 @@
 				uiCache.formName = null;
 
 				render();
+				updateEditorBaender();
 
 			} finally {
 				isUpdating = false;
@@ -1256,6 +1257,45 @@
 		DOM.nameSelect.addEventListener("change", e => {
 			if (isUpdating) return;
 			updatePokemon(e.target.value);
+		});
+		
+		DOM.form.addEventListener("change", e => {
+
+			if (isUpdating) return;
+
+
+			// Aktuell ausgewählte Bänder sichern
+			const selectedBands =
+				Array.from(
+					DOM.bandContainer.querySelectorAll(
+						'input[type="checkbox"]:checked'
+					)
+				).map(cb =>
+					cb.dataset.band
+				);
+
+
+			// Form im State aktualisieren
+			setState({
+				formName: e.target.value
+			});
+
+
+			// Cache zurücksetzen
+			uiCache.formName = null;
+
+
+			// Pokémon/Form neu rendern
+			render();
+
+
+			// Bänder mit der neuen Form neu berechnen
+			renderBaender(selectedBands);
+
+
+			// Vorschau aktualisieren
+			requestPreviewUpdate();
+
 		});
 
 		/*
@@ -1337,67 +1377,631 @@
 				`${checked} ausgewählt`;
 
 		}
+		
+		// ======================================================
+		// Pokémon aus dem aktuellen Editor auslesen
+		// ======================================================
+
+		function getEditorPokemon() {
+
+			const nummer =
+				Number(DOM.nummerSelect.value) || null;
+
+			const pokemon =
+				pokemonListe.find(
+					p => Number(p.nummer) === nummer
+				);
+
+			const formKey =
+				DOM.form.value || "Standard";
+
+			const form =
+				pokemon?.forms?.[formKey];
+
+			return {
+
+				nummer:
+					nummer,
+
+				name:
+					DOM.nameSelect.value || "",
+
+				game:
+					DOM.game.value || "",
+
+				generation:
+					Number(DOM.generation.value) || null,
+
+				form:
+					formKey,
+
+				formId:
+					form?.id || null,
+
+				ball:
+					DOM.pokeball?.value || ""
+
+			};
+
+		}
+		
+		// ======================================================
+		// Pokemon in Spiel vorhanden
+		// ======================================================
+		
+		function isPokemonAvailableInGame(pokemon, game) {
+
+			if (!pokemon || !pokemon.nummer || !game) {
+				return false;
+			}
+
+			const rule =
+				POKEMON_TRANSFER_RULES[pokemon.formId];
+
+			// Keine spezielle Einschränkung
+			if (!rule) {
+				return true;
+			}
+
+			// Keine Ausschlussliste
+			if (!Array.isArray(rule.exclude)) {
+				return true;
+			}
+
+			return !rule.exclude.includes(game);
+
+		}
+		
+		// ======================================================
+		// Pokemon als Nummer transferieren
+		// ======================================================
+		function getTransferCalculationNumber(pokemon) {
+
+			if (!pokemon || !pokemon.nummer) {
+				return null;
+			}
+
+			const rule =
+				POKEMON_TRANSFER_RULES[pokemon.formId];
+
+			if (!rule || !rule.transferAs) {
+				return pokemon.nummer;
+			}
+
+			return rule.transferAs;
+		}
+
+		// ======================================================
+		// Gemeinsame Transferberechnung
+		// ======================================================
+
+		function calculatePokemonTransferStages(pokemon) {
+
+			if (!pokemon || !pokemon.game) {
+				return [];
+			}
 
 
-		// =========================
-		// Bänder laden
-		// =========================
+			// ==================================================
+			// Aktuelle Pokémon-Art
+			// ==================================================
+
+			const currentNumber =
+				Number(pokemon.nummer);
+
+
+			// ==================================================
+			// Form-ID
+			// ==================================================
+
+			const currentFormId =
+				pokemon.formId ||
+				String(currentNumber);
+
+
+			// ==================================================
+			// Entwicklungsregel
+			// ==================================================
+
+			const evolutionRule =
+				POKEMON_TRANSFER_EVOLUTION_RULES[currentNumber];
+
+
+			// ==================================================
+			// Fangspiel ermitteln
+			// ==================================================
+
+			const originNode =
+				TRANSFER_GAME_ALIASES[pokemon.game];
+
+
+			if (!originNode) {
+
+				console.warn(
+					"Kein Transfer-Node für Fangspiel gefunden:",
+					pokemon.game
+				);
+
+				return [];
+			}
+
+
+			// ==================================================
+			// Generation des Ursprungsspiels
+			// ==================================================
+
+			const originGameNode =
+				TRANSFER_NODES[originNode];
+
+
+			const originGeneration =
+				originGameNode?.generation;
+
+
+			// ==================================================
+			// Transferwege berechnen
+			// ==================================================
+
+			const reachableNodes =
+				findTransferPaths(originNode);
+
+
+			// ==================================================
+			// Nur Spiele
+			// ==================================================
+
+			const games =
+				reachableNodes.filter(nodeKey =>
+					TRANSFER_NODES[nodeKey]?.type === "game"
+				);
+
+
+			// ==================================================
+			// Transferstufen erzeugen
+			// ==================================================
+
+			return games
+				.map(game => {
+
+					// ----------------------------------------------
+					// Standardmäßig aktuelle Pokémon-Art
+					// ----------------------------------------------
+
+					let pokemonId =
+						currentNumber;
+
+
+					// ----------------------------------------------
+					// Entwicklungsregel
+					// ----------------------------------------------
+
+					if (
+						evolutionRule &&
+						evolutionRule.transferAs &&
+						evolutionRule.availableFromGeneration &&
+						originGeneration
+					) {
+
+						const targetNode =
+							TRANSFER_NODES[game];
+
+
+						const targetGeneration =
+							targetNode?.generation;
+
+
+						if (
+							originGeneration <
+								evolutionRule.availableFromGeneration &&
+
+							targetGeneration &&
+							targetGeneration <
+								evolutionRule.availableFromGeneration
+						) {
+
+							pokemonId =
+								evolutionRule.transferAs;
+
+						}
+
+					}
+
+
+					// ----------------------------------------------
+					// Transferregel bestimmen
+					// ----------------------------------------------
+					//
+					// Wichtig:
+					// Die Formregel hat Vorrang.
+					// Danach normale Pokémon-ID als Fallback.
+					//
+
+					const transferRule =
+						POKEMON_TRANSFER_RULES[currentFormId]
+						||
+						POKEMON_TRANSFER_RULES[String(pokemonId)]
+						||
+						POKEMON_TRANSFER_RULES[pokemonId];
+
+
+					// ----------------------------------------------
+					// Pokémon in diesem Spiel ausgeschlossen?
+					// ----------------------------------------------
+
+					if (
+						transferRule &&
+						Array.isArray(transferRule.exclude) &&
+						transferRule.exclude.includes(game)
+					) {
+
+						return null;
+
+					}
+
+
+					return {
+						game: game,
+						pokemonId: pokemonId,
+						formId: currentFormId
+					};
+
+				})
+				.filter(stage =>
+					stage !== null
+				);
+
+		}
+
+		// ======================================================
+		// Transfer-Spiele für gespeicherte Pokémon
+		//
+		// Diese Funktion wird von den Statistiken verwendet.
+		// Nur tatsächlich gefangene Pokémon zählen.
+		// ======================================================
+
+		function getPokemonTransferGames(pokemon) {
+
+			if (!pokemon) {
+				return [];
+			}
+
+			if (pokemon.gefangen !== true) {
+				return [];
+			}
+
+			return calculatePokemonTransferGames(pokemon);
+
+		}
+
+
+		// ======================================================
+		// Transfer-Spiele für den Editor
+		//
+		// Hier spielt "gefangen" bewusst keine Rolle.
+		// Das Pokémon wird gerade bearbeitet.
+		// ======================================================
+
+		function getEditorTransferGames() {
+
+			const pokemon =
+				getEditorPokemon();
+
+			if (!pokemon.nummer || !pokemon.game) {
+				return [];
+			}
+
+			return calculatePokemonTransferGames(pokemon);
+
+		}
+
+
+		// ======================================================
+		// Bänder rendern
+		// ======================================================
 
 		function renderBaender(savedBands = null) {
 
 			DOM.bandContainer.innerHTML = "";
 
-			const active = new Set(savedBands || []);
+			const active =
+				new Set(savedBands || []);
 
-			const currentGeneration =
-				DOM.generation.value
-					? Number(DOM.generation.value)
-					: null;
 
-			const availableBands = baender.filter(band => {
+			// ==================================================
+			// Aktuelles Pokémon aus dem Editor
+			// ==================================================
 
-				const rule = BAND_RULES[band.name];
+			const editorPokemon =
+				getEditorPokemon();
 
-				// Keine Regel = Band bleibt immer verfügbar
-				if (!rule) return true;
 
-				return rule(currentGeneration);
-			});
+			// ==================================================
+			// Transferstufen berechnen
+			// ==================================================
 
-			availableBands.forEach(band => {
+			const transferStages =
+				calculatePokemonTransferStages(
+					editorPokemon
+				);
 
-				const row = document.createElement("div");
-				row.className = "band-item";
 
-				const checkbox = document.createElement("input");
-				checkbox.type = "checkbox";
-				checkbox.dataset.band = band.name;
-				checkbox.checked = active.has(band.name);
+			// ==================================================
+			// Fangspiel
+			// ==================================================
 
-				checkbox.addEventListener("change", () => {
+			const originGame =
+				TRANSFER_GAME_ALIASES[
+					editorPokemon.game
+				];
 
-					updateBandCounter();
-					requestPreviewUpdate();
+
+			// ==================================================
+			// Pokéball
+			// ==================================================
+
+			const ball =
+				editorPokemon.ball;
+
+
+			// ==================================================
+			// Bänder prüfen
+			// ==================================================
+
+			const availableBands =
+				baender.filter(band => {
+
+					const rule =
+						BAND_RULES[band.name];
+
+
+					// --------------------------------------------------
+					// Keine spezielle Regel
+					// --------------------------------------------------
+
+					if (!rule) {
+						return true;
+					}
+
+
+					// ==================================================
+					// 1. Spielbedingung
+					// ==================================================
+
+					if (Array.isArray(rule.games)) {
+
+						const gameAllowed =
+							transferStages.some(stage =>
+								rule.games.includes(stage.game)
+							);
+
+						if (!gameAllowed) {
+							return false;
+						}
+
+					}
+
+
+					// ==================================================
+					// 2. Ursprungs-Spielbedingung
+					// ==================================================
+
+					if (Array.isArray(rule.originGames)) {
+
+						const originAllowed =
+							rule.originGames.includes(
+								originGame
+							);
+
+						if (!originAllowed) {
+							return false;
+						}
+
+					}
+
+
+					// ==================================================
+					// 3. Pokéball-Bedingung
+					// ==================================================
+
+					if (Array.isArray(rule.balls)) {
+
+						const ballAllowed =
+							rule.balls.includes(ball);
+
+						if (!ballAllowed) {
+							return false;
+						}
+
+					}
+
+
+					// ==================================================
+					// 4. Pokémon-spezifische Bedingung
+					// ==================================================
+
+					if (rule.pokemonIds) {
+
+						const pokemonAllowed =
+							transferStages.some(stage => {
+
+								if (!rule.pokemonIds.includes(
+									stage.pokemonId
+								)) {
+									return false;
+								}
+
+								if (
+									Array.isArray(rule.games) &&
+									!rule.games.includes(stage.game)
+								) {
+									return false;
+								}
+
+								return true;
+
+							});
+
+						if (!pokemonAllowed) {
+							return false;
+						}
+
+					}
+					
+					// ==================================================
+					// 5. Konflikt mit bereits ausgewählten Bändern
+					// ==================================================
+
+					const hasConflict =
+						baender.some(otherBand => {
+
+							if (!active.has(otherBand.name)) {
+								return false;
+							}
+
+							const otherRule =
+								BAND_RULES[otherBand.name];
+
+							if (!otherRule) {
+								return false;
+							}
+
+							const directConflict =
+								Array.isArray(rule.conflictsWith) &&
+								rule.conflictsWith.includes(otherBand.name);
+
+							const reverseConflict =
+								Array.isArray(otherRule.conflictsWith) &&
+								otherRule.conflictsWith.includes(band.name);
+
+							return directConflict || reverseConflict;
+
+						});
+
+					if (hasConflict) {
+						return false;
+					}
+
+					// ==================================================
+					// Alle Bedingungen erfüllt
+					// ==================================================
+
+					return true;
 
 				});
 
-				const img = document.createElement("img");
-				img.className = "band-img";
+
+			// ==================================================
+			// Bänder darstellen
+			// ==================================================
+
+			availableBands.forEach(band => {
+
+				const row =
+					document.createElement("div");
+
+				row.className =
+					"band-item";
+
+
+				// --------------------------------------------------
+				// Checkbox
+				// --------------------------------------------------
+
+				const checkbox =
+					document.createElement("input");
+
+				checkbox.type =
+					"checkbox";
+
+				checkbox.dataset.band =
+					band.name;
+
+				checkbox.checked =
+					active.has(band.name);
+
+				checkbox.addEventListener(
+					"change",
+					() => {
+
+						const selectedBands =
+							Array.from(
+								DOM.bandContainer.querySelectorAll(
+									'input[type="checkbox"]:checked'
+								)
+							).map(cb =>
+								cb.dataset.band
+							);
+
+
+						renderBaender(selectedBands);
+
+						requestPreviewUpdate();
+
+					}
+				);
+
+
+				// --------------------------------------------------
+				// Bild
+				// --------------------------------------------------
+
+				const img =
+					document.createElement("img");
+
+				img.className =
+					"band-img";
+
 				img.src =
 					`https://raw.githubusercontent.com/kwsch/PKHeX/master/PKHeX.Drawing.Misc/Resources/img/ribbons/${band.image}.png`;
-				img.alt = band.name;
 
-				const text = document.createElement("div");
-				text.className = "band-text";
+				img.alt =
+					band.name;
 
-				const name = document.createElement("div");
-				name.className = "band-name";
-				name.textContent = band.name;
 
-				const title = document.createElement("div");
-				title.className = "band-title";
+				// --------------------------------------------------
+				// Textcontainer
+				// --------------------------------------------------
+
+				const text =
+					document.createElement("div");
+
+				text.className =
+					"band-text";
+
+
+				// --------------------------------------------------
+				// Name
+				// --------------------------------------------------
+
+				const name =
+					document.createElement("div");
+
+				name.className =
+					"band-name";
+
+				name.textContent =
+					band.name;
+
+
+				// --------------------------------------------------
+				// Titel
+				// --------------------------------------------------
+
+				const title =
+					document.createElement("div");
+
+				title.className =
+					"band-title";
+
 				title.textContent =
-					band.title ? `(${band.title})` : "";
+					band.title
+						? `(${band.title})`
+						: "";
+
+
+				// --------------------------------------------------
+				// Zusammensetzen
+				// --------------------------------------------------
 
 				text.appendChild(name);
 				text.appendChild(title);
@@ -1407,18 +2011,57 @@
 				row.appendChild(text);
 
 				DOM.bandContainer.appendChild(row);
+
 			});
 
 			updateBandCounter();
+
+			// ==================================================
+			// Debug
+			// ==================================================
+
+			console.log(
+				"Editor Pokémon:",
+				editorPokemon
+			);
+
+			console.log(
+				"Editor Transferstufen:",
+				transferStages
+			);
+
 		}
-		
-		DOM.generation.addEventListener("change", () => {
+
+		// ======================================================
+		// Editor aktualisieren
+		// ======================================================
+
+		function updateEditorBaender() {
+
 			renderBaender();
 			requestPreviewUpdate();
-		});
+
+		}
+
+		// ======================================================
+		// Fangspiel geändert
+		// ======================================================
+
+		DOM.game.addEventListener(
+			"change",
+			() => {
+
+				updateEditorBaender();
+
+			}
+		);
+
+		// ======================================================
+		// Initialisierung
+		// ======================================================
 
 		renderBaender();
-	
+
 	</script>
 	
 	<!-- Card Preview -->
@@ -2836,14 +3479,18 @@
 
 		} else {
 
-			populateGameDropdown(Number(DOM.generation.value));
+			populateGameDropdown(
+				Number(DOM.generation.value)
+			);
 
 		}
 
 		updateGameData();
 
+		updateEditorBaender();
+
 	});
-	
+		
 	function updateGameData() {
 
 		const game = DOM.game.value;
@@ -3075,6 +3722,8 @@
 				optionElement.addEventListener("click", () => {
 
 					select.value = ball.value;
+
+					updateEditorBaender();
 
 					selectedImage.src =
 						POKEBALL_SPRITE_BASE + ball.sprite;
