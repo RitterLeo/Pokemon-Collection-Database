@@ -3692,7 +3692,7 @@ const pokemonListe = [
 			}
 		},
 		Hisui: {
-			id: "100-alola",
+			id: "100-hisui",
 			displayname: "Hisui",
 			spriteId: 10231,
 			typen: ["Elektro", "Pflanze"],
@@ -3743,7 +3743,7 @@ const pokemonListe = [
 			}
 		},
 		Hisui: {
-			id: "101-alola",
+			id: "101-hisui",
 			displayname: "Hisui",
 			spriteId: 10232,
 			typen: ["Elektro", "Pflanze"],
