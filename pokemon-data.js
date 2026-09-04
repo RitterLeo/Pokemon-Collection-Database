@@ -22824,7 +22824,7 @@ const pokemonListe = [
 		Blau: {
 			id: "670-blue",
 			displayname: "Blaublütler",
-			spriteId: "670-yellow",
+			spriteId: "670-blue",
 			typen: ["Fee"],
 			eiergruppen: ["Fee"],
 			geschlecht: ["Weiblich"],
@@ -22864,7 +22864,7 @@ const pokemonListe = [
 			}
 		},
 		Ewig: {
-			id: "670",
+			id: "670-eternal",
 			displayname: "Ewigblütler",
 			spriteId: "670",
 			typen: ["Fee"],
@@ -30352,7 +30352,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixErdbeere: {
-			id: "869-ruby-strawberry",
+			id: "869-ruby-mix-strawberry",
 			displayname: "Ruby-Mix Erdbeere",
 			spriteId: "869-ruby-swirl-strawberry-sweet",
 			typen: ["Fee"],
@@ -30373,7 +30373,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixBlume: {
-			id: "869-ruby-flower",
+			id: "869-ruby-mix-flower",
 			displayname: "Ruby-Mix Blume",
 			spriteId: "869-ruby-swirl-flower-sweet",
 			typen: ["Fee"],
@@ -30394,7 +30394,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixHerz: {
-			id: "869-ruby-love",
+			id: "869-ruby-mix-love",
 			displayname: "Ruby-Mix Herz",
 			spriteId: "869-ruby-swirl-love-sweet",
 			typen: ["Fee"],
@@ -30415,7 +30415,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixBeere: {
-			id: "869-ruby-berry",
+			id: "869-ruby-mix-berry",
 			displayname: "Ruby-Mix Beere",
 			spriteId: "869-ruby-swirl-berry-sweet",
 			typen: ["Fee"],
@@ -30436,7 +30436,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixStern: {
-			id: "869-ruby-star",
+			id: "869-ruby-mix-star",
 			displayname: "Ruby-Mix Stern",
 			spriteId: "869-ruby-swirl-star-sweet",
 			typen: ["Fee"],
@@ -30457,7 +30457,7 @@ const pokemonListe = [
 			}
 		},
 		RubyMixSchleife: {
-			id: "869-ruby-ribbon",
+			id: "869-ruby-mix-ribbon",
 			displayname: "Ruby-Mix Schleife",
 			spriteId: "869-ruby-swirl-ribbon-sweet",
 			typen: ["Fee"],
@@ -30520,7 +30520,7 @@ const pokemonListe = [
 			}
 		},
 		KaramellMixBlume: {
-			id: "869-caramel-flower",
+			id: "869-caramel-mix-flower",
 			displayname: "Karamell-Mix Blume",
 			spriteId: "869-caramel-swirl-flower-sweet",
 			typen: ["Fee"],
@@ -30541,7 +30541,7 @@ const pokemonListe = [
 			}
 		},
 		KaramellMixHerz: {
-			id: "869-caramel-love",
+			id: "869-caramel-mix-love",
 			displayname: "Karamell-Mix Herz",
 			spriteId: "869-caramel-swirl-love-sweet",
 			typen: ["Fee"],
@@ -30562,7 +30562,7 @@ const pokemonListe = [
 			}
 		},
 		KaramellMixBeere: {
-			id: "869-caramel-berry",
+			id: "869-caramel-mix-berry",
 			displayname: "Karamell-Mix Beere",
 			spriteId: "869-caramel-swirl-berry-sweet",
 			typen: ["Fee"],
@@ -30583,7 +30583,7 @@ const pokemonListe = [
 			}
 		},
 		KaramellMixStern: {
-			id: "869-caramel-star",
+			id: "869-caramel-mix-star",
 			displayname: "Karamell-Mix Stern",
 			spriteId: "869-caramel-swirl-star-sweet",
 			typen: ["Fee"],
@@ -30604,7 +30604,7 @@ const pokemonListe = [
 			}
 		},
 		KaramellMixSchleife: {
-			id: "869-caramel-ribbon",
+			id: "869-caramel-mix-ribbon",
 			displayname: "Karamell-Mix Schleife",
 			spriteId: "869-caramel-swirl-ribbon-sweet",
 			typen: ["Fee"],
