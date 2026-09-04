@@ -633,6 +633,7 @@
 	</div>
 	
 	<script src="pokemon-data.js"></script>
+	<script src="pokemon-transfer-list-data.js"></script>
 	<script src="game-data.js"></script>
 	<script src="attack-data.js"></script>
 	<script src="ribbon-data.js"></script>
@@ -1429,46 +1430,17 @@
 		// Pokemon in Spiel vorhanden
 		// ======================================================
 		
-		function isPokemonAvailableInGame(pokemon, game) {
+		function isPokemonAvailableInGame(pokemonId, formId, game) {
+			const availablePokemon =
+				POKEMON_GAME_AVAILABILITY_LIST[game];
 
-			if (!pokemon || !pokemon.nummer || !game) {
+			if (!availablePokemon) {
 				return false;
 			}
 
-			const rule =
-				POKEMON_TRANSFER_RULES[pokemon.formId];
+			const id = String(formId || pokemonId);
 
-			// Keine spezielle Einschränkung
-			if (!rule) {
-				return true;
-			}
-
-			// Keine Ausschlussliste
-			if (!Array.isArray(rule.exclude)) {
-				return true;
-			}
-
-			return !rule.exclude.includes(game);
-
-		}
-		
-		// ======================================================
-		// Pokemon als Nummer transferieren
-		// ======================================================
-		function getTransferCalculationNumber(pokemon) {
-
-			if (!pokemon || !pokemon.nummer) {
-				return null;
-			}
-
-			const rule =
-				POKEMON_TRANSFER_RULES[pokemon.formId];
-
-			if (!rule || !rule.transferAs) {
-				return pokemon.nummer;
-			}
-
-			return rule.transferAs;
+			return availablePokemon.has(id);
 		}
 
 		// ======================================================
@@ -1496,11 +1468,12 @@
 
 			const currentFormId =
 				pokemon.formId ||
+				pokemon.pokemonId ||
 				String(currentNumber);
 
 
 			// ==================================================
-			// Entwicklungsregel
+			// Historische Transferregel
 			// ==================================================
 
 			const evolutionRule =
@@ -1547,7 +1520,7 @@
 
 
 			// ==================================================
-			// Nur Spiele
+			// Nur echte Spiele
 			// ==================================================
 
 			const games =
@@ -1564,7 +1537,7 @@
 				.map(game => {
 
 					// ----------------------------------------------
-					// Standardmäßig aktuelle Pokémon-Art
+					// Standardmäßig aktuelle Pokémon-ID
 					// ----------------------------------------------
 
 					let pokemonId =
@@ -1572,7 +1545,7 @@
 
 
 					// ----------------------------------------------
-					// Entwicklungsregel
+					// Historische Transfer-ID bestimmen
 					// ----------------------------------------------
 
 					if (
@@ -1603,46 +1576,36 @@
 								evolutionRule.transferAs;
 
 						}
-
 					}
 
 
 					// ----------------------------------------------
-					// Transferregel bestimmen
+					// Pokémon/Form im Zielspiel verfügbar?
 					// ----------------------------------------------
-					//
-					// Wichtig:
-					// Die Formregel hat Vorrang.
-					// Danach normale Pokémon-ID als Fallback.
-					//
 
-					const transferRule =
-						POKEMON_TRANSFER_RULES[currentFormId]
-						||
-						POKEMON_TRANSFER_RULES[String(pokemonId)]
-						||
-						POKEMON_TRANSFER_RULES[pokemonId];
-
-
-					// ----------------------------------------------
-					// Pokémon in diesem Spiel ausgeschlossen?
-					// ----------------------------------------------
+					const availabilityFormId =
+						pokemonId === currentNumber
+							? currentFormId
+							: String(pokemonId);
 
 					if (
-						transferRule &&
-						Array.isArray(transferRule.exclude) &&
-						transferRule.exclude.includes(game)
+						!isPokemonAvailableInGame(
+							pokemonId,
+							availabilityFormId,
+							game
+						)
 					) {
-
 						return null;
-
 					}
 
+					// ----------------------------------------------
+					// Transferstufe
+					// ----------------------------------------------
 
 					return {
 						game: game,
 						pokemonId: pokemonId,
-						formId: currentFormId
+						formId: availabilityFormId
 					};
 
 				})
@@ -1661,16 +1624,12 @@
 
 		function getPokemonTransferGames(pokemon) {
 
-			if (!pokemon) {
+			if (!pokemon || pokemon.gefangen !== true) {
 				return [];
 			}
 
-			if (pokemon.gefangen !== true) {
-				return [];
-			}
-
-			return calculatePokemonTransferGames(pokemon);
-
+			return calculatePokemonTransferStages(pokemon)
+				.map(stage => stage.game);
 		}
 
 
@@ -1690,7 +1649,8 @@
 				return [];
 			}
 
-			return calculatePokemonTransferGames(pokemon);
+			return calculatePokemonTransferStages(pokemon)
+				.map(stage => stage.game);
 
 		}
 
@@ -1713,7 +1673,6 @@
 
 			const editorPokemon =
 				getEditorPokemon();
-
 
 			// ==================================================
 			// Transferstufen berechnen
