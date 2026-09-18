@@ -142,7 +142,7 @@ function createCard(p, preview = false) {
     // =========================
     card.innerHTML = `
         <div class="card-top">
-            <img src="${spriteUrl}">
+            <img src="${spriteUrl}" loading="lazy">
             <div>
                 <div class="title">
                     #${String(p.nummer).padStart(4, "0")} ${p.name}

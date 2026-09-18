@@ -1,4 +1,3 @@
-let pokedexMode = "new";		// "new" | "complete"
 let shinyMode = "all";
 
 let progressView = localStorage.getItem("pokedexProgressView") || "games";
@@ -827,16 +826,6 @@ function renderPokedexSection(stats) {
         <h2>Pokédexe</h2>
 
 			<div class="pokedex-controls">
-
-				<button
-					class="pokedex-btn ${pokedexMode === "new" ? "active" : ""}"
-					id="toggleDexMode">
-
-					${pokedexMode === "new"
-						? "Neue Pokémon"
-						: "Alle Pokémon"}
-
-				</button>
 				
 				<select id="pokedexViewSelect">
 					<option value="generations">Generationen-Dex</option>
@@ -846,6 +835,8 @@ function renderPokedexSection(stats) {
 					<option value="shinyForms">Shiny Living-Form-Dex</option>
 					<option value="origin">Origin-Dex</option>
 					<option value="icognito">Icognito-Dex</option>
+					<option value="vivillon">Vivillon-Dex</option>
+					<option value="pokusan">Pokusan-Dex</option>
 				</select>
 
 				<button
@@ -867,20 +858,8 @@ function renderPokedexSection(stats) {
         <div class="pokedex-list"></div>
     `;
 	
-	const dexButton = section.querySelector("#toggleDexMode");
 	const shinyButton = section.querySelector("#toggleShinyMode");
 	const viewSelect = section.querySelector("#pokedexViewSelect");
-		
-	dexButton.addEventListener("click", () => {
-
-		pokedexMode =
-			pokedexMode === "new"
-				? "complete"
-				: "new";
-
-		rerenderCollectionDashboard();
-
-	});;
 	
 	shinyButton.addEventListener("click", () => {
 
@@ -1402,7 +1381,252 @@ function renderPokedexSection(stats) {
 
 
 		list.appendChild(missingGrid);
+		
+	// =====================================================
+	// Vivillon-Dex
+	// =====================================================
 
+	} else if (progressView === "vivillon") {
+
+		const vivillonStats =
+			stats.vivillonDex;
+
+
+		// =============================================
+		// Vivillon-Dex Fortschritt
+		// =============================================
+
+		const progressRow =
+			document.createElement("div");
+
+		progressRow.className =
+			"pokedex-row";
+
+		progressRow.innerHTML = `
+
+			<div class="generation-header">
+
+				<span class="generation-title">
+					Vivillon-Dex
+				</span>
+
+				<span class="generation-value">
+					${vivillonStats.owned} /
+					${vivillonStats.total}
+				</span>
+
+				<span class="generation-percent">
+					${vivillonStats.percent} %
+				</span>
+
+			</div>
+
+			<div class="progress-bar">
+
+				<div
+					class="progress-fill"
+					style="width:${vivillonStats.percent}%">
+				</div>
+
+			</div>
+
+		`;
+
+		list.appendChild(progressRow);
+
+
+		// =============================================
+		// Fehlende Vivillon-Formen
+		// =============================================
+
+		const missingVivillon =
+			vivillonStats.entries
+				.filter(entry => !entry.owned)
+				.slice(0, 3);
+
+
+		const missingGrid =
+			document.createElement("div");
+
+		missingGrid.className =
+			"missing-pokemon-grid";
+
+
+		missingVivillon.forEach(entry => {
+
+			const card =
+				document.createElement("div");
+
+			card.className =
+				"highlight-card missing-pokemon-card";
+
+
+			const spriteId =
+				entry.spriteId ??
+				entry.formId;
+
+			const spriteBase =
+				"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+			const normalSprite =
+				`${spriteBase}${spriteId}.png`;
+
+
+			card.innerHTML = `
+
+				<div class="highlight-title">
+					Fehlendes Vivillon
+				</div>
+
+				<div class="highlight-content">
+
+					<div>
+
+						<div class="highlight-value">
+							${entry.displayName}
+						</div>
+
+					</div>
+
+					<img
+						class="highlight-sprite"
+						src="${normalSprite}"
+						alt="${entry.displayName}">
+
+				</div>
+
+			`;
+
+
+			missingGrid.appendChild(card);
+
+		});
+
+
+		list.appendChild(missingGrid);
+
+	// =====================================================
+	// Pokusan-Dex
+	// =====================================================
+
+	} else if (progressView === "pokusan") {
+
+		const pokusanStats =
+			stats.pokusanDex;
+
+
+		// =============================================
+		// Pokusan-Dex Fortschritt
+		// =============================================
+
+		const progressRow =
+			document.createElement("div");
+
+		progressRow.className =
+			"pokedex-row";
+
+		progressRow.innerHTML = `
+
+			<div class="generation-header">
+
+				<span class="generation-title">
+					Pokusan-Dex
+				</span>
+
+				<span class="generation-value">
+					${pokusanStats.owned} /
+					${pokusanStats.total}
+				</span>
+
+				<span class="generation-percent">
+					${pokusanStats.percent} %
+				</span>
+
+			</div>
+
+			<div class="progress-bar">
+
+				<div
+					class="progress-fill"
+					style="width:${pokusanStats.percent}%">
+				</div>
+
+			</div>
+
+		`;
+
+		list.appendChild(progressRow);
+
+
+		// =============================================
+		// Fehlende Pokusan-Formen
+		// =============================================
+
+		const missingPokusan =
+			pokusanStats.entries
+				.filter(entry => !entry.owned)
+				.slice(0, 3);
+
+
+		const missingGrid =
+			document.createElement("div");
+
+		missingGrid.className =
+			"missing-pokemon-grid";
+
+
+		missingPokusan.forEach(entry => {
+
+			const card =
+				document.createElement("div");
+
+			card.className =
+				"highlight-card missing-pokemon-card";
+
+
+			const spriteId =
+				entry.spriteId ??
+				entry.formId;
+
+			const spriteBase =
+				"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
+			const normalSprite =
+				`${spriteBase}${spriteId}.png`;
+
+
+			card.innerHTML = `
+
+				<div class="highlight-title">
+					Fehlendes Pokusan
+				</div>
+
+				<div class="highlight-content">
+
+					<div>
+
+						<div class="highlight-value">
+							${entry.displayName}
+						</div>
+
+					</div>
+
+					<img
+						class="highlight-sprite"
+						src="${normalSprite}"
+						alt="${entry.displayName}">
+
+				</div>
+
+			`;
+
+
+			missingGrid.appendChild(card);
+
+		});
+
+
+		list.appendChild(missingGrid);
 
 	// =====================================================
 	// Regionaler Pokédex

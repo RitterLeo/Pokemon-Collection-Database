@@ -40,33 +40,51 @@ const SORT_DEFINITIONS = {
 
     number: {
         label: "Nummer",
+		ascendingLabel: "Nummer – #0001",
+        descendingLabel: "Nummer – #9999",
         compare: (a,b) =>
             Number(a.nummer) - Number(b.nummer)
     },
 
     name: {
         label: "Name",
+		ascendingLabel: "Name – A-Z",
+        descendingLabel: "Name – Z-A",
         compare: (a,b) =>
             a.name.localeCompare(b.name,"de")
     },
 
     generation: {
         label: "Generation",
+		ascendingLabel: "Generation – 1-9",
+        descendingLabel: "Generation – 9-1",
         compare: (a,b) =>
             Number(a.generation) - Number(b.generation)
     },
 
     level: {
         label: "Level",
+		ascendingLabel: "Level – 1-100",
+        descendingLabel: "Level – 100-1",
         compare: (a,b) =>
             Number(a.level) - Number(b.level)
     },
 
     date: {
         label: "Datum",
+		ascendingLabel: "Datum – neu",
+        descendingLabel: "Datum – alt",
         compare: (a,b) =>
             new Date(a.datum||0) - new Date(b.datum||0)
-    }
+    },
+	
+	stats: {
+		label: "Statuswerte",
+		ascendingLabel: "Statuswert – 1-999",
+		descendingLabel: "Statuswert - 999-1",
+			compare: (a,b) =>
+				Number(a.KP) - Number(b.KP)
+	}
 
 };
 
@@ -119,14 +137,14 @@ function createSortOptions(select, includeNone = false){
 
 		select.add(
 			new Option(
-				`${definition.label} ↑`,
+				definition.ascendingLabel,
 				`${key}-asc`
 			)
 		);
 
 		select.add(
 			new Option(
-				`${definition.label} ↓`,
+				definition.descendingLabel,
 				`${key}-desc`
 			)
 		);
@@ -168,14 +186,14 @@ function refreshSecondarySort(primarySort, secondarySort){
 
         secondarySort.add(
             new Option(
-                `${definition.label} ↑`,
+                definition.ascendingLabel,
                 `${key}-asc`
             )
         );
 
         secondarySort.add(
             new Option(
-                `${definition.label} ↓`,
+                definition.descendingLabel,
                 `${key}-desc`
             )
         );

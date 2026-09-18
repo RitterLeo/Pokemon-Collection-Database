@@ -323,6 +323,42 @@ function getIcognitoDexKey(pokemon) {
 
 }
 
+function getVivillonDexKey(pokemon) {
+
+	if (!pokemon) return null;
+
+	// Nur Vivillon (#666)
+	if (Number(pokemon.nummer) !== 666) {
+		return null;
+	}
+
+	// Die Form-ID identifiziert die Vivillon-Form
+	if (!pokemon.pokemonId) {
+		return null;
+	}
+
+	return String(pokemon.pokemonId);
+
+}
+
+function getPokusanDexKey(pokemon) {
+
+	if (!pokemon) return null;
+
+	// Nur Pokusan (#869)
+	if (Number(pokemon.nummer) !== 869) {
+		return null;
+	}
+
+	// Die Form-ID identifiziert die Pokusan-Form
+	if (!pokemon.pokemonId) {
+		return null;
+	}
+
+	return String(pokemon.pokemonId);
+
+}
+
 function calculateCollectionStats(collection) {
 
 	const stats = {
@@ -377,6 +413,20 @@ function calculateCollectionStats(collection) {
 		},
 		
 		icognitoDex: {
+			owned: 0,
+			total: 0,
+			percent: 0,
+			entries: []
+		},
+		
+		vivillonDex: {
+			owned: 0,
+			total: 0,
+			percent: 0,
+			entries: []
+		},
+		
+		pokusanDex: {
 			owned: 0,
 			total: 0,
 			percent: 0,
@@ -618,8 +668,7 @@ stats.captureStats.topNatures =
 
 	const pokedexData = calculatePokedexProgress(
 		collection,
-		shinyMode,
-		pokedexMode
+		shinyMode
 	);
 
 	stats.pokedexes = pokedexData.regions;
@@ -1063,6 +1112,316 @@ stats.captureStats.topNatures =
 				stats.icognitoDex.total *
 				100
 			);
+			
+	// =====================================================
+	// Vivillon-DEX
+	// =====================================================
+	//
+	// Regeln:
+	//
+	// - Nur Vivillon (#666)
+	// - Jede Form genau einmal
+	// - Insgesamt 20 Formen
+	// - Geschlecht wird ignoriert
+	// - Shiny wird ignoriert
+	// - Andere Pokémon werden ignoriert
+	//
+	// =====================================================
+
+
+	// -----------------------------------------------------
+	// Soll-Einträge bestimmen
+	// -----------------------------------------------------
+
+	const vivillonDexEntries = [];
+
+	const vivillonDexKeys = new Set();
+
+	const vivillon =
+		pokemonListe.find(
+			pokemon =>
+				Number(pokemon.nummer) === 666
+		);
+
+
+	if (vivillon && vivillon.forms) {
+
+		Object.entries(vivillon.forms).forEach(
+			([formKey, form]) => {
+
+				if (!form || !form.id) {
+					return;
+				}
+
+				const dexKey =
+					getVivillonDexKey({
+
+						nummer: 666,
+
+						pokemonId:
+							form.id
+
+					});
+
+				if (!dexKey) {
+					return;
+				}
+
+				if (vivillonDexKeys.has(dexKey)) {
+					return;
+				}
+
+				vivillonDexKeys.add(dexKey);
+
+				vivillonDexEntries.push({
+
+					dexKey,
+
+					formId:
+						String(form.id),
+
+					formKey,
+
+					formName:
+						form.displayname ?? formKey,
+
+					displayName:
+						form.displayname ?? formKey,
+
+					pokemonName:
+						vivillon.name,
+
+					pokemonNumber:
+						666,
+
+					spriteId:
+						form.spriteId ?? form.id
+
+				});
+
+			}
+		);
+
+	}
+
+
+	// -----------------------------------------------------
+	// Besessene Vivillon-Formen bestimmen
+	// -----------------------------------------------------
+
+	const ownedVivillonDexKeys = new Set();
+
+	collection.forEach(pokemon => {
+
+		// Nur Vivillon
+		if (Number(pokemon.nummer) !== 666) {
+			return;
+		}
+
+		// Muss gefangen sein
+		if (pokemon.gefangen !== true) {
+			return;
+		}
+
+		const dexKey =
+			getVivillonDexKey(pokemon);
+
+		if (!dexKey) {
+			return;
+		}
+
+		ownedVivillonDexKeys.add(dexKey);
+
+	});
+
+
+	// -----------------------------------------------------
+	// Vivillon-Dex Werte
+	// -----------------------------------------------------
+
+	stats.vivillonDex.entries =
+		vivillonDexEntries.map(entry => ({
+
+			...entry,
+
+			owned:
+				ownedVivillonDexKeys.has(
+					entry.dexKey
+				)
+
+		}));
+
+	stats.vivillonDex.total =
+		stats.vivillonDex.entries.length;
+
+	stats.vivillonDex.owned =
+		stats.vivillonDex.entries.filter(
+			entry => entry.owned
+		).length;
+
+	stats.vivillonDex.percent =
+		stats.vivillonDex.total === 0
+			? 0
+			: Math.round(
+				stats.vivillonDex.owned /
+				stats.vivillonDex.total *
+				100
+			);
+
+	// =====================================================
+	// Pokusan-DEX
+	// =====================================================
+	//
+	// Regeln:
+	//
+	// - Nur Pokusan (#869)
+	// - Jede Form genau einmal
+	// - Insgesamt 63 Formen
+	// - Geschlecht wird ignoriert
+	// - Shiny wird ignoriert
+	// - Andere Pokémon werden ignoriert
+	//
+	// =====================================================
+
+
+	// -----------------------------------------------------
+	// Soll-Einträge bestimmen
+	// -----------------------------------------------------
+
+	const pokusanDexEntries = [];
+
+	const pokusanDexKeys = new Set();
+
+	const pokusan =
+		pokemonListe.find(
+			pokemon =>
+				Number(pokemon.nummer) === 869
+		);
+
+
+	if (pokusan && pokusan.forms) {
+
+		Object.entries(pokusan.forms).forEach(
+			([formKey, form]) => {
+
+				if (!form || !form.id) {
+					return;
+				}
+
+				const dexKey =
+					getPokusanDexKey({
+
+						nummer: 869,
+
+						pokemonId:
+							form.id
+
+					});
+
+				if (!dexKey) {
+					return;
+				}
+
+				if (pokusanDexKeys.has(dexKey)) {
+					return;
+				}
+
+				pokusanDexKeys.add(dexKey);
+
+				pokusanDexEntries.push({
+
+					dexKey,
+
+					formId:
+						String(form.id),
+
+					formKey,
+
+					formName:
+						form.displayname ?? formKey,
+
+					displayName:
+						form.displayname ?? formKey,
+
+					pokemonName:
+						pokusan.name,
+
+					pokemonNumber:
+						869,
+
+					spriteId:
+						form.spriteId ?? form.id
+
+				});
+
+			}
+		);
+
+	}
+
+
+	// -----------------------------------------------------
+	// Besessene Pokusan-Formen bestimmen
+	// -----------------------------------------------------
+
+	const ownedPokusanDexKeys = new Set();
+
+	collection.forEach(pokemon => {
+
+		// Nur Pokusan
+		if (Number(pokemon.nummer) !== 869) {
+			return;
+		}
+
+		// Muss gefangen sein
+		if (pokemon.gefangen !== true) {
+			return;
+		}
+
+		const dexKey =
+			getPokusanDexKey(pokemon);
+
+		if (!dexKey) {
+			return;
+		}
+
+		ownedPokusanDexKeys.add(dexKey);
+
+	});
+
+
+	// -----------------------------------------------------
+	// Pokusan-Dex Werte
+	// -----------------------------------------------------
+
+	stats.pokusanDex.entries =
+		pokusanDexEntries.map(entry => ({
+
+			...entry,
+
+			owned:
+				ownedPokusanDexKeys.has(
+					entry.dexKey
+				)
+
+		}));
+
+	stats.pokusanDex.total =
+		stats.pokusanDex.entries.length;
+
+	stats.pokusanDex.owned =
+		stats.pokusanDex.entries.filter(
+			entry => entry.owned
+		).length;
+
+	stats.pokusanDex.percent =
+		stats.pokusanDex.total === 0
+			? 0
+			: Math.round(
+				stats.pokusanDex.owned /
+				stats.pokusanDex.total *
+				100
+			);
 
 	// =====================================================
 	// Typen
@@ -1430,7 +1789,7 @@ stats.captureStats.topNatures =
 
 }
 
-function calculatePokedexProgress(collection, shinyFilter = "all", pokedexMode = "new") {
+function calculatePokedexProgress(collection, shinyFilter = "all") {
 
 	const regions = {};
 	const generations = {};
@@ -1453,14 +1812,9 @@ function calculatePokedexProgress(collection, shinyFilter = "all", pokedexMode =
 	}
 
 	function getDex(game){
-
-		const dex = pokedexMode === "new"
-			? game.newPokemon
-			: game.regionalDex;
-
 		return new Set(
 
-			(Array.isArray(dex) ? dex : [])
+			(Array.isArray(game.pokemon) ? game.pokemon : [])
 				.map(id => String(id))
 
 		);

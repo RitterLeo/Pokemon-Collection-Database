@@ -29462,8 +29462,6 @@ const pokemonListe = [
 	}
 },
 
-/* FORMEN EINFÜGEN */
-
 {
 	nummer: 869,
 	name: "Pokusan",
