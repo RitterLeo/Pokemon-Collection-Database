@@ -208,6 +208,38 @@ body {
 
 }
 
+.filter-mark-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-mark-icon {
+    width: 20px;
+    height: 20px;
+
+    border: 1px solid #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    user-select: none;
+
+    box-sizing: border-box;
+}
+
+.filter-mark-icon:hover {
+    outline: 2px solid #666;
+}
+
+.filter-mark-icon.active {
+    outline: 2px solid #5b9cff;
+}
 
 /* =========================
    SORTIERUNG
@@ -1314,7 +1346,7 @@ body {
 #resultBar {
 
     min-height:
-        54px;
+        48px;
 
     box-sizing:
         border-box;

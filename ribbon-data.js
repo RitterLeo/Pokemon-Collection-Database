@@ -893,8 +893,6 @@ const BAND_RULES = {
 
 	//Pokémon can only have one personality or weather mark or time of day mark. They can only get it at time of capture.
 
-
-
 	// Marks
 	//Daytime
 	"Mittags-Zeichen": {
@@ -3446,6 +3444,10 @@ const BAND_RULES = {
 			"Violet"
 		],
 		
+		height: [
+			"XXXL"
+		],
+		
 		conflictsWith: [
 			"Winzlings-Zeichen"
 		]
@@ -3455,6 +3457,10 @@ const BAND_RULES = {
 		games: [
 			"Scarlet",
 			"Violet"
+		],
+		
+		height: [
+			"XXXS"
 		],
 		
 		conflictsWith: [

@@ -22137,7 +22137,7 @@ const pokemonListe = [
 		Blumenmeer: {
 			id: "666-meadow",
 			displayname: "Blumenmeermuster",
-			spriteId: "666-meadow",
+			spriteId: "666",
 			typen: ["Käfer", "Flug"],
 			eiergruppen: ["Käfer"],
 			geschlecht: ["Männlich", "Weiblich"],

@@ -78,13 +78,53 @@ const SORT_DEFINITIONS = {
             new Date(a.datum||0) - new Date(b.datum||0)
     },
 	
-	stats: {
-		label: "Statuswerte",
-		ascendingLabel: "Statuswert – 1-999",
-		descendingLabel: "Statuswert - 999-1",
+	statsHP: {
+		label: "Kraftpunkte (KP)",
+		ascendingLabel: "Kraftpunkte (KP) – 1-999",
+		descendingLabel: "Kraftpunkte (KP) - 999-1",
 			compare: (a,b) =>
-				Number(a.KP) - Number(b.KP)
-	}
+				Number(a.stats.hp) - Number(b.stats.hp)
+	},
+	
+	statsAtk: {
+		label: "Angriff (Atk)",
+		ascendingLabel: "Angriff (Atk) – 1-999",
+		descendingLabel: "Angriff (Atk) - 999-1",
+			compare: (a,b) =>
+				Number(a.stats.atk) - Number(b.stats.atk)
+	},
+	
+	statsDef: {
+		label: "Verteidigung (Def)",
+		ascendingLabel: "Verteidigung (Def) – 1-999",
+		descendingLabel: "Verteidigung (Def) - 999-1",
+			compare: (a,b) =>
+				Number(a.stats.def) - Number(b.stats.def)
+	},
+	
+	statsSpAtk: {
+		label: "Spezial-Angriff (SpAtk)",
+		ascendingLabel: "Spezial-Angriff (SpAtk) – 1-999",
+		descendingLabel: "Spezial-Angriff (SpAtk) - 999-1",
+			compare: (a,b) =>
+				Number(a.stats.spatk) - Number(b.stats.spatk)
+	},
+	
+	statsSpDef: {
+		label: "Spezial-Verteidigung (SpDef)",
+		ascendingLabel: "Spezial-Verteidigung (SpDef) – 1-999",
+		descendingLabel: "Spezial-Verteidigung (SpDef) - 999-1",
+			compare: (a,b) =>
+				Number(a.stats.spdef) - Number(b.stats.spdef)
+	},
+	
+	statsInit: {
+		label: "Initiative (Init)",
+		ascendingLabel: "Initiative (Init) – 1-999",
+		descendingLabel: "Initiative (Init) - 999-1",
+			compare: (a,b) =>
+				Number(a.stats.init) - Number(b.stats.init)
+	},
 
 };
 

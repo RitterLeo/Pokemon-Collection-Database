@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="confirmDialog.css">
 
     <script src="attack-data.js"></script>
+	<script src="editor-data.js"></script>
 	<script src="cardRenderer.js"></script>
 	<script src="search.js"></script>
 	<script src="sorting.js"></script>
@@ -92,10 +93,30 @@
 				<button onclick="addFilter('level')">
 					Level
 				</button>
+				
+				<button onclick="addFilter('catchLevel')">
+					Fanglevel
+				</button>
+				
 				<button onclick="addFilter('date')">
 					Datum
 				</button>
 
+				<button onclick="addFilter('size')">
+					Größe
+				</button>
+
+				<button onclick="addFilter('marks')">
+					Markierungen
+				</button>
+
+				<button onclick="addFilter('id')">
+					Trainer-ID
+				</button>
+
+				<button onclick="addFilter('location')">
+					Ort
+				</button>
 			</div>
 			
 			<!-- AKTIVE FILTER -->
@@ -291,6 +312,18 @@
 				min: 1,
 				max: 100
 			},
+			
+			catchLevel: {
+				field: "catchlevel",
+				min: 1,
+				max: 100
+			},
+			
+			id: {
+				field: "trainerID",
+				min: 1,
+				max: Number.MAX_SAFE_INTEGER
+			},
 
 			cool: {
 				field: "cool",
@@ -321,12 +354,6 @@
 				min: 0,
 				max: 255
 			}
-			
-			stats: {
-				field: "level",
-				min: 1,
-				max: 100
-			},
 
 		};
 		
@@ -355,7 +382,7 @@
 				input: "select",
 				field: "ball"
 			},
-			
+
 			gender: {
 				label: "Geschlecht",
 				input: "select",
@@ -384,6 +411,18 @@
 				input: "boolean"
 			},
 
+			size: {
+				label: "Größe",
+				input: "select",
+				field: "height"
+			},
+
+			location: {
+				label: "Ort",
+				input: "select",
+				field: "location"
+			},
+
 			level: {
 				label: "Level",
 				input: "number",
@@ -391,13 +430,13 @@
 				min: 1,
 				max: 100
 			},
-			
+
 			date: {
 				label: "Datum",
 				input: "date",
 				field: "datum"
 			},
-			
+
 			stats: {
 				label: "Statuswert",
 				input: "number",
@@ -405,6 +444,27 @@
 				min: 1,
 				max: 1000
 			},
+
+			catchLevel: {
+				label: "Fanglevel",
+				input: "number",
+				field: "catchlevel",
+				min: 1,
+				max: 100
+			},
+
+			marks: {
+				label: "Markierungen",
+				input: "marks"
+			},
+
+			id: {
+				label: "Trainer-ID",
+				input: "number",
+				field: "trainerID",
+				min: 1,
+				max: Number.MAX_SAFE_INTEGER
+			}
 
 		};
 
@@ -1237,15 +1297,100 @@
 							);
 
 						}
+						else if (filter.value === "false") {
+
+							data = data.filter(p =>
+								p.favorit !== true
+							);
+
+						}
 
 						break;
 
 					case "shiny":
-
+						
 						if (filter.value === "true") {
 
 							data = data.filter(p =>
 								p.shiny === true
+							);
+
+						}
+						else if (filter.value === "false") {
+
+							data = data.filter(p =>
+								p.shiny !== true
+							);
+
+						}
+						
+					case "marks":
+
+						if (filter.value !== "") {
+
+							let selectedMarks = [];
+
+							try {
+
+								selectedMarks =
+									JSON.parse(filter.value);
+
+								if (!Array.isArray(selectedMarks)) {
+									selectedMarks = [];
+								}
+
+							}
+							catch {
+
+								selectedMarks = [];
+
+							}
+
+							if (selectedMarks.length === 0) {
+								break;
+							}
+
+							data = data.filter(pokemon => {
+
+								if (!Array.isArray(pokemon.marks)) {
+									return false;
+								}
+
+								return selectedMarks.every(selectedMark =>
+
+									pokemon.marks.some(mark =>
+
+										mark.symbol === selectedMark.symbol &&
+										mark.color === selectedMark.color
+
+									)
+
+								);
+
+							});
+
+						}
+
+						break;
+						
+					case "location":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.location === filter.value
+							);
+
+						}
+
+						break;
+						
+					case "size":
+
+						if (filter.value !== "") {
+
+							data = data.filter(p =>
+								p.height === filter.value
 							);
 
 						}
@@ -1380,6 +1525,7 @@
 					options = `
 						<option value="">Alle</option>
 						<option value="true">Ja</option>
+						<option value="false">Nein</option>
 					`;
 
 				}
@@ -1402,6 +1548,90 @@
 
 					list = [...new Set(list)].sort();
 
+				}
+				
+				// -------------------------
+				// Markierungen
+				// -------------------------
+				
+				else if (filter.type === "marks") {
+
+					let selectedMarks = [];
+
+					if (filter.value) {
+
+						try {
+
+							selectedMarks = JSON.parse(filter.value);
+
+							if (!Array.isArray(selectedMarks)) {
+								selectedMarks = [];
+							}
+
+						} catch {
+
+							selectedMarks = [];
+
+						}
+
+					}
+
+					// Standardzustand:
+					// Alle Symbole sind mit Farbe 1 (Schwarz) ausgewählt.
+					if (selectedMarks.length === 0) {
+
+						selectedMarks = editorData.symbols.map(symbol => ({
+							symbol,
+							color: editorData.colors[0]
+						}));
+
+						filter.value =
+							JSON.stringify(selectedMarks);
+
+						saveFilters();
+					}
+
+					options = `
+
+						<div class="mark-row filter-mark-row">
+
+							${editorData.symbols.map(symbol => {
+
+								const selectedMark =
+									selectedMarks.find(
+										mark => mark.symbol === symbol
+									);
+
+								const isSelected =
+									selectedMark !== undefined;
+
+								const color =
+									isSelected
+										? selectedMark.color
+										: "";
+
+								return `
+
+									<div
+										class="mark-icon filter-mark-icon"
+										data-symbol="${symbol}"
+										data-color="${color}"
+										${isSelected
+											? `style="color:${color};"`
+											: ""
+										}
+										onclick="cycleMarkFilter(${index}, '${symbol}')"
+									>
+										${symbol}
+									</div>
+
+								`;
+
+							}).join("")}
+
+						</div>
+
+					`;
 				}
 
 				// -------------------------
@@ -1468,7 +1698,23 @@
 
 					`;
 
-					chip.querySelector(".filter-operator").value = filter.operator;
+					chip.querySelector(".filter-operator").value =
+						filter.operator;
+
+				}
+				else if (filter.type === "marks") {
+
+					chip.innerHTML = `
+
+						<span>${definition.label}</span>
+
+						${options}
+
+						<button onclick="removeFilter(${index})">
+							✖
+						</button>
+
+					`;
 
 				}
 				else {
@@ -1477,7 +1723,9 @@
 
 						<span>${definition.label}</span>
 
-						<select onchange="changeFilterValue(${index}, this.value)">
+						<select
+							onchange="changeFilterValue(${index}, this.value)"
+						>
 							${options}
 						</select>
 
@@ -1487,14 +1735,15 @@
 
 					`;
 
-					chip.querySelector("select").value = filter.value;
+					chip.querySelector("select").value =
+						filter.value;
 
 				}
 
 				container.appendChild(chip);
 
 			});
-
+		
 		}
 		
 		function changeFilterOperator(index, operator) {
@@ -1561,43 +1810,145 @@
 
 		}
 		
+		function getNextColor(current) {
+
+			const index =
+				editorData.colors.indexOf(current);
+
+			return editorData.colors[
+				(index + 1) % editorData.colors.length
+			];
+
+		}
+
+		function cycleMarkFilter(index, symbol) {
+
+			const filter = activeFilters[index];
+
+			let selectedMarks = [];
+
+			if (filter.value) {
+
+				try {
+
+					selectedMarks = JSON.parse(filter.value);
+
+					if (!Array.isArray(selectedMarks)) {
+						selectedMarks = [];
+					}
+
+				} catch {
+
+					selectedMarks = [];
+
+				}
+
+			}
+
+			const existingIndex =
+				selectedMarks.findIndex(
+					mark => mark.symbol === symbol
+				);
+
+			// Noch nicht ausgewählt → erste Farbe (Blau)
+			if (existingIndex === -1) {
+
+				selectedMarks.push({
+					symbol,
+					color: editorData.colors[0]
+				});
+
+			}
+
+			// Bereits ausgewählt → nächste Farbe
+			else {
+
+				const currentColor =
+					selectedMarks[existingIndex].color;
+
+				const colorIndex =
+					editorData.colors.indexOf(currentColor);
+
+				const nextColorIndex =
+					colorIndex === -1
+						? 0
+						: (colorIndex + 1) % editorData.colors.length;
+
+				selectedMarks[existingIndex].color =
+					editorData.colors[nextColorIndex];
+
+			}
+
+			filter.value =
+				JSON.stringify(selectedMarks);
+
+			saveFilters();
+
+			renderActiveFilters();
+
+			refreshGrid();
+
+		}
+		
 		function getFilterName(type) {
 
 			return filterDefinitions[type]?.label || type;
 
 		}
 		
+		function changeMarkFilter(index, value) {
+			changeFilterValue(index, value);
+			renderActiveFilters();
+		}
+				
 		function getUniqueValues(field, storage = null) {
-
 			storage ??= getCustom();
 
-			const values = [...new Set(
+			const values = [];
 
-				storage
-					.map(p => p[field])
-					.filter(v =>
-						v !== undefined &&
-						v !== null &&
-						v !== "" &&
-						v !== "-"
-					)
+			storage.forEach(p => {
+				const value = p[field];
 
-			)];
+				if (Array.isArray(value)) {
+					value.forEach(v => {
+						if (
+							v !== undefined &&
+							v !== null &&
+							v !== "" &&
+							v !== "-"
+						) {
+							values.push(v);
+						}
+					});
+				}
+				else if (
+					value !== undefined &&
+					value !== null &&
+					value !== "" &&
+					value !== "-"
+				) {
+					values.push(value);
+				}
+			});
+
+			const uniqueValues = [...new Set(values)];
 
 			if (field === "generation") {
-
-				values.sort((a, b) => Number(a) - Number(b));
-
-			} else {
-
-				values.sort((a, b) =>
-					String(a).localeCompare(String(b), "de")
+				uniqueValues.sort(
+					(a, b) => Number(a) - Number(b)
 				);
-
 			}
-			
-			return values;
+			else {
+				uniqueValues.sort(
+					(a, b) =>
+						String(a).localeCompare(
+							String(b),
+							"de"
+						)
+				);
+			}
 
+			return uniqueValues;
 		}
 		
 		function createNumberList(min, max) {

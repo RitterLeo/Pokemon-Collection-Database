@@ -919,8 +919,8 @@
 
 				} else if (g === null) {
 					const opt = document.createElement("option");
-					opt.value = "Geschlechtslos";
-					opt.textContent = "Geschlechtslos";
+					opt.value = "Unbekannt";
+					opt.textContent = "Unbekannt";
 					select.appendChild(opt);
 
 				} else {
@@ -1420,7 +1420,10 @@
 					form?.id || null,
 
 				ball:
-					DOM.pokeball?.value || ""
+					DOM.pokeball?.value || "",
+					
+				height:
+					DOM.height.value || ""
 
 			};
 
@@ -1654,7 +1657,6 @@
 
 		}
 
-
 		// ======================================================
 		// Bänder rendern
 		// ======================================================
@@ -1701,6 +1703,13 @@
 			const ball =
 				editorPokemon.ball;
 
+
+			// ==================================================
+			// Größe
+			// ==================================================
+
+			const height =
+				editorPokemon.height;
 
 			// ==================================================
 			// Bänder prüfen
@@ -1773,7 +1782,6 @@
 
 					}
 
-
 					// ==================================================
 					// 4. Pokémon-spezifische Bedingung
 					// ==================================================
@@ -1807,7 +1815,22 @@
 					}
 					
 					// ==================================================
-					// 5. Konflikt mit bereits ausgewählten Bändern
+					// 5. Größen-Bedingung
+					// ==================================================
+
+					if (Array.isArray(rule.height)) {
+
+						const heightAllowed =
+							rule.height.includes(height);
+
+						if (!heightAllowed) {
+							return false;
+						}
+
+					}
+					
+					// ==================================================
+					// 6. Konflikt mit bereits ausgewählten Bändern
 					// ==================================================
 
 					const hasConflict =
@@ -1910,12 +1933,16 @@
 				img.className =
 					"band-img";
 
+				// CHANGE TO POKEMONAPI, NEED NEW WAY TO CALCULATE WHICH IMAGE TO USE
+				// EVERY GENERATION HAS HIS OWN FOLDER, SAME WITH MARKS
+				// `https://github.com/PokeAPI/sprites/tree/master/sprites/marks/${band.image}.png`; - marks
+				// `https://github.com/PokeAPI/sprites/tree/master/sprites/ribbons/${band.image}.png`;- ribbons
+				
 				img.src =
 					`https://raw.githubusercontent.com/kwsch/PKHeX/master/PKHeX.Drawing.Misc/Resources/img/ribbons/${band.image}.png`;
 
 				img.alt =
 					band.name;
-
 
 				// --------------------------------------------------
 				// Textcontainer
@@ -1926,7 +1953,6 @@
 
 				text.className =
 					"band-text";
-
 
 				// --------------------------------------------------
 				// Name
@@ -1940,7 +1966,6 @@
 
 				name.textContent =
 					band.name;
-
 
 				// --------------------------------------------------
 				// Titel
@@ -1956,7 +1981,6 @@
 					band.title
 						? `(${band.title})`
 						: "";
-
 
 				// --------------------------------------------------
 				// Zusammensetzen
@@ -2337,7 +2361,7 @@
 					
 				pokemonId: selectedPokemon.forms[DOM.form.value]?.id ?? null,
 
-				groesse: getValue("height"),
+				height: getValue("height"),
 
 				wesen: getValue("wesen"),
 				teraTyp: getValue("teratype"),
@@ -2520,7 +2544,7 @@
 				if (exists) el.value = value;
 			}
 
-			DOM.height.value = pokemon.groesse || "M";
+			DOM.height.value = pokemon.height || "M";
 			DOM.wesen.value = pokemon.wesen || "";
 			DOM.pokestar.value = pokemon.pokestar || "";
 			DOM.shinycrown.value = pokemon.blaetterkrone || "";
