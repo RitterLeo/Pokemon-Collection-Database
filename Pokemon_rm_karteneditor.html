@@ -111,525 +111,567 @@
 
 						</div>
 
-						<!-- Notizen -->
-
-						<div class="notes-card">
-
-							<div class="notes-header">
-								Notizen
-							</div>
-
-							<textarea
-								class="notes-area"
-								placeholder="Notizen..."
-							></textarea>
-
-						</div>
-
 					</div>
 			</div>
 
 		<!-- Mittlere Seite -->
 		
 		<div class="editor-panel">
-			<section class="editor-group">
-				<h2>⚙ Allgemein</h2>
-
-				<div class="field">
-					<label>Markierung:</label>
-					<div id="markContainer" class="mark-row"></div>
-				</div>
-				
-				<div class="field">
-					<label>Größe:</label>
-					<select id="height"></select>
-				</div>
-				
-				<div class="field">
-					<label>Wesen:</label>
-					<select id="wesen"></select>
-				</div>
-				
-				<div class="field">
-					<label>Persönlichkeit:</label>
-					<select id="personality"></select>
-				</div>
-				
-				<div class="field">
-					<label>Level:</label>
-					<input
-						id="levelInput"
-						type="number"
-						class="level-input"
-						min="1"
-						max="100"
-						value="100"
-					>
-				</div>
-				
-				<div class="field">
-					<label>Fanglevel:</label>
-					<input
-						id="catchlevelInput"
-						type="number"
-						class="level-input"
-						min="1"
-						max="100"
-						value="100"
-					>
-				</div>
-				
-				<div class="field">
-					<label>Ball:</label>
-
-					<div class="pokeball-dropdown" id="pokeballDropdown">
-
-						<button
-							type="button"
-							class="pokeball-selected"
-							id="pokeballSelected"
-						>
-							<img
-								id="pokeballSelectedImage"
-								src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
-								alt=""
-								loading="lazy"
-							>
-							<span id="pokeballSelectedName">Pokeball</span>
-							<span class="pokeball-arrow">▼</span>
-						</button>
-
-						<div
-							class="pokeball-options"
-							id="pokeballOptions"
-						></div>
-
-					</div>
-
-					<!-- Bestehendes Feld bleibt für die Speicherung erhalten -->
-					<select id="pokeball" hidden></select>
-				</div>
-				
-				<div class="field">
-					<label>Fähigkeit:</label>
-
-					<div class="ability-dropdown" id="abilityDropdown">
-
-						<button
-							type="button"
-							class="ability-selected"
-							id="abilitySelected"
-						>
-							<span id="abilitySelectedName">
-								Fähigkeit auswählen
-							</span>
-
-							<span class="ability-arrow">▼</span>
-						</button>
-
-						<div
-							class="ability-options"
-							id="abilityOptions"
-						></div>
-
-					</div>
-
-					<!-- Unsichtbares Select für bestehende Speicher-/Edit-Logik -->
-					<select id="ability" hidden></select>
-
-				</div>
-				
-			</section>
+			<div class="editor-content">
 			
-			<section class="editor-group">
+				<section class="editor-group" data-section="allgemeines">
+					<h2>⚙ Allgemeines</h2>
 
-				<h2>📍 Herkunft</h2>
-				
-				<div class="field">
-					<label>Datum:</label>
-					<input type="date" id="date">
-				</div>
-				<div class="field">
-					<label>Ort:</label>
-					<select id="location"></select>
-				</div>
-				
-				<div class="field">
-					<label>Spiel:</label>
-					<select id="game"></select>
-				</div>
-				<div class="field">
-					<label>Generation:</label>
-					<select id="generation">
-						<option value="">Alle</option>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-					</select>
-				</div>
-				
-				<div class="field">
-					<label>ID:</label>
-					<input
-						type="text"
-						id="trainerID"
-						maxlength="6"
-						pattern="[0-9]{5,6}"
-						placeholder="00001"
-					>
-				</div>
-				<div class="field">
-					<label>OG-Trainer:</label>
-					<input
-					type="text"
-					id="trainer"
-					maxlength="12"
-					placeholder="OG-Trainer"
-					>
-				</div>
-				
-				<div class="field">
-					<label>Spitzname:</label>
-					<input
-					type="text"
-					id="nickname"
-					maxlength="12"
-					placeholder="Spitzname"
-					>
-				</div>
-			</section>
-			
-			<section class="editor-group">
-
-				<h2>✨ Besonderheiten</h2>
-
-				<div class="field">
-					 <label>Pokestar</label>
-						<select id="pokestar">
-							<option value="Nein" selected>Nein</option>
-							<option value="Ja">Ja</option>
-						</select>
-				</div>
-
-				<div class="field">
-					<label>Tera-Typ:</label>
-					<select id="teratype">
-						<option>Normal</option>
-						<option>Feuer</option>
-						<option>Wasser</option>
-						<option>Pflanze</option>
-						<option>Elektro</option>
-						<option>Eis</option>
-						<option>Kampf</option>
-						<option>Gift</option>
-						<option>Boden</option>
-						<option>Flug</option>
-						<option>Psycho</option>
-						<option>Käfer</option>
-						<option>Gestein</option>
-						<option>Geist</option>
-						<option>Drache</option>
-						<option>Unlicht</option>
-						<option>Stahl</option>
-						<option>Fee</option>
-						<option>Stellar</option>
-					</select>
-				</div>
-				
-				<div class="field">
-					<label>Blätterkrone:</label>
-					<select id="shinycrown">
-						<option>Nein</option>
-						<option>Ja</option>
-					</select>
-				</div>
-
-				<div class="field">
-					<label>Dynamax:</label>
-						<select id="dynamax">
-							<option>Nein</option>
-							<option>Dynamax</option>
-							<option>Gigadynamax</option>
-						</select>
-				</div>
-				
-			</section>
-			
-			<section class="editor-group">
-
-				<h2>🏆 Wettbewerbe</h2>
-				
-				
-				<div class="field">
-					<label>Coolness:</label>
-					<input id="cool" type="number" class="coolness-input" min="0" max="255" value="0">
-				</div>
-
-				<div class="field">
-					<label>Schönheit:</label>
-					<input id="beauty" type="number" class="schönheit-input" min="0" max="255" value="0">
-				</div>
-
-				<div class="field">
-					<label>Klugheit:</label>
-					<input id="smart" type="number" class="klugheit-input" min="0" max="255" value="0">
-				</div>
-
-				<div class="field">
-					<label>Putzigkeit:</label>
-					<input id="cute" type="number" class="putzigkeit-input" min="0" max="255" value="0">
-				</div>
-
-				<div class="field">
-					<label>Stärke:</label>
-					<input id="tough" type="number" class="stärke-input" min="0" max="255" value="0">
-				</div>
-				
-			</section>
-
-			<section class="editor-group stats">
-
-				<h2 class="group-toggle">
-					<span>📊 Statuswerte</span>
-					<span class="toggle-arrow">▲</span>
-				</h2>
-
-				<div class="group-content">
-
-					<div class="stats-grid">
-
-						<!-- Kopfzeile -->
-						<div class="cell stats-empty"></div>
-
-						<div class="cell stats-header">KP</div>
-						<div class="cell stats-header">Atk.</div>
-						<div class="cell stats-header">Def.</div>
-						<div class="cell stats-header">Sp.-Atk.</div>
-						<div class="cell stats-header">Sp.-Def.</div>
-						<div class="cell stats-header">Init.</div>
-
-
-						<!-- Basis -->
-						<div class="cell stats-label">Basis</div>
-
-						<div class="cell stat-base" id="hpbase">107</div>
-						<div class="cell stat-base" id="atkbase">139</div>
-						<div class="cell stat-base" id="defbase">139</div>
-						<div class="cell stat-base" id="spatkbase">53</div>
-						<div class="cell stat-base" id="spdefbase">53</div>
-						<div class="cell stat-base" id="initbase">139</div>
-
-
-						<!-- IV -->
-						<div class="cell stats-label">IV</div>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-						<input
-							class="cell iv-input"
-							type="number"
-							min="0"
-							max="31"
-							value="31"
-						>
-
-
-						<!-- EV -->
-						<div class="cell stats-label">EV</div>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-						<input
-							class="cell ev-input"
-							type="number"
-							min="0"
-							max="252"
-							value="0"
-						>
-
-
-						<!-- Gesamt -->
-						<div class="cell stats-label total-label">Gesamt</div>
-
-						<div class="cell total-cell stat-hp" id="total-hp">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-						<div class="cell total-cell stat-atk" id="total-atk">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-						<div class="cell total-cell stat-def" id="total-def">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-						<div class="cell total-cell stat-spatk" id="total-spatk">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-						<div class="cell total-cell stat-spdef" id="total-spdef">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-						<div class="cell total-cell stat-init" id="total-init">
-							<span class="total-value">0</span>
-							<div class="stat-bar">
-								<div class="stat-bar-fill"></div>
-							</div>
-						</div>
-
-					</div>
-				
-				</div>
-				
-			</section>
-
-			<section class="editor-group attacks">
-
-				<h2 class="group-toggle">
-					<span>⚔ Attacken</span>
-					<span class="toggle-arrow">▼</span>
-				</h2>
-				
-				<div class="group-content">
-				
-					<div class="attack-grid">
-						<div class="attack-slot"></div>
-						<div class="attack-slot"></div>
-						<div class="attack-slot"></div>
-						<div class="attack-slot"></div>
+					<div class="field">
+						<label>Markierung:</label>
+						<div id="markContainer" class="mark-row"></div>
 					</div>
 					
-				</div>
+					<div class="field">
+						<label>Größe:</label>
+						<select id="height"></select>
+					</div>
+					
+					<div class="field">
+						<label>Wesen:</label>
+						<select id="wesen"></select>
+					</div>
+					
+					<div class="field">
+						<label>Persönlichkeit:</label>
+						<select id="personality"></select>
+					</div>
+					
+					<div class="field">
+						<label>Level:</label>
+						<input
+							id="levelInput"
+							type="number"
+							class="level-input"
+							min="1"
+							max="100"
+							value="100"
+						>
+					</div>
+					
+					<div class="field">
+						<label>Fanglevel:</label>
+						<input
+							id="catchlevelInput"
+							type="number"
+							class="level-input"
+							min="1"
+							max="100"
+							value="100"
+						>
+					</div>
+					
+					<div class="field">
+						<label>Ball:</label>
+
+						<div class="pokeball-dropdown" id="pokeballDropdown">
+
+							<button
+								type="button"
+								class="pokeball-selected"
+								id="pokeballSelected"
+							>
+								<img
+									id="pokeballSelectedImage"
+									src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+									alt=""
+									loading="lazy"
+								>
+								<span id="pokeballSelectedName">Pokeball</span>
+								<span class="pokeball-arrow">▼</span>
+							</button>
+
+							<div
+								class="pokeball-options"
+								id="pokeballOptions"
+							></div>
+
+						</div>
+
+						<!-- Bestehendes Feld bleibt für die Speicherung erhalten -->
+						<select id="pokeball" hidden></select>
+					</div>
+					
+					<div class="field">
+						<label>Fähigkeit:</label>
+
+						<div class="ability-dropdown" id="abilityDropdown">
+
+							<button
+								type="button"
+								class="ability-selected"
+								id="abilitySelected"
+							>
+								<span id="abilitySelectedName">
+									Fähigkeit auswählen
+								</span>
+
+								<span class="ability-arrow">▼</span>
+							</button>
+
+							<div
+								class="ability-options"
+								id="abilityOptions"
+							></div>
+
+						</div>
+
+						<!-- Unsichtbares Select für bestehende Speicher-/Edit-Logik -->
+						<select id="ability" hidden></select>
+
+					</div>
+					
+				</section>
 				
-			</section>
+				<section class="editor-group" data-section="herkunft">
+
+					<h2>📍 Herkunft</h2>
+					
+					<div class="field">
+						<label>Datum:</label>
+						<input type="date" id="date">
+					</div>
+					
+					<div class="field">
+						<label>Ort:</label>
+						<select id="location"></select>
+					</div>
+					
+					<div class="field">
+						<label>Spiel:</label>
+						<select id="game"></select>
+					</div>
+					<div class="field">
+						<label>Generation:</label>
+						<select id="generation">
+							<option value="">Alle</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+						</select>
+					</div>
+					
+					<div class="field">
+						<label>ID:</label>
+						<input
+							type="text"
+							id="trainerID"
+							maxlength="6"
+							pattern="[0-9]{5,6}"
+							placeholder="00001"
+						>
+					</div>
+					<div class="field">
+						<label>OG-Trainer:</label>
+						<input
+						type="text"
+						id="trainer"
+						maxlength="12"
+						placeholder="OG-Trainer"
+						>
+					</div>
+					
+					<div class="field">
+						<label>Spitzname:</label>
+						<input
+						type="text"
+						id="nickname"
+						maxlength="12"
+						placeholder="Spitzname"
+						>
+					</div>
+				</section>
+				
+				<section class="editor-group" data-section="besonderheiten">
+
+					<h2>✨ Besonderheiten</h2>
+
+					<div class="field">
+						 <label>Pokestar</label>
+							<select id="pokestar">
+								<option value="Nein" selected>Nein</option>
+								<option value="Ja">Ja</option>
+							</select>
+					</div>
+
+					<div class="field">
+						<label>Tera-Typ:</label>
+						<select id="teratype">
+							<option>Normal</option>
+							<option>Feuer</option>
+							<option>Wasser</option>
+							<option>Pflanze</option>
+							<option>Elektro</option>
+							<option>Eis</option>
+							<option>Kampf</option>
+							<option>Gift</option>
+							<option>Boden</option>
+							<option>Flug</option>
+							<option>Psycho</option>
+							<option>Käfer</option>
+							<option>Gestein</option>
+							<option>Geist</option>
+							<option>Drache</option>
+							<option>Unlicht</option>
+							<option>Stahl</option>
+							<option>Fee</option>
+							<option>Stellar</option>
+						</select>
+					</div>
+					
+					<div class="field">
+						<label>Blätterkrone:</label>
+						<select id="shinycrown">
+							<option>Nein</option>
+							<option>Ja</option>
+						</select>
+					</div>
+
+					<div class="field">
+						<label>Dynamax:</label>
+							<select id="dynamax">
+								<option>Nein</option>
+								<option>Dynamax</option>
+								<option>Gigadynamax</option>
+							</select>
+					</div>
+					
+				</section>
+				
+				<section class="editor-group" data-section="wettbewerbe">
+
+					<h2>🏆 Wettbewerbe</h2>
+					
+					
+					<div class="field">
+						<label>Coolness:</label>
+						<input id="cool" type="number" class="coolness-input" min="0" max="255" value="0">
+					</div>
+
+					<div class="field">
+						<label>Schönheit:</label>
+						<input id="beauty" type="number" class="schönheit-input" min="0" max="255" value="0">
+					</div>
+
+					<div class="field">
+						<label>Klugheit:</label>
+						<input id="smart" type="number" class="klugheit-input" min="0" max="255" value="0">
+					</div>
+
+					<div class="field">
+						<label>Putzigkeit:</label>
+						<input id="cute" type="number" class="putzigkeit-input" min="0" max="255" value="0">
+					</div>
+
+					<div class="field">
+						<label>Stärke:</label>
+						<input id="tough" type="number" class="stärke-input" min="0" max="255" value="0">
+					</div>
+					
+				</section>
+
+				<section class="editor-group" data-section="statuswerte">
+
+					<h2 class="group-toggle">
+						<span>📊 Statuswerte</span>
+					</h2>
+
+					<div class="group-content">
+
+						<div class="stats-grid">
+
+							<!-- Kopfzeile -->
+							<div class="cell stats-empty"></div>
+
+							<div class="cell stats-header">KP</div>
+							<div class="cell stats-header">Atk.</div>
+							<div class="cell stats-header">Def.</div>
+							<div class="cell stats-header">Sp.-Atk.</div>
+							<div class="cell stats-header">Sp.-Def.</div>
+							<div class="cell stats-header">Init.</div>
+
+
+							<!-- Basis -->
+							<div class="cell stats-label">Basis</div>
+
+							<div class="cell stat-base" id="hpbase">107</div>
+							<div class="cell stat-base" id="atkbase">139</div>
+							<div class="cell stat-base" id="defbase">139</div>
+							<div class="cell stat-base" id="spatkbase">53</div>
+							<div class="cell stat-base" id="spdefbase">53</div>
+							<div class="cell stat-base" id="initbase">139</div>
+
+
+							<!-- IV -->
+							<div class="cell stats-label">IV</div>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+							<input
+								class="cell iv-input"
+								type="number"
+								min="0"
+								max="31"
+								value="31"
+							>
+
+
+							<!-- EV -->
+							<div class="cell stats-label">EV</div>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+							<input
+								class="cell ev-input"
+								type="number"
+								min="0"
+								max="252"
+								value="0"
+							>
+
+
+							<!-- Gesamt -->
+							<div class="cell stats-label total-label">Gesamt</div>
+
+							<div class="cell total-cell stat-hp" id="total-hp">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+							<div class="cell total-cell stat-atk" id="total-atk">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+							<div class="cell total-cell stat-def" id="total-def">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+							<div class="cell total-cell stat-spatk" id="total-spatk">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+							<div class="cell total-cell stat-spdef" id="total-spdef">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+							<div class="cell total-cell stat-init" id="total-init">
+								<span class="total-value">0</span>
+								<div class="stat-bar">
+									<div class="stat-bar-fill"></div>
+								</div>
+							</div>
+
+						</div>
+					
+					</div>
+					
+				</section>
+
+				<section class="editor-group" data-section="attacken">
+
+					<h2 class="group-toggle">
+						<span>⚔ Attacken</span>
+					</h2>
+					
+					<div class="group-content">
+					
+						<div class="attack-grid">
+							<div class="attack-slot"></div>
+							<div class="attack-slot"></div>
+							<div class="attack-slot"></div>
+							<div class="attack-slot"></div>
+						</div>
+						
+					</div>
+					
+				</section>
+				
+				<!-- Notizen -->
+				
+				<section class="editor-group" data-section="notizen">
+
+							<div class="notes-card">
+
+								<div class="notes-header">
+									Notizen
+								</div>
+
+								<textarea
+									class="notes-area"
+									placeholder="Notizen..."
+								></textarea>
+
+							</div>
+							
+				</section>
+				
+				<section class="editor-group" data-section="bänder">
+					
+						<div class="ribbon-header">
+
+							<div class="ribbon-title">
+								Bänder
+							</div>
+
+							<div id="bandCounter" class="ribbon-counter">
+								0 / 0
+							</div>
+
+						</div>
+						
+						<input
+							id="ribbonSearch"
+							class="search-input"
+							type="text"
+							placeholder="🔍 Band suchen..."
+						>
+
+						<div id="bandContainer" class="band-container"></div>
+
+				</section>
+				
+			</div>
 			
+			<div class="editor-tabs" role="tablist">
+
+				<button class="editor-tab active" data-target="allgemeines" type="button">
+					⚙ Allgemeines
+				</button>
+
+				<button class="editor-tab" data-target="herkunft" type="button">
+					📍 Herkunft
+				</button>
+
+				<button class="editor-tab" data-target="besonderheiten" type="button">
+					✨ Besonderheiten
+				</button>
+
+				<button class="editor-tab" data-target="wettbewerbe" type="button">
+					🏆 Wettbewerbe
+				</button>
+
+				<button class="editor-tab" data-target="statuswerte" type="button">
+					📊 Statuswerte
+				</button>
+
+				<button class="editor-tab" data-target="attacken" type="button">
+					⚔ Attacken
+				</button>
+
+				<button class="editor-tab" data-target="bänder" type="button">
+					🎖 Bänder
+				</button>
+
+				<button class="editor-tab" data-target="notizen" type="button">
+					📝 Notizen
+				</button>
+
+			</div>
+		
 		</div>
 		
 		<!-- Rechte Seite -->
-		<div class="ribbon-panel">
-			<div class="ribbon-header">
-
-				<div class="ribbon-title">
-					Bänder
-				</div>
-
-				<div id="bandCounter" class="ribbon-counter">
-					0 / 0
-				</div>
-
-			</div>
-			
-			<input
-				id="ribbonSearch"
-				class="search-input"
-				type="text"
-				placeholder="🔍 Band suchen..."
-			>
-
-			<div id="bandContainer" class="band-container"></div>
-				
-				<h2>Kartenvorschau</h2>
-				<div id="previewCard"></div>
-
-		</div>
 
 	</div>
 	
@@ -852,8 +894,6 @@
 
 					dropdown.classList.remove("open");
 
-					requestPreviewUpdate();
-
 				};
 
 
@@ -869,7 +909,34 @@
 
 					event.stopPropagation();
 
-					dropdown.classList.toggle("open");
+					const isOpen = dropdown.classList.contains("open");
+
+					// Dropdown schließen
+					if (isOpen) {
+						dropdown.classList.remove("open");
+						dropdown.classList.remove("dropup");
+						return;
+					}
+
+					// Dropdown öffnen
+					dropdown.classList.add("open");
+
+					// Verfügbaren Platz berechnen
+					const rect = selected.getBoundingClientRect();
+
+					const spaceBelow = window.innerHeight - rect.bottom - 12;
+					const spaceAbove = rect.top - 12;
+
+					const availableSpace = Math.max(spaceBelow, spaceAbove);
+
+					// Öffnungsrichtung bestimmen
+					const openUpwards = spaceBelow < 280 && spaceAbove > spaceBelow;
+
+					dropdown.classList.toggle("dropup", openUpwards);
+
+					// Maximale Höhe anpassen
+					optionsContainer.style.maxHeight =
+						Math.max(0, Math.min(280, availableSpace - 12)) + "px";
 
 				};
 
@@ -1002,7 +1069,6 @@
 			renderGenderButtons(formData);
 
 			calculateTotalStats();
-			requestPreviewUpdate();
 		}
 
 
@@ -1104,8 +1170,6 @@
 
 			shinyBtn: document.getElementById("shinyBtn"),
 			caughtBtn: document.getElementById("caughtBtn"),
-
-			preview: document.getElementById("previewCard"),
 
 			ribbonSearch: document.getElementById("ribbonSearch")
 		};
@@ -1293,10 +1357,6 @@
 			// Bänder mit der neuen Form neu berechnen
 			renderBaender(selectedBands);
 
-
-			// Vorschau aktualisieren
-			requestPreviewUpdate();
-
 		});
 
 		/*
@@ -1313,9 +1373,6 @@
 
 			initPage();
 			initPokeballDropdown();
-			
-			initPreview();
-			requestPreviewUpdate();
 			
 		});
 
@@ -1917,8 +1974,6 @@
 
 						renderBaender(selectedBands);
 
-						requestPreviewUpdate();
-
 					}
 				);
 
@@ -2022,7 +2077,6 @@
 		function updateEditorBaender() {
 
 			renderBaender();
-			requestPreviewUpdate();
 
 		}
 
@@ -2045,128 +2099,6 @@
 
 		renderBaender();
 
-	</script>
-	
-	<!-- Card Preview -->
-	<script>
-	function createPokemonData() {
-
-		const pokemon = pokemonListe.find(p => p.nummer === Number(DOM.nummerSelect.value));
-		
-		if (!pokemon) return null;
-
-		return {
-
-			id: editingPokemon?.id ?? crypto.randomUUID(),
-
-			nummer: pokemon.nummer,
-
-			name: DOM.nameSelect.options[DOM.nameSelect.selectedIndex].text,
-
-			spriteId: pokemon.forms[DOM.form.value]?.spriteId ?? pokemon.forms.Standard?.spriteId ?? null,
-			
-			pokemonId: pokemon.forms[DOM.form.value].id,
-
-			typ1: DOM.typ1.textContent,
-			typ2: DOM.typ2.textContent,
-
-			shiny: isShiny,
-			geschlecht: currentGender,
-
-			trainer: DOM.trainer.value,
-
-			level: Number(DOM.level.value),
-
-			wesen: DOM.wesen.value,
-
-			faehigkeit: DOM.ability.value,
-
-			ball: DOM.pokeball.value,
-
-			stats: {
-
-				hp: Number(DOM.totalHp.textContent),
-				atk: Number(DOM.totalAtk.textContent),
-				def: Number(DOM.totalDef.textContent),
-				spatk: Number(DOM.totalSpatk.textContent),
-				spdef: Number(DOM.totalSpdef.textContent),
-				init: Number(DOM.totalInit.textContent)
-
-			},
-
-			attacken: getSelectedAttacks(),
-
-			bands: Array.from(
-				document.querySelectorAll("#bandContainer input[type='checkbox']")
-			).map(cb => ({
-				name: cb.dataset.band,
-				active: cb.checked
-			})),
-
-			favorit: editingPokemon?.favorit ?? false
-
-		};
-
-	}
-
-	function getCurrentPokemon() {
-		return createPokemonData();
-	}
-	
-	let previewUpdatePending = false;
-
-	function updatePreview() {
-
-		const preview = DOM.preview;
-
-		preview.replaceChildren(
-			createDetailCard(getCurrentPokemon(), false)
-		);
-
-	}
-
-	function requestPreviewUpdate() {
-
-		if (previewUpdatePending) return;
-
-		previewUpdatePending = true;
-
-		requestAnimationFrame(() => {
-
-			previewUpdatePending = false;
-
-			updatePreview();
-
-		});
-
-	}
-	
-	function initPreview() {
-
-		document.addEventListener(
-			"input",
-			handlePreviewInput
-		);
-
-		document.addEventListener(
-			"change",
-			handlePreviewInput
-		);
-
-	}
-
-	function handlePreviewInput(event) {
-
-		if (
-			event.target.matches(
-				"input, select, textarea"
-			)
-		) {
-			requestPreviewUpdate();
-		}
-
-	}
-	
 	</script>
 
 	<script>
@@ -2517,8 +2449,6 @@
 
 				calculateTotalStats();
 
-				requestPreviewUpdate();
-
 			});
 
 			localStorage.removeItem("editPokemon");
@@ -2830,7 +2760,6 @@
 		document.querySelectorAll(".iv-input, .ev-input").forEach(i =>
 			i.addEventListener("input", () => {
 				calculateTotalStats();
-				requestPreviewUpdate();
 			})
 		);
 
@@ -2953,7 +2882,6 @@
 				updateButton();
 
 				updateCurrentPokemonSprite();
-				requestPreviewUpdate();
 			});
 
 			container.appendChild(btn);
@@ -2971,7 +2899,6 @@
 			);
 
 			updateCurrentPokemonSprite();
-			requestPreviewUpdate();
 		});
 
 		const caughtBtn = DOM.caughtBtn;
@@ -3231,9 +3158,6 @@
 
 					<div class="attack-bottom">
 
-						<div class="attack-description-box">
-							${atk.description || "&nbsp;"}
-						</div>
 
 						<div class="attack-footer">
 
@@ -3258,8 +3182,6 @@
 					setSelected(atk);
 
 					wrapper.classList.remove("open");
-
-					requestPreviewUpdate();
 
 				});
 
@@ -3287,21 +3209,43 @@
 
 			selected.addEventListener("click", e => {
 
-				e.stopPropagation();
+			e.stopPropagation();
 
-				wrapper.classList.toggle("open");
+			const isOpen = wrapper.classList.contains("open");
 
-				if(wrapper.classList.contains("open")) {
+			// Dropdown schließen
+			if (isOpen) {
+				wrapper.classList.remove("open");
+				wrapper.classList.remove("dropup");
+				return;
+			}
 
-					search.value = "";
+			// Dropdown öffnen
+			wrapper.classList.add("open");
 
-					search.dispatchEvent(new Event("input"));
+			// Suche zurücksetzen
+			search.value = "";
+			search.dispatchEvent(new Event("input"));
 
-					search.focus();
+			// Verfügbaren Platz berechnen
+			const rect = selected.getBoundingClientRect();
 
-				}
+			const spaceBelow = window.innerHeight - rect.bottom - 12;
+			const spaceAbove = rect.top - 12;
 
-			});
+			const openUpwards = spaceBelow < 280 && spaceAbove > spaceBelow;
+
+			wrapper.classList.toggle("dropup", openUpwards);
+
+			const availableSpace = Math.max(spaceBelow, spaceAbove);
+
+			// Maximale Höhe der Liste anpassen
+			options.style.maxHeight =
+				Math.max(0, Math.min(240, availableSpace - 12)) + "px";
+
+			search.focus();
+
+		});
 
 
 			options.prepend(search);
@@ -3589,30 +3533,6 @@
 
 	</script>
 	
-	
-	<script>
-	// Hide attack and stats
-	document.querySelectorAll(".group-toggle").forEach(header => {
-
-		header.addEventListener("click", () => {
-
-			const group = header.parentElement;
-
-			group.classList.toggle("collapsed");
-
-			const arrow = header.querySelector(".toggle-arrow");
-
-			arrow.textContent =
-				group.classList.contains("collapsed")
-					? "▼"
-					: "▲";
-
-		});
-
-	});
-
-	</script>
-	
 	<script>
 	
 		/* =========================
@@ -3729,11 +3649,36 @@
 			// Dropdown öffnen / schließen
 			// =========================================
 
-			selected.addEventListener("click", event => {
+			selected.addEventListener("click", () => {
 
-				event.stopPropagation();
+				const isOpen = dropdown.classList.contains("open");
 
-				dropdown.classList.toggle("open");
+				// Beim erneuten Klick Dropdown schließen
+				if (isOpen) {
+					dropdown.classList.remove("open");
+					dropdown.classList.remove("dropup");
+					return;
+				}
+
+				// Dropdown zunächst öffnen
+				dropdown.classList.add("open");
+
+				// Verfügbaren Platz berechnen
+				const rect = selected.getBoundingClientRect();
+
+				const spaceBelow = window.innerHeight - rect.bottom - 12;
+				const spaceAbove = rect.top - 12;
+
+				const availableSpace = Math.max(spaceBelow, spaceAbove);
+
+				// Öffnungsrichtung bestimmen
+				const openUpwards = spaceBelow < 280 && spaceAbove > spaceBelow;
+
+				dropdown.classList.toggle("dropup", openUpwards);
+
+				// Maximale Höhe an verfügbaren Platz anpassen
+				optionsContainer.style.maxHeight =
+					Math.max(0, Math.min(280, availableSpace - 12)) + "px";
 
 			});
 
@@ -3864,6 +3809,55 @@
 
 		}
 
+	}
+	
+	</script>
+	
+	<script>
+	
+	/* =========================
+	   Tabs Editor
+	========================= */
+	
+	function initEditorTabs() {
+
+		const tabs = document.querySelectorAll(".editor-tab");
+		const sections = document.querySelectorAll(
+			".editor-content [data-section]"
+		);
+
+		function showSection(target) {
+
+			sections.forEach(section => {
+				section.hidden = section.dataset.section !== target;
+			});
+
+			tabs.forEach(tab => {
+
+				const active = tab.dataset.target === target;
+
+				tab.classList.toggle("active", active);
+				tab.setAttribute("aria-selected", String(active));
+
+			});
+
+		}
+
+		tabs.forEach(tab => {
+
+			tab.addEventListener("click", () => {
+				showSection(tab.dataset.target);
+			});
+
+		});
+
+		showSection("allgemeines");
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initEditorTabs);
+	} else {
+		initEditorTabs();
 	}
 	
 	</script>
