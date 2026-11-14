@@ -1718,6 +1718,18 @@
 		// Bänder rendern
 		// ======================================================
 
+		const POKEAPI_SPRITE_BASE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites";
+		
+		function getBandImageUrl(band) {
+
+			if (band.spritePath) {
+
+				return `${POKEAPI_SPRITE_BASE}/${band.spritePath}`;
+
+			}
+
+		}
+
 		function renderBaender(savedBands = null) {
 
 			DOM.bandContainer.innerHTML = "";
@@ -1982,22 +1994,13 @@
 				// Bild
 				// --------------------------------------------------
 
-				const img =
-					document.createElement("img");
+				const img = document.createElement("img");
 
-				img.className =
-					"band-img";
+				img.className = "band-img";
 
-				// CHANGE TO POKEMONAPI, NEED NEW WAY TO CALCULATE WHICH IMAGE TO USE
-				// EVERY GENERATION HAS HIS OWN FOLDER, SAME WITH MARKS
-				// `https://github.com/PokeAPI/sprites/tree/master/sprites/marks/${band.image}.png`; - marks
-				// `https://github.com/PokeAPI/sprites/tree/master/sprites/ribbons/${band.image}.png`;- ribbons
-				
-				img.src =
-					`https://raw.githubusercontent.com/kwsch/PKHeX/master/PKHeX.Drawing.Misc/Resources/img/ribbons/${band.image}.png`;
+				img.src = getBandImageUrl(band);
 
-				img.alt =
-					band.name;
+				img.alt = band.name;
 
 				// --------------------------------------------------
 				// Textcontainer
